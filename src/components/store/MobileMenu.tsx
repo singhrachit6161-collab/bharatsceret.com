@@ -2,13 +2,10 @@
 
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export function MobileMenu({ links }: { links: { href: string; label: string }[] }) {
   const [open, setOpen] = useState(false);
-  const pathname = usePathname();
-  useEffect(() => setOpen(false), [pathname]);
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
@@ -38,7 +35,7 @@ export function MobileMenu({ links }: { links: { href: string; label: string }[]
             <ul className="p-2">
               {links.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="block rounded-md px-3 py-3 text-sm font-medium text-ink hover:bg-almond-100">
+                  <Link href={l.href} onClick={() => setOpen(false)} className="block rounded-md px-3 py-3 text-sm font-medium text-ink hover:bg-almond-100">
                     {l.label}
                   </Link>
                 </li>

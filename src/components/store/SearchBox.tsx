@@ -14,7 +14,7 @@ export function SearchBox({ categories }: { categories: { slug: string; name: st
   const router = useRouter();
   const [q, setQ] = useState("");
   const [category, setCategory] = useState("");
-  const [items, setItems] = useState<Suggestion[]>([]);
+  const [results, setResults] = useState<Suggestion[]>([]);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(-1);
   const listId = useId();
@@ -22,17 +22,14 @@ export function SearchBox({ categories }: { categories: { slug: string; name: st
 
   useEffect(() => {
     const term = q.trim();
-    if (term.length < 2) {
-      setItems([]);
-      return;
-    }
+    if (term.length < 2) return;
     const t = setTimeout(async () => {
       abort.current?.abort();
       abort.current = new AbortController();
       try {
         const res = await fetch(`/api/search/suggest?q=${encodeURIComponent(term)}`, { signal: abort.current.signal });
         if (res.ok) {
-          setItems((await res.json()).items ?? []);
+          setResults((await res.json()).items ?? []);
           setOpen(true);
           setActive(-1);
         }
@@ -42,6 +39,8 @@ export function SearchBox({ categories }: { categories: { slug: string; name: st
     }, 200);
     return () => clearTimeout(t);
   }, [q]);
+
+  const items = q.trim().length < 2 ? [] : results;
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
