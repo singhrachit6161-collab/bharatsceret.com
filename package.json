@@ -1,12 +1,16 @@
 {
-  "name": "app",
+  "name": "swaadvana-store",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:db": "vitest run tests/db",
+    "placeholders": "python3 scripts/generate-placeholders.py"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

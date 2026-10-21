@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 import { getSessionUser } from "@/lib/auth";
 import { quoteCheckout, type Quote } from "@/lib/checkout";
@@ -31,7 +32,7 @@ export async function previewCheckout(input: {
 export type PlaceOrderState =
   | null
   | { ok: false; error: string; errors?: Record<string, string> }
-  | { ok: true; orderId: string; orderNumber: string; next: "pay" | "confirmed" };
+  | { ok: true };
 
 export async function placeOrder(_prev: PlaceOrderState, formData: FormData): Promise<PlaceOrderState> {
   const user = await getSessionUser();
@@ -104,10 +105,11 @@ export async function placeOrder(_prev: PlaceOrderState, formData: FormData): Pr
       await notify("order_confirmed", { to: user.email, orderNumber: order.order_number, totalPaise: quote.totals.totalPaise });
     }
     revalidatePath("/", "layout");
-    return { ok: true, orderId: order.order_id, orderNumber: order.order_number, next: "confirmed" };
+    // Redirect from the action: the cart is now empty, so re-rendering /checkout would bounce to /cart.
+    redirect(`/account/orders/${encodeURIComponent(order.order_number)}?placed=1`);
   }
   // Online payment: keep the cart until the payment is confirmed.
-  return { ok: true, orderId: order.order_id, orderNumber: order.order_number, next: "pay" };
+  redirect(`/checkout/pay/${order.order_id}`);
 }
 
 export interface PaymentSession {

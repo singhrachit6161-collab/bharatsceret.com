@@ -2,7 +2,7 @@
 
 import { CreditCard, Plus, Truck } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useActionState, useCallback, useEffect, useState, useTransition } from "react";
+import { useActionState, useCallback, useState, useTransition } from "react";
 import { placeOrder, previewCheckout, type PlaceOrderState } from "@/app/actions/checkout";
 import type { Quote } from "@/lib/checkout";
 import { formatINR } from "@/lib/money";
@@ -54,12 +54,6 @@ export function CheckoutForm({
       }),
     [],
   );
-
-  useEffect(() => {
-    if (state?.ok) {
-      router.push(state.next === "pay" ? `/checkout/pay/${state.orderId}` : `/account/orders/${encodeURIComponent(state.orderNumber)}?placed=1`);
-    }
-  }, [state, router]);
 
   const t = quote.totals;
   const codBlocked = !t.codAvailable;
