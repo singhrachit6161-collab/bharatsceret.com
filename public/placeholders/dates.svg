@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Dates placeholder illustration">
+<rect width="800" height="800" fill="#F1E2D6"/>
+<circle cx="400" cy="380" r="300" fill="#FFFFFF" opacity="0.35"/>
+<ellipse cx="400" cy="620" rx="270" ry="34" fill="#38251D" opacity="0.12"/>
+<ellipse transform="rotate(64 625 479)" cx="625" cy="479" rx="49" ry="25" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(242 178 476)" cx="178" cy="476" rx="52" ry="26" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(153 622 476)" cx="622" cy="476" rx="54" ry="27" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(215 599 471)" cx="599" cy="471" rx="48" ry="24" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(84 222 471)" cx="222" cy="471" rx="57" ry="28" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(56 215 467)" cx="215" cy="467" rx="49" ry="25" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(304 199 465)" cx="199" cy="465" rx="47" ry="23" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(347 605 464)" cx="605" cy="464" rx="45" ry="23" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(236 189 462)" cx="189" cy="462" rx="51" ry="26" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(285 194 458)" cx="194" cy="458" rx="49" ry="24" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(73 481 455)" cx="481" cy="455" rx="44" ry="22" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(30 362 453)" cx="362" cy="453" rx="45" ry="23" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(172 320 451)" cx="320" cy="451" rx="44" ry="22" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(94 217 448)" cx="217" cy="448" rx="56" ry="28" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(172 294 436)" cx="294" cy="436" rx="55" ry="27" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(338 253 426)" cx="253" cy="426" rx="45" ry="23" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(111 444 425)" cx="444" cy="425" rx="43" ry="22" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(203 246 424)" cx="246" cy="424" rx="44" ry="22" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(283 348 423)" cx="348" cy="423" rx="43" ry="22" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(66 501 422)" cx="501" cy="422" rx="45" ry="23" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(340 311 420)" cx="311" cy="420" rx="48" ry="24" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(60 524 419)" cx="524" cy="419" rx="54" ry="27" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(334 412 418)" cx="412" cy="418" rx="56" ry="28" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(238 342 409)" cx="342" cy="409" rx="52" ry="26" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(318 524 404)" cx="524" cy="404" rx="51" ry="26" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(72 417 400)" cx="417" cy="400" rx="55" ry="28" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(99 423 393)" cx="423" cy="393" rx="44" ry="22" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(230 395 387)" cx="395" cy="387" rx="44" ry="22" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(252 410 386)" cx="410" cy="386" rx="50" ry="25" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(276 498 385)" cx="498" cy="385" rx="57" ry="29" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(83 519 380)" cx="519" cy="380" rx="50" ry="25" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(313 306 372)" cx="306" cy="372" rx="47" ry="23" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(75 479 362)" cx="479" cy="362" rx="55" ry="27" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<ellipse transform="rotate(325 351 360)" cx="351" cy="360" rx="46" ry="23" fill="#6B3A22" stroke="#3F2013" stroke-width="3"/>
+<path d="M130,470 Q150,640 400,645 Q650,640 670,470Z" fill="#8A5A3B" stroke="#38251D" stroke-width="4"/>
+<ellipse cx="400" cy="470" rx="270" ry="26" fill="#A06B47" stroke="#38251D" stroke-width="4"/>
+<path d="M200,530 Q400,570 600,530" stroke="#C89136" stroke-width="5" fill="none" opacity="0.7"/>
+<text x="400" y="720" text-anchor="middle" font-family="Georgia, serif" font-size="40" fill="#38251D">Dates</text>
+<text x="400" y="760" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" letter-spacing="3" fill="#38251D" opacity="0.55">PLACEHOLDER IMAGE</text>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Cranberries placeholder illustration">
+<rect width="800" height="800" fill="#F6DEDC"/>
+<circle cx="400" cy="380" r="300" fill="#FFFFFF" opacity="0.35"/>
+<ellipse cx="400" cy="620" rx="270" ry="34" fill="#38251D" opacity="0.12"/>
+<path transform="rotate(288 623 478)" d="M589,478 q7,-34 34,-27 q34,3 31,31 q-10,27 -34,24 q-27,-3 -31,-27Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(228 212 470)" d="M176,470 q7,-36 36,-29 q36,4 33,33 q-11,29 -36,25 q-29,-4 -33,-29Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(99 589 467)" d="M554,467 q7,-35 35,-28 q35,3 31,31 q-10,28 -35,24 q-28,-3 -31,-28Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(109 303 458)" d="M267,458 q7,-36 36,-29 q36,4 32,32 q-11,29 -36,25 q-29,-4 -32,-29Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(73 573 458)" d="M544,458 q6,-29 29,-23 q29,3 26,26 q-9,23 -29,21 q-23,-3 -26,-23Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(110 317 458)" d="M284,458 q7,-33 33,-26 q33,3 30,30 q-10,26 -33,23 q-26,-3 -30,-26Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(38 525 457)" d="M492,457 q7,-33 33,-26 q33,3 29,29 q-10,26 -33,23 q-26,-3 -29,-26Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(182 249 455)" d="M217,455 q6,-32 32,-26 q32,3 29,29 q-10,26 -32,22 q-26,-3 -29,-26Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(298 312 452)" d="M274,452 q8,-38 38,-31 q38,4 35,35 q-12,31 -38,27 q-31,-4 -35,-31Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(79 563 445)" d="M526,445 q7,-37 37,-30 q37,4 33,33 q-11,30 -37,26 q-30,-4 -33,-30Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(242 226 444)" d="M191,444 q7,-35 35,-28 q35,3 31,31 q-10,28 -35,24 q-28,-3 -31,-28Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(236 504 443)" d="M471,443 q6,-32 32,-26 q32,3 29,29 q-10,26 -32,23 q-26,-3 -29,-26Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(137 224 441)" d="M193,441 q6,-30 30,-24 q30,3 27,27 q-9,24 -30,21 q-24,-3 -27,-24Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(163 300 441)" d="M262,441 q8,-38 38,-30 q38,4 34,34 q-11,30 -38,27 q-30,-4 -34,-30Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(338 566 437)" d="M531,437 q7,-35 35,-28 q35,3 31,31 q-10,28 -35,24 q-28,-3 -31,-28Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(328 325 436)" d="M288,436 q7,-37 37,-30 q37,4 33,33 q-11,30 -37,26 q-30,-4 -33,-30Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(125 568 430)" d="M530,430 q8,-39 39,-31 q39,4 35,35 q-12,31 -39,27 q-31,-4 -35,-31Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(86 275 430)" d="M243,430 q6,-31 31,-25 q31,3 28,28 q-9,25 -31,22 q-25,-3 -28,-25Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(352 247 429)" d="M217,429 q6,-30 30,-24 q30,3 27,27 q-9,24 -30,21 q-24,-3 -27,-24Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(152 545 423)" d="M515,423 q6,-30 30,-24 q30,3 27,27 q-9,24 -30,21 q-24,-3 -27,-24Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(88 338 420)" d="M305,420 q7,-33 33,-26 q33,3 30,30 q-10,26 -33,23 q-26,-3 -30,-26Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(356 504 417)" d="M470,417 q7,-34 34,-27 q34,3 31,31 q-10,27 -34,24 q-27,-3 -31,-27Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(137 525 416)" d="M493,416 q6,-31 31,-25 q31,3 28,28 q-9,25 -31,22 q-25,-3 -28,-25Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(132 235 414)" d="M199,414 q7,-37 37,-29 q37,4 33,33 q-11,29 -37,26 q-29,-4 -33,-29Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(342 422 397)" d="M384,397 q8,-38 38,-30 q38,4 34,34 q-11,30 -38,27 q-30,-4 -34,-30Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(112 529 395)" d="M497,395 q6,-32 32,-26 q32,3 29,29 q-10,26 -32,22 q-26,-3 -29,-26Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(184 531 395)" d="M500,395 q6,-32 32,-25 q32,3 28,28 q-9,25 -32,22 q-25,-3 -28,-25Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(72 309 393)" d="M271,393 q8,-38 38,-30 q38,4 34,34 q-11,30 -38,26 q-30,-4 -34,-30Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(234 371 392)" d="M338,392 q7,-33 33,-26 q33,3 29,29 q-10,26 -33,23 q-26,-3 -29,-26Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(223 393 391)" d="M358,391 q7,-35 35,-28 q35,4 32,32 q-11,28 -35,25 q-28,-4 -32,-28Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(238 349 374)" d="M320,374 q6,-29 29,-23 q29,3 26,26 q-9,23 -29,20 q-23,-3 -26,-23Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(101 311 373)" d="M279,373 q6,-32 32,-26 q32,3 29,29 q-10,26 -32,22 q-26,-3 -29,-26Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(44 484 366)" d="M445,366 q8,-39 39,-31 q39,4 35,35 q-12,31 -39,27 q-31,-4 -35,-31Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path transform="rotate(320 429 341)" d="M394,341 q7,-36 36,-28 q36,4 32,32 q-11,28 -36,25 q-28,-4 -32,-28Z" fill="#A3232E" stroke="#661018" stroke-width="3"/>
+<path d="M130,470 Q150,640 400,645 Q650,640 670,470Z" fill="#8A5A3B" stroke="#38251D" stroke-width="4"/>
+<ellipse cx="400" cy="470" rx="270" ry="26" fill="#A06B47" stroke="#38251D" stroke-width="4"/>
+<path d="M200,530 Q400,570 600,530" stroke="#C89136" stroke-width="5" fill="none" opacity="0.7"/>
+<text x="400" y="720" text-anchor="middle" font-family="Georgia, serif" font-size="40" fill="#38251D">Cranberries</text>
+<text x="400" y="760" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" letter-spacing="3" fill="#38251D" opacity="0.55">PLACEHOLDER IMAGE</text>
+</svg>

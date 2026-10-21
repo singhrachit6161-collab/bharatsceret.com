@@ -543,7 +543,7 @@ begin
          error_code = left(p_error_code, 100),
          error_description = left(p_error_description, 500)
    where provider_order_id = p_provider_order_id
-     and status in ('created', 'failed', 'authorized');
+     and status in ('created', 'failed');
 end;
 $$;
 

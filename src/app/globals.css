@@ -1,26 +1,131 @@
 @import "tailwindcss";
 
+/* SwaadVana design tokens */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --walnut: #38251d;
+  --walnut-700: #4a3226;
+  --walnut-600: #5c4033;
+  --ivory: #fff9f0;
+  --saffron: #c89136;
+  --saffron-600: #a8762a;
+  --almond: #e9d9c3;
+  --almond-100: #f5ece0;
+  --olive: #66724b;
+  --ink: #29231f;
+  --muted: #6b5d52;
+  --line: #e6d9c8;
+  --danger: #a3232e;
+  --success: #3f6b3a;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-walnut: var(--walnut);
+  --color-walnut-700: var(--walnut-700);
+  --color-walnut-600: var(--walnut-600);
+  --color-ivory: var(--ivory);
+  --color-saffron: var(--saffron);
+  --color-saffron-600: var(--saffron-600);
+  --color-almond: var(--almond);
+  --color-almond-100: var(--almond-100);
+  --color-olive: var(--olive);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display-serif);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display-serif), Georgia, serif;
+}
+
+:focus-visible {
+  outline: 2px solid var(--saffron);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .btn,
+  .btn-primary,
+  .btn-accent,
+  .btn-outline,
+  .btn-ghost,
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-5 py-2.5 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply bg-walnut text-ivory hover:bg-walnut-700;
+  }
+  .btn-accent {
+    @apply bg-saffron text-walnut hover:bg-saffron-600 hover:text-ivory;
+  }
+  .btn-outline {
+    @apply border border-walnut/30 bg-white text-walnut hover:border-walnut hover:bg-almond-100;
+  }
+  .btn-ghost {
+    @apply text-walnut hover:bg-almond-100;
+  }
+  .btn-danger {
+    @apply bg-danger text-white hover:bg-danger/90;
+  }
+  .input {
+    @apply w-full rounded-md border border-line bg-white px-3 py-2 text-sm text-ink placeholder:text-muted/70 focus:border-saffron focus:ring-2 focus:ring-saffron/30 focus:outline-none disabled:bg-almond-100;
+  }
+  .label {
+    @apply mb-1 block text-sm font-medium text-ink;
+  }
+  .card {
+    @apply rounded-lg border border-line bg-white;
+  }
+  .section-title {
+    @apply font-display text-2xl font-semibold text-walnut sm:text-3xl;
+  }
+  .prose-store h2 {
+    @apply mt-8 mb-3 text-xl font-semibold text-walnut;
+  }
+  .prose-store p {
+    @apply mb-4 leading-relaxed text-ink/90;
+  }
+  .prose-store ul {
+    @apply mb-4 list-disc pl-6;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
 }
