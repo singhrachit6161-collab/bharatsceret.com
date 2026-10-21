@@ -1,4 +1,5 @@
 import { saveProduct } from "@/app/admin/actions/catalog";
+import { buildTree } from "@/lib/category-tree";
 import type { Category } from "@/lib/types";
 import { ActionForm } from "./ActionForm";
 import { Check, Field, TextArea } from "./fields";
@@ -73,12 +74,22 @@ export function ProductForm({ product, categories, selected }: { product?: Produ
       <section className="card grid gap-4 p-5 sm:grid-cols-2">
         <h2 className="font-semibold text-walnut sm:col-span-2">Categories & merchandising</h2>
         <fieldset className="sm:col-span-2">
-          <legend className="label">Categories</legend>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
-            {categories.map((c) => (
-              <label key={c.id} className="flex items-center gap-2 text-sm">
-                <input type="checkbox" name="category_ids" value={c.id} defaultChecked={selected.includes(c.id)} className="h-4 w-4 accent-walnut" /> {c.name}
-              </label>
+          <legend className="label">Collections & regions</legend>
+          <p className="mb-3 text-xs text-muted">Tick the most specific collections (e.g. Walnuts, Kashmir). Parent collections include their sub-collections automatically.</p>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {buildTree(categories).map((root) => (
+              <div key={root.id} className="rounded-md border border-line p-3">
+                <label className="flex items-center gap-2 text-sm font-semibold text-walnut">
+                  <input type="checkbox" name="category_ids" value={root.id} defaultChecked={selected.includes(root.id)} className="h-4 w-4 accent-walnut" /> {root.name}
+                </label>
+                <div className="mt-2 space-y-1 border-l border-line pl-3">
+                  {root.children.map((c) => (
+                    <label key={c.id} className="flex items-center gap-2 text-sm">
+                      <input type="checkbox" name="category_ids" value={c.id} defaultChecked={selected.includes(c.id)} className="h-4 w-4 accent-walnut" /> {c.name}
+                    </label>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </fieldset>

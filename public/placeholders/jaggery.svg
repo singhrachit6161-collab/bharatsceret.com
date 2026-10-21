@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Jaggery placeholder illustration">
+<defs>
+<linearGradient id="brass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6E4A1A"/><stop offset="0.35" stop-color="#C9973F"/><stop offset="0.55" stop-color="#F0D49A"/><stop offset="0.8" stop-color="#B07D2E"/><stop offset="1" stop-color="#5E3D14"/></linearGradient>
+<linearGradient id="rim" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8A5E22"/><stop offset="0.5" stop-color="#F6DFA8"/><stop offset="1" stop-color="#8A5E22"/></linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.42" r="0.6"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.75"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
+<radialGradient id="velvet" cx="0.3" cy="0.2" r="0.9"><stop offset="0" stop-color="#0F4A3A"/><stop offset="0.6" stop-color="#082C22"/><stop offset="1" stop-color="#041A14"/></radialGradient>
+</defs>
+<rect width="800" height="800" fill="#F6EBDA"/>
+<g fill="none" stroke="#B8893B" stroke-opacity="0.12"><circle cx="400" cy="380" r="150"/><circle cx="400" cy="380" r="210"/><circle cx="400" cy="380" r="270"/><circle cx="400" cy="380" r="330"/></g>
+<rect width="800" height="800" fill="url(#glow)"/>
+<ellipse cx="400" cy="470" rx="262" ry="22" fill="#0A3328"/>
+<g transform="rotate(66 187 476)"><rect x="163" y="452" width="47" height="47" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M172,464 l15,6" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(205 621 474)"><rect x="596" y="448" width="51" height="51" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M605,461 l16,6" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(329 618 473)"><rect x="590" y="444" width="57" height="57" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M601,459 l18,7" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(194 182 468)"><rect x="157" y="443" width="51" height="51" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M166,455 l16,6" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(51 613 465)"><rect x="585" y="437" width="58" height="58" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M596,451 l18,7" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(293 212 465)"><rect x="184" y="437" width="57" height="57" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M195,451 l18,7" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(228 193 465)"><rect x="167" y="439" width="52" height="52" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M177,452 l16,6" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(171 238 463)"><rect x="208" y="434" width="60" height="60" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M219,448 l19,7" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(245 312 458)"><rect x="288" y="434" width="48" height="48" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M297,446 l15,6" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(140 435 457)"><rect x="407" y="429" width="57" height="57" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M417,443 l18,7" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(111 312 455)"><rect x="288" y="432" width="47" height="47" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M297,444 l15,6" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(75 404 453)"><rect x="381" y="429" width="47" height="47" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M390,441 l15,6" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(200 577 453)"><rect x="546" y="422" width="62" height="62" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M558,437 l19,8" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(67 200 451)"><rect x="170" y="421" width="60" height="60" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M182,436 l19,7" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(123 341 447)"><rect x="317" y="422" width="49" height="49" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M326,434 l15,6" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(203 448 444)"><rect x="419" y="415" width="57" height="57" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M430,429 l18,7" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(236 573 439)"><rect x="544" y="409" width="58" height="58" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M555,424 l18,7" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(11 577 435)"><rect x="549" y="407" width="55" height="55" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M559,421 l17,7" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(243 264 430)"><rect x="235" y="400" width="59" height="59" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M246,415 l18,7" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(78 548 428)"><rect x="517" y="398" width="61" height="61" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M529,413 l19,8" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(47 227 421)"><rect x="201" y="394" width="52" height="52" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M211,408 l16,7" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(187 260 417)"><rect x="229" y="387" width="62" height="62" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M240,402 l19,8" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(204 282 417)"><rect x="256" y="391" width="51" height="51" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M266,404 l16,6" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(300 483 416)"><rect x="460" y="393" width="46" height="46" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M469,405 l14,6" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(134 490 411)"><rect x="464" y="384" width="53" height="53" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M474,397 l17,7" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(181 446 408)"><rect x="421" y="383" width="49" height="49" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M431,395 l15,6" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(109 538 404)"><rect x="508" y="374" width="60" height="60" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M519,389 l19,7" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(173 253 403)"><rect x="227" y="376" width="54" height="54" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M237,390 l17,7" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(330 517 403)"><rect x="489" y="375" width="56" height="56" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M500,389 l18,7" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(203 433 399)"><rect x="407" y="373" width="52" height="52" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M417,386 l16,7" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(118 517 384)"><rect x="491" y="359" width="50" height="50" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M501,371 l16,6" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(27 448 377)"><rect x="424" y="353" width="47" height="47" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M433,365 l15,6" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(313 308 376)"><rect x="277" y="345" width="62" height="62" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M289,361 l19,8" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<g transform="rotate(194 410 375)"><rect x="386" y="352" width="46" height="46" rx="6" fill="#A8662A" stroke="#6E3E14" stroke-width="3"/><path d="M395,364 l14,6" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>
+<ellipse cx="400" cy="648" rx="256" ry="23" fill="#000" opacity="0.18"/><path d="M130,470 Q152,640 400,644 Q648,640 670,470Z" fill="url(#brass)"/><path d="M211,546 Q400,598 589,546" stroke="#5E3D14" stroke-width="2" fill="none" opacity="0.5"/><path d="M252,575 Q400,616 548,575" stroke="#F6DFA8" stroke-width="1.5" fill="none" opacity="0.6"/><ellipse cx="400" cy="470" rx="270" ry="26" fill="none" stroke="url(#rim)" stroke-width="6"/>
+<text x="400" y="730" text-anchor="middle" font-family="Georgia, serif" font-size="34" letter-spacing="6" fill="#0A3328">JAGGERY</text>
+<text x="400" y="764" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" letter-spacing="5" fill="#96701F">PLACEHOLDER IMAGE</text>
+</svg>

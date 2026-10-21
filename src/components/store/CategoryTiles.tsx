@@ -3,12 +3,12 @@ import Link from "next/link";
 import { SectionHeading } from "@/components/ui/Ornament";
 import type { Banner } from "@/lib/types";
 
-export function CategoryTiles({ tiles }: { tiles: Banner[] }) {
+export function CategoryTiles({ tiles, title }: { tiles: Banner[]; title: string }) {
   if (!tiles.length) return null;
   return (
     <section aria-labelledby="tiles-title" className="bg-ivory-pattern py-16 sm:py-20">
       <div className="container-page">
-        <SectionHeading id="tiles-title" eyebrow="Treasures of the season" title="Curated Indulgences" />
+        <SectionHeading id="tiles-title" eyebrow="Treasures of Bharat" title={title} />
         <ul className="grid grid-cols-2 gap-5 sm:gap-8 lg:grid-cols-4">
           {tiles.map((t) => (
             <li key={t.id}>

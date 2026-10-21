@@ -4,6 +4,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { Pagination } from "@/components/ui/Pagination";
 import { getPackSizes, listProducts, SORT_OPTIONS, type ProductFilters, type SortKey } from "@/lib/data/catalog";
 import { rupeesToPaise } from "@/lib/money";
+import { buildTree, flattenTree } from "@/lib/category-tree";
 import type { Category } from "@/lib/types";
 import { ProductGrid } from "./ProductSection";
 
@@ -80,8 +81,9 @@ export async function ProductListingPage({
                 </label>
                 <select id="f-category" name="category" defaultValue={first(searchParams.category) ?? ""} className="input">
                   <option value="">All categories</option>
-                  {categories.map((c) => (
+                  {flattenTree(buildTree(categories)).map((c) => (
                     <option key={c.slug} value={c.slug}>
+                      {"\u00a0\u00a0".repeat(c.depth)}
                       {c.name}
                     </option>
                   ))}

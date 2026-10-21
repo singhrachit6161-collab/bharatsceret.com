@@ -276,7 +276,10 @@ export async function saveCategory(_prev: AdminFormState, fd: FormData): Promise
     if (id && parsed.data.parent_id === id) return { ok: false, message: "A category cannot be its own parent." };
     const row = { ...parsed.data, slug: slug.data, is_visible: formBool(fd, "is_visible"), show_in_nav: formBool(fd, "show_in_nav") };
     const res = id ? await db.from("categories").update(row).eq("id", id) : await db.from("categories").insert(row);
-    if (res.error) return { ok: false, message: res.error.code === "23505" ? "Slug already in use." : "Could not save category." };
+    if (res.error) {
+      if (res.error.message?.includes("CATEGORY_CYCLE")) return { ok: false, message: "A collection cannot be placed inside its own sub-collection." };
+      return { ok: false, message: res.error.code === "23505" ? "Slug already in use." : "Could not save category." };
+    }
     await audit(db, user.id, id ? "category.update" : "category.create", "category", id || slug.data);
     refreshStorefront();
     revalidatePath("/admin/categories");

@@ -4,6 +4,7 @@ import { Check, Field, TextArea } from "@/components/admin/fields";
 import { PageHeader } from "@/components/admin/ui";
 import { ADMIN_ROLES, requireStaffPage } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
+import { buildTree, flattenTree } from "@/lib/category-tree";
 import type { Category } from "@/lib/types";
 
 function CategoryFields({ c, all }: { c?: Category; all: Category[] }) {
@@ -19,7 +20,9 @@ function CategoryFields({ c, all }: { c?: Category; all: Category[] }) {
           <label htmlFor={`parent-${c?.id ?? "new"}`} className="label">Parent</label>
           <select id={`parent-${c?.id ?? "new"}`} name="parent_id" defaultValue={c?.parent_id ?? ""} className="input">
             <option value="">— None —</option>
-            {all.filter((x) => x.id !== c?.id).map((x) => <option key={x.id} value={x.id}>{x.name}</option>)}
+            {flattenTree(buildTree(all)).filter((x) => x.id !== c?.id).map((x) => (
+              <option key={x.id} value={x.id}>{"\u00a0\u00a0".repeat(x.depth)}{x.name}</option>
+            ))}
           </select>
         </div>
         <Field label="SEO title" name="seo_title" defaultValue={c?.seo_title} maxLength={70} />
@@ -47,11 +50,11 @@ export default async function AdminCategories() {
 
   return (
     <div className="max-w-5xl space-y-4">
-      <PageHeader title="Categories" description="Categories in use cannot be deleted — hide them instead." />
-      {all.map((c) => (
-        <details key={c.id} className="card p-4">
+      <PageHeader title="Collections" description="The catalogue tree. Top-level collections with “Show in menus” appear in the main menu; their children with the flag appear in its dropdown. Categories in use cannot be deleted — hide them instead." />
+      {flattenTree(buildTree(all)).map((c) => (
+        <details key={c.id} className="card p-4" style={{ marginLeft: c.depth * 28 }}>
           <summary className="flex cursor-pointer flex-wrap justify-between gap-2 text-sm">
-            <span><strong>{c.name}</strong> <span className="text-muted">/{c.slug}</span>{!c.is_visible && <span className="ml-2 text-danger">hidden</span>}</span>
+            <span>{c.depth > 0 && <span className="mr-1 text-saffron">└</span>}<strong className={c.depth === 0 ? "font-display text-lg" : ""}>{c.name}</strong> <span className="text-muted">/{c.slug}</span>{!c.is_visible && <span className="ml-2 text-danger">hidden</span>}</span>
             <span className="text-xs text-muted">{usage.get(c.id) ?? 0} products · order {c.sort_order}</span>
           </summary>
           <div className="mt-4 space-y-3">

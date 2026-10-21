@@ -7,7 +7,7 @@ export interface Crumb {
   href?: string;
 }
 
-export function Breadcrumbs({ items }: { items: Crumb[] }) {
+export function Breadcrumbs({ items, tone = "dark" }: { items: Crumb[]; tone?: "dark" | "light" }) {
   const all: Crumb[] = [{ name: "Home", href: "/" }, ...items];
   const jsonLd = {
     "@context": "https://schema.org",
@@ -20,17 +20,17 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
     })),
   };
   return (
-    <nav aria-label="Breadcrumb" className="py-3 text-sm text-muted">
-      <ol className="flex flex-wrap items-center gap-1">
+    <nav aria-label="Breadcrumb" className={`py-3 text-sm ${tone === "light" ? "text-ivory/60" : "text-muted"}`}>
+      <ol className={`flex flex-wrap items-center gap-1 ${tone === "light" ? "justify-center" : ""}`}>
         {all.map((c, i) => (
           <li key={i} className="inline-flex items-center gap-1">
             {i > 0 && <ChevronRight size={14} aria-hidden="true" />}
             {c.href && i < all.length - 1 ? (
-              <Link href={c.href} className="hover:text-walnut hover:underline">
+              <Link href={c.href} className={tone === "light" ? "hover:text-gold-light" : "hover:text-walnut hover:underline"}>
                 {c.name}
               </Link>
             ) : (
-              <span aria-current={i === all.length - 1 ? "page" : undefined} className="text-ink">
+              <span aria-current={i === all.length - 1 ? "page" : undefined} className={tone === "light" ? "text-gold-light" : "text-ink"}>
                 {c.name}
               </span>
             )}

@@ -13,7 +13,8 @@ import { WishlistButton } from "@/components/store/WishlistButton";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Stars } from "@/components/ui/Stars";
 import { getSessionUser } from "@/lib/auth";
-import { getApprovedReviews, getProductBySlug, getRelatedProducts } from "@/lib/data/catalog";
+import { ancestorsOf } from "@/lib/category-tree";
+import { getApprovedReviews, getCategories, getProductBySlug, getRelatedProducts } from "@/lib/data/catalog";
 import { getSettings } from "@/lib/data/settings";
 import { publicEnv } from "@/lib/env";
 import { formatINR } from "@/lib/money";
@@ -39,11 +40,12 @@ export default async function ProductPage({ params }: Props) {
   const product = await getProductBySlug(slug);
   if (!product) notFound();
 
-  const [reviews, related, user, settings] = await Promise.all([
+  const [reviews, related, user, settings, allCategories] = await Promise.all([
     getApprovedReviews(product.id),
     getRelatedProducts(product),
     getSessionUser(),
     getSettings(),
+    getCategories(),
   ]);
   let saved = false;
   if (user) {
@@ -54,7 +56,10 @@ export default async function ProductPage({ params }: Props) {
 
   const prices = product.variants.map((v) => v.price_paise);
   const anyInStock = product.variants.some((v) => v.available > 0);
-  const category = product.categories[0];
+  // Breadcrumb through the product-type branch (not Regions), e.g. Shop > Dry Fruits > Walnuts.
+  const withChains = product.categories.map((c) => ({ c, chain: ancestorsOf(c.id, allCategories) }));
+  const primary = withChains.find((x) => x.chain[0]?.slug !== "regions") ?? withChains[0];
+  const regions = withChains.filter((x) => x.chain[0]?.slug === "regions").map((x) => x.c);
   const toAbs = (u: string) => (u.startsWith("http") ? u : `${publicEnv.siteUrl}${u}`);
   const jsonLd = {
     "@context": "https://schema.org",
@@ -96,7 +101,7 @@ export default async function ProductPage({ params }: Props) {
       <Breadcrumbs
         items={[
           { name: "Shop", href: "/shop" },
-          ...(category ? [{ name: category.name, href: `/category/${category.slug}` }] : []),
+          ...(primary ? [...primary.chain, primary.c].map((c) => ({ name: c.name, href: `/category/${c.slug}` })) : []),
           { name: product.name },
         ]}
       />
@@ -106,7 +111,14 @@ export default async function ProductPage({ params }: Props) {
 
         <div className="space-y-6">
           <div>
-            <p className="text-xs font-semibold tracking-widest text-saffron-600 uppercase">{product.brand}</p>
+            <p className="text-xs font-semibold tracking-widest text-saffron-600 uppercase">
+              {product.brand}
+              {regions.map((r) => (
+                <Link key={r.id} href={`/category/${r.slug}`} className="ml-3 rounded-full border border-saffron/50 px-2.5 py-0.5 tracking-[0.18em] hover:bg-almond-100">
+                  {r.name}
+                </Link>
+              ))}
+            </p>
             <h1 className="mt-1 text-3xl font-semibold text-walnut sm:text-4xl">{product.name}</h1>
             {product.review_count > 0 && (
               <a href="#reviews" className="mt-2 inline-block">

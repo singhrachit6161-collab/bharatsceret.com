@@ -26,6 +26,20 @@ ITEMS = {
     "cranberries": ("#F6DEDC", "#A3232E", "#661018", "raisin", "Cranberries"),
     "blueberries": ("#E7E4F0", "#2E2A5A", "#16133A", "round", "Blueberries"),
     "corn-nuts": ("#FBEBCB", "#E2A93B", "#A8701B", "round", "Corn Nuts"),
+    "makhana": ("#F6F1E6", "#F3EAD3", "#C9B58C", "puff", "Makhana"),
+    "saffron": ("#F7EEE4", "#B3261E", "#7A140F", "thread", "Saffron"),
+    "cardamom": ("#F1F0E2", "#9CB46A", "#5D7536", "seed", "Cardamom"),
+    "spice": ("#F8ECE2", "#B5401F", "#7C2A12", "powder", "Spices"),
+    "bhujia": ("#FAF0DC", "#D99A2B", "#A0661A", "thread", "Bhujia"),
+    "tea": ("#EEF0E4", "#3F5A2C", "#24361A", "seed", "Tea"),
+    "jaggery": ("#F6EBDA", "#A8662A", "#6E3E14", "cube", "Jaggery"),
+}
+
+# Jar products: (background, contents colour, label)
+JARS = {
+    "honey": ("#F8EEDC", "#D99A2B", "Honey"),
+    "pickle": ("#F7EBDD", "#C4561F", "Pickle"),
+    "chutney": ("#F5EADF", "#8E2A1E", "Chutney"),
 }
 
 MIX_COLORS = [("#B9774A", "#7A4A2A"), ("#EBD3A8", "#B8955C"), ("#C9862B", "#8A5313"), ("#A3232E", "#661018"), ("#C9B98E", "#7F8C4E")]
@@ -57,7 +71,40 @@ def shape(kind, x, y, r, rot, fill, stroke):
         return (f'<g {t}><rect x="{x-r:.0f}" y="{y-r*0.8:.0f}" width="{r*2:.0f}" height="{r*1.6:.0f}" rx="8" fill="{fill}" stroke="{stroke}" stroke-width="3"/>'
                 f'<rect x="{x-r*0.12:.0f}" y="{y-r*0.8:.0f}" width="{r*0.24:.0f}" height="{r*1.6:.0f}" fill="#0D5A44"/>'
                 f'<rect x="{x-r:.0f}" y="{y-r*0.12:.0f}" width="{r*2:.0f}" height="{r*0.24:.0f}" fill="#0D5A44"/></g>')
+    if kind == "puff":
+        return (f'<g {t}><circle cx="{x:.0f}" cy="{y:.0f}" r="{r*0.95:.0f}" fill="{fill}" stroke="{stroke}" stroke-width="2.5"/>'
+                f'<path d="M{x-r*0.5:.0f},{y-r*0.2:.0f} q{r*0.3:.0f},{-r*0.4:.0f} {r*0.7:.0f},{-r*0.1:.0f}" stroke="{stroke}" stroke-width="2" fill="none"/>'
+                f'<circle cx="{x+r*0.3:.0f}" cy="{y+r*0.3:.0f}" r="{r*0.18:.0f}" fill="#8A6A3A" opacity="0.5"/></g>')
+    if kind == "thread":
+        return f'<path {t} d="M{x-r*1.3:.0f},{y:.0f} q{r*0.6:.0f},{-r*0.5:.0f} {r*1.3:.0f},0 t{r*1.3:.0f},0" stroke="{fill}" stroke-width="{max(3, r*0.18):.0f}" stroke-linecap="round" fill="none"/>'
+    if kind == "powder":
+        return f'<ellipse {t} cx="{x:.0f}" cy="{y:.0f}" rx="{r*0.9:.0f}" ry="{r*0.7:.0f}" fill="{fill}" stroke="{stroke}" stroke-width="1.5" opacity="0.95"/>'
+    if kind == "cube":
+        return (f'<g {t}><rect x="{x-r*0.8:.0f}" y="{y-r*0.8:.0f}" width="{r*1.6:.0f}" height="{r*1.6:.0f}" rx="6" fill="{fill}" stroke="{stroke}" stroke-width="3"/>'
+                f'<path d="M{x-r*0.5:.0f},{y-r*0.4:.0f} l{r*0.5:.0f},{r*0.2:.0f}" stroke="#D9A866" stroke-width="3" opacity="0.6"/></g>')
     return f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{r:.0f}" fill="{fill}" stroke="{stroke}" stroke-width="3"/>'
+
+
+def jar_svg(bg, contents, label):
+    w = h = 800
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" role="img" aria-label="{label} placeholder illustration">
+{BRASS_DEFS}
+<defs><linearGradient id="glass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/><stop offset="0.2" stop-color="#FFFFFF" stop-opacity="0.1"/><stop offset="0.8" stop-color="#FFFFFF" stop-opacity="0.05"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0.45"/></linearGradient></defs>
+<rect width="{w}" height="{h}" fill="{bg}"/>
+<g fill="none" stroke="#B8893B" stroke-opacity="0.12">{''.join(f'<circle cx="400" cy="380" r="{r}"/>' for r in (150, 210, 270, 330))}</g>
+<rect width="{w}" height="{h}" fill="url(#glow)"/>
+<ellipse cx="400" cy="640" rx="190" ry="22" fill="#000" opacity="0.15"/>
+<rect x="245" y="300" width="310" height="340" rx="46" fill="{contents}"/>
+<rect x="245" y="300" width="310" height="340" rx="46" fill="url(#glass)" stroke="#B8893B" stroke-opacity="0.35" stroke-width="3"/>
+<rect x="268" y="230" width="264" height="82" rx="14" fill="url(#brass)"/>
+<rect x="268" y="296" width="264" height="10" fill="url(#rim)"/>
+<rect x="300" y="400" width="200" height="130" rx="10" fill="#FAF6EF" stroke="#B8893B" stroke-width="3"/>
+<text x="400" y="458" text-anchor="middle" font-family="Georgia, serif" font-size="30" fill="#0D5A44">{label}</text>
+<text x="400" y="494" text-anchor="middle" font-family="Georgia, serif" font-size="15" letter-spacing="4" fill="#96701F">BHARAT SECRETS</text>
+<text x="400" y="730" text-anchor="middle" font-family="Georgia, serif" font-size="34" letter-spacing="6" fill="#0A3328">{label.upper()}</text>
+<text x="400" y="764" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" letter-spacing="5" fill="#96701F">PLACEHOLDER IMAGE</text>
+</svg>
+'''
 
 
 def bowl_items(kind, fill, stroke, cx, cy, w, count, size, seed):
@@ -143,6 +190,8 @@ def hero_svg(name, bg, accent, kinds, seed, w=1000, h=1250):
 
 for key, (bg, fill, stroke, kind, label) in ITEMS.items():
     (OUT / f"{key}.svg").write_text(product_svg(key, bg, fill, stroke, kind, label))
+for key, (bg, contents, label) in JARS.items():
+    (OUT / f"{key}.svg").write_text(jar_svg(bg, contents, label))
 
 (OUT / "hero-hampers.svg").write_text(hero_svg("hampers", "", "", [("box", "#D4A64E", "#7A5A1E"), ("almond", "#B9774A", "#7A4A2A"), ("cashew", "#EBD3A8", "#B8955C")], 7))
 (OUT / "hero-nuts.svg").write_text(hero_svg("nuts", "", "", [("walnut", "#C49A6C", "#7E5A36"), ("pistachio", "#C9B98E", "#7F8C4E"), ("almond", "#B9774A", "#7A4A2A")], 11))

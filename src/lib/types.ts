@@ -98,7 +98,7 @@ export interface Banner {
 }
 
 export interface HomepageSection {
-  key: "category_tiles" | "bestsellers" | "most_viewed" | "latest" | "promo_banners" | "featured" | "brand_showcase";
+  key: "category_tiles" | "bestsellers" | "most_viewed" | "latest" | "promo_banners" | "featured" | "brand_showcase" | "regions";
   title: string;
   is_visible: boolean;
   sort_order: number;

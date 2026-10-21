@@ -1,5 +1,6 @@
 import "server-only";
 import { cache } from "react";
+import { ancestorsOf } from "@/lib/category-tree";
 import { isSupabaseConfigured } from "@/lib/env";
 import { createClient } from "@/lib/supabase/server";
 import type { Banner, Category, HomepageSection, ProductDetail, ProductListing, Review, Variant } from "@/lib/types";
@@ -234,7 +235,10 @@ export const getProductBySlug = cache(async (slug: string): Promise<ProductDetai
 });
 
 export async function getRelatedProducts(product: ProductDetail, limit = 8): Promise<ProductListing[]> {
-  const slug = product.categories[0]?.slug;
+  // Prefer the product-type branch over the Regions branch for "you may also like".
+  const all = await getCategories();
+  const typeCategory = product.categories.find((c) => ancestorsOf(c.id, all)[0]?.slug !== "regions");
+  const slug = (typeCategory ?? product.categories[0])?.slug;
   if (!slug) return [];
   const { items } = await listProducts({ category: slug, pageSize: limit + 1, sort: "popular" });
   return items.filter((p) => p.id !== product.id).slice(0, limit);

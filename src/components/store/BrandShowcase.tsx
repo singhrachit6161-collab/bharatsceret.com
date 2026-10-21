@@ -38,7 +38,7 @@ export function BrandShowcase({ title }: { title: string }) {
           </figure>
         </div>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
-          <Link href="/category/gift-hampers" className="btn-primary rounded-none px-8 py-3.5 text-xs tracking-[0.2em] uppercase">
+          <Link href="/category/gifting" className="btn-primary rounded-none px-8 py-3.5 text-xs tracking-[0.2em] uppercase">
             Curated gift collections
           </Link>
           <Link href="/shop" className="btn-outline rounded-none border-saffron/60 px-8 py-3.5 text-xs tracking-[0.2em] uppercase">

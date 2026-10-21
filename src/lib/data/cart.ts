@@ -4,7 +4,8 @@ import { CART_COOKIE, parseCart, serializeCart, type CartLine } from "@/lib/cart
 import { isSupabaseConfigured } from "@/lib/env";
 import type { PricedLine } from "@/lib/pricing";
 import { createClient } from "@/lib/supabase/server";
-import { availableFrom } from "./catalog";
+import { withAncestorIds } from "@/lib/category-tree";
+import { availableFrom, getCategories } from "./catalog";
 
 export interface CartViewLine {
   variantId: string;
@@ -79,6 +80,8 @@ export async function getCartView(lines?: CartLine[]): Promise<CartViewLine[]> {
     };
   };
   const byId = new Map(((data ?? []) as unknown as Row[]).map((r) => [r.id, r]));
+  // Coupons scoped to a parent collection (e.g. Dry Fruits) apply to its sub-collections.
+  const allCategories = await getCategories();
 
   const view: CartViewLine[] = [];
   for (const line of cart) {
@@ -103,7 +106,10 @@ export async function getCartView(lines?: CartLine[]): Promise<CartViewLine[]> {
       quantity: line.quantity,
       available,
       maxPerOrder: r.max_per_order,
-      categoryIds: (r.products.product_categories ?? []).map((c) => c.category_id),
+      categoryIds: withAncestorIds(
+        (r.products.product_categories ?? []).map((c) => c.category_id),
+        allCategories,
+      ),
       issue,
     });
   }

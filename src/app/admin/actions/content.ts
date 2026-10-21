@@ -156,7 +156,7 @@ export async function deleteBanner(_prev: AdminFormState, fd: FormData): Promise
 export async function saveSection(_prev: AdminFormState, fd: FormData): Promise<AdminFormState> {
   try {
     const { db, user } = await adminContext(ADMIN_ROLES);
-    const key = z.enum(["category_tiles", "bestsellers", "most_viewed", "latest", "promo_banners", "featured", "brand_showcase"]).safeParse(formString(fd, "key"));
+    const key = z.enum(["category_tiles", "bestsellers", "most_viewed", "latest", "promo_banners", "featured", "brand_showcase", "regions"]).safeParse(formString(fd, "key"));
     const title = formString(fd, "title").slice(0, 80);
     const sort = Number(formString(fd, "sort_order"));
     const limit = Number(formString(fd, "item_limit"));

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Cardamom placeholder illustration">
+<defs>
+<linearGradient id="brass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6E4A1A"/><stop offset="0.35" stop-color="#C9973F"/><stop offset="0.55" stop-color="#F0D49A"/><stop offset="0.8" stop-color="#B07D2E"/><stop offset="1" stop-color="#5E3D14"/></linearGradient>
+<linearGradient id="rim" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8A5E22"/><stop offset="0.5" stop-color="#F6DFA8"/><stop offset="1" stop-color="#8A5E22"/></linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.42" r="0.6"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.75"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
+<radialGradient id="velvet" cx="0.3" cy="0.2" r="0.9"><stop offset="0" stop-color="#0F4A3A"/><stop offset="0.6" stop-color="#082C22"/><stop offset="1" stop-color="#041A14"/></radialGradient>
+</defs>
+<rect width="800" height="800" fill="#F1F0E2"/>
+<g fill="none" stroke="#B8893B" stroke-opacity="0.12"><circle cx="400" cy="380" r="150"/><circle cx="400" cy="380" r="210"/><circle cx="400" cy="380" r="270"/><circle cx="400" cy="380" r="330"/></g>
+<rect width="800" height="800" fill="url(#glow)"/>
+<ellipse cx="400" cy="470" rx="262" ry="22" fill="#0A3328"/>
+<ellipse transform="rotate(257 607 470)" cx="607" cy="470" rx="21" ry="11" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(90 210 466)" cx="210" cy="466" rx="20" ry="10" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(40 205 462)" cx="205" cy="462" rx="17" ry="8" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(214 545 462)" cx="545" cy="462" rx="21" ry="10" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(244 541 460)" cx="541" cy="460" rx="21" ry="11" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(24 553 460)" cx="553" cy="460" rx="18" ry="9" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(106 383 460)" cx="383" cy="460" rx="18" ry="9" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(185 257 458)" cx="257" cy="458" rx="21" ry="10" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(224 364 455)" cx="364" cy="455" rx="19" ry="9" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(50 227 455)" cx="227" cy="455" rx="17" ry="8" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(147 469 452)" cx="469" cy="452" rx="17" ry="9" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(99 279 452)" cx="279" cy="452" rx="21" ry="11" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(155 470 451)" cx="470" cy="451" rx="21" ry="11" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(244 549 446)" cx="549" cy="446" rx="20" ry="10" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(81 572 444)" cx="572" cy="444" rx="21" ry="10" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(335 387 444)" cx="387" cy="444" rx="17" ry="9" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(120 404 441)" cx="404" cy="441" rx="22" ry="11" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(325 347 438)" cx="347" cy="438" rx="20" ry="10" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(321 519 435)" cx="519" cy="435" rx="21" ry="11" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(250 284 435)" cx="284" cy="435" rx="18" ry="9" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(79 417 431)" cx="417" cy="431" rx="20" ry="10" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(110 297 430)" cx="297" cy="430" rx="18" ry="9" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(185 527 429)" cx="527" cy="429" rx="19" ry="9" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(219 508 426)" cx="508" cy="426" rx="17" ry="9" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(196 256 425)" cx="256" cy="425" rx="19" ry="10" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(231 430 422)" cx="430" cy="422" rx="18" ry="9" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(281 474 419)" cx="474" cy="419" rx="21" ry="11" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(44 526 413)" cx="526" cy="413" rx="21" ry="11" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(98 509 413)" cx="509" cy="413" rx="22" ry="11" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(261 454 410)" cx="454" cy="410" rx="19" ry="10" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(12 375 409)" cx="375" cy="409" rx="22" ry="11" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(239 370 393)" cx="370" cy="393" rx="21" ry="10" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(76 449 393)" cx="449" cy="393" rx="20" ry="10" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse transform="rotate(61 375 386)" cx="375" cy="386" rx="22" ry="11" fill="#9CB46A" stroke="#5D7536" stroke-width="2.5"/>
+<ellipse cx="400" cy="648" rx="256" ry="23" fill="#000" opacity="0.18"/><path d="M130,470 Q152,640 400,644 Q648,640 670,470Z" fill="url(#brass)"/><path d="M211,546 Q400,598 589,546" stroke="#5E3D14" stroke-width="2" fill="none" opacity="0.5"/><path d="M252,575 Q400,616 548,575" stroke="#F6DFA8" stroke-width="1.5" fill="none" opacity="0.6"/><ellipse cx="400" cy="470" rx="270" ry="26" fill="none" stroke="url(#rim)" stroke-width="6"/>
+<text x="400" y="730" text-anchor="middle" font-family="Georgia, serif" font-size="34" letter-spacing="6" fill="#0A3328">CARDAMOM</text>
+<text x="400" y="764" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" letter-spacing="5" fill="#96701F">PLACEHOLDER IMAGE</text>
+</svg>

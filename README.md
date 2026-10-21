@@ -61,6 +61,28 @@ tests/unit, tests/db    Vitest suites
 public/placeholders/    original, clearly labelled placeholder artwork (scripts/generate-placeholders.py)
 ```
 
+## Catalogue structure
+
+Collections are nested categories (`categories.parent_id`), managed in **Admin → Collections**:
+
+```
+Dry Fruits      Almonds · Cashews · Pistachios · Walnuts · Raisins · Dates
+Flavour Lab     Flavoured Nuts · Flavoured Makhana · Roasted · Build Your Own
+Spices          Single Origin · Whole Spices · Ground · Regional Blends
+Snacks          Makhana · Traditional Snacks · Seeds · Trail Mixes
+Pantry          Honey · Pickles · Chutneys · Specialty Foods
+Tea & Beverages Kahwa · Chai · Regional Tea
+Regions         Kashmir · Punjab · Himachal · Uttarakhand · Rajasthan · Uttar Pradesh
+Gifting         Festivals · Weddings · Corporate · Build Your Own · Luxury
+```
+
+- **Menus:** top-level collections marked "Show in menus" form the main menu. Their marked children appear in each dropdown and in the mobile menu.
+- **Parent pages:** a parent collection's page lists every product in its sub-collections. For example, `/category/dry-fruits` includes almonds.
+- **Coupons:** a coupon scoped to a parent collection applies to products in its sub-collections.
+- **Regions:** regions are collections too. Tag a product with both its type and its region (e.g. *Walnuts* and *Kashmir*). It then appears in both places, and the product page shows a region badge.
+- **Adding a region:** add it in Admin → Collections with parent *Regions*. It appears in the menu and the homepage "Explore by region" section automatically.
+- **Build Your Own:** the Flavour Lab and Gifting entries are collections only, with no products seeded. An interactive mix or hamper builder is not built yet.
+
 ## Database & migrations
 
 | Order | File | Contents |
@@ -71,6 +93,8 @@ public/placeholders/    original, clearly labelled placeholder artwork (scripts/
 | 4 | `20261021000004_storage.sql` | `product-images` bucket (5 MB limit; JPEG, PNG, WebP or AVIF) and admin-only write policies |
 | 5 | `20261021000005_listing_view.sql` | `product_listing` view (security invoker) and popularity score |
 | 6 | `20261021000006_admin_reporting.sql` | Staff-only dashboard and customer reporting functions |
+| 7 | `20261021000007_brand_showcase.sql` | "Artisanal Portfolio" homepage section key |
+| 8 | `20261021000008_category_tree.sql` | Nested catalogue: listings roll up to parent collections, `regions` homepage section, cycle guard |
 
 **How to apply them:**
 - **Supabase CLI:** `supabase link --project-ref <ref>`, then `supabase db push`.

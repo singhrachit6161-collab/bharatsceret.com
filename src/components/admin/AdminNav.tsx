@@ -11,7 +11,7 @@ const ITEMS = [
   { href: "/admin", label: "Dashboard", icon: BarChart3, admin: false },
   { href: "/admin/orders", label: "Orders", icon: ClipboardList, admin: false },
   { href: "/admin/products", label: "Products", icon: Package, admin: true },
-  { href: "/admin/categories", label: "Categories", icon: Tags, admin: true },
+  { href: "/admin/categories", label: "Collections", icon: Tags, admin: true },
   { href: "/admin/inventory", label: "Inventory", icon: Boxes, admin: false },
   { href: "/admin/customers", label: "Customers", icon: Users, admin: false },
   { href: "/admin/coupons", label: "Coupons", icon: Tag, admin: true },

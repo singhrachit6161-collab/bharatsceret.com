@@ -63,7 +63,7 @@ export async function Footer() {
         </div>
         <FooterList title="The house" links={INFO} />
         <FooterList title="Your account" links={ACCOUNT} />
-        <FooterList title="Collections" links={categories.slice(0, 7).map((c) => ({ href: `/category/${c.slug}`, label: c.name }))} />
+        <FooterList title="Collections" links={categories.filter((c) => !c.parent_id && c.show_in_nav).map((c) => ({ href: `/category/${c.slug}`, label: c.name }))} />
       </div>
       <div className="border-t border-gold-light/15">
         <div className="container-page flex flex-col gap-3 py-6 text-[11px] tracking-wide text-ivory/50 sm:flex-row sm:items-center sm:justify-between">
