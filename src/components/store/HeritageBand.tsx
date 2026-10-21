@@ -14,7 +14,7 @@ export function HeritageBand({ heritage }: { heritage: StoreSettings["heritage"]
               <Image src="/placeholders/heritage.svg" alt="" fill sizes="448px" unoptimized className="object-cover" />
             </div>
           </div>
-          <div className="absolute -right-4 -bottom-6 hidden border border-gold-light/40 bg-maroon px-6 py-5 text-center shadow-2xl sm:block">
+          <div className="absolute -right-4 -bottom-6 hidden border border-gold-light/40 bg-emerald px-6 py-5 text-center shadow-2xl sm:block">
             <p className="font-display text-3xl font-semibold text-gold-light">भारत</p>
             <p className="mt-1 text-[10px] tracking-[0.3em] text-ivory/70 uppercase">Rooted in India</p>
           </div>

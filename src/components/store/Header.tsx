@@ -35,9 +35,9 @@ export async function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line/70 bg-ivory/95 backdrop-blur supports-[backdrop-filter]:bg-ivory/85">
+    <header className="sticky top-0 z-40 border-b border-saffron/40 bg-ivory/95 backdrop-blur supports-[backdrop-filter]:bg-ivory/85">
       {settings.announcement.enabled && settings.announcement.message && (
-        <div className="bg-walnut px-4 py-2 text-center text-[11px] tracking-[0.2em] text-gold-light uppercase sm:text-xs">
+        <div className="border-b border-saffron/50 bg-walnut px-4 py-2 text-center text-[11px] tracking-[0.2em] text-gold-light uppercase sm:text-xs">
           {settings.announcement.message}
           {settings.announcement.link_url && settings.announcement.link_label && (
             <Link href={settings.announcement.link_url} className="ml-3 font-semibold text-ivory underline decoration-saffron underline-offset-4 hover:text-gold-light">
@@ -82,7 +82,7 @@ export async function Header() {
         <SearchBox categories={[]} />
       </div>
 
-      <nav aria-label="Main" className="hidden border-t border-line/70 lg:block">
+      <nav aria-label="Main" className="hidden border-t border-saffron/30 lg:block">
         <ul className="container-page flex items-center justify-center gap-1 text-[12px] font-semibold tracking-[0.18em] text-walnut uppercase">
           <li className="group relative">
             <Link href="/shop" className="flex items-center gap-1 px-4 py-3.5 transition-colors hover:text-saffron-600">

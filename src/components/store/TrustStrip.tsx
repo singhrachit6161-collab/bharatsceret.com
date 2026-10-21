@@ -5,7 +5,7 @@ const ICONS: Record<string, LucideIcon> = { truck: Truck, package: Package, shie
 export function TrustStrip({ items }: { items: { icon: string; title: string; text: string }[] }) {
   if (!items.length) return null;
   return (
-    <section aria-label="Our promise" className="bg-maroon-royal text-ivory">
+    <section aria-label="Our promise" className="bg-emerald-royal text-ivory">
       <ul className="container-page grid grid-cols-2 gap-8 py-12 lg:grid-cols-4">
         {items.map((it) => {
           const Icon = ICONS[it.icon] ?? Package;

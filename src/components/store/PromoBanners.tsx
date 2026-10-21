@@ -4,9 +4,9 @@ import type { Banner } from "@/lib/types";
 
 const BG: Record<Banner["theme"], string> = {
   walnut: "bg-royal",
-  saffron: "bg-maroon-royal",
+  saffron: "bg-emerald-royal",
   olive: "bg-royal",
-  cream: "bg-maroon-royal",
+  cream: "bg-emerald-royal",
 };
 
 export function PromoBanners({ banners }: { banners: Banner[] }) {

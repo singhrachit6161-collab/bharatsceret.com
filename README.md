@@ -4,7 +4,7 @@ A full-stack Indian dry-fruits e-commerce site: storefront, cart, checkout with 
 
 > **Brand:** Bharat Secret. The name appears in the logo (`src/components/ui/Logo.tsx`), the site metadata (`src/app/layout.tsx`) and the `store_contact` setting. Order numbers start with `BS`.
 >
-> **Design:** royal Indian luxury. Espresso, maroon and antique gold, Cormorant Garamond headings, palace-arch (jharokha) frames, gold ornament dividers and a damask pattern (`public/patterns/`). The homepage "heritage" story is edited in Admin → Settings. Only mention export standards or certifications you actually hold.
+> **Design:** royal Indian luxury. Royal emerald, antique gold and ivory, Cormorant Garamond headings, palace-arch (jharokha) frames, gold ornament dividers and a damask pattern (`public/patterns/`). The homepage "heritage" story is edited in Admin → Settings. Only mention export standards or certifications you actually hold.
 
 **Stack:** Next.js 16 (App Router, TypeScript strict) · Tailwind CSS 4 · Supabase (Postgres, Auth, Storage, RLS) · Razorpay Standard Checkout · Zod · Vitest.
 

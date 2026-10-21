@@ -2,22 +2,22 @@
 
 /* Bharat Secret design tokens */
 :root {
-  /* Espresso, antique gold and ivory: a quiet, heritage-luxury palette */
-  --walnut: #1f1612;
-  --walnut-700: #2c2019;
-  --walnut-600: #3d2c22;
+  /* Royal emerald, antique gold and ivory */
+  --walnut: #08281f;
+  --walnut-700: #0c3428;
+  --walnut-600: #134537;
   --ivory: #faf6ef;
   --saffron: #b8893b;
   --saffron-600: #96701f;
   --gold-light: #dcc08a;
-  --maroon: #5a1622;
-  --maroon-700: #43101a;
-  --almond: #ede3d3;
-  --almond-100: #f4ede2;
-  --olive: #4e5b3a;
-  --ink: #1e1915;
-  --muted: #75685c;
-  --line: #e7dccb;
+  --emerald: #0d5a44;
+  --emerald-700: #0a4636;
+  --almond: #ece4d2;
+  --almond-100: #f3eee2;
+  --olive: #1f6b50;
+  --ink: #11221c;
+  --muted: #5e6a62;
+  --line: #e3dac6;
   --danger: #9b2230;
   --success: #3d6338;
 }
@@ -30,8 +30,8 @@
   --color-saffron: var(--saffron);
   --color-saffron-600: var(--saffron-600);
   --color-gold-light: var(--gold-light);
-  --color-maroon: var(--maroon);
-  --color-maroon-700: var(--maroon-700);
+  --color-emerald: var(--emerald);
+  --color-emerald-700: var(--emerald-700);
   --color-almond: var(--almond);
   --color-almond-100: var(--almond-100);
   --color-olive: var(--olive);
@@ -157,13 +157,13 @@ h3 {
 .bg-royal {
   background-color: var(--walnut);
   background-image:
-    radial-gradient(ellipse at 20% 0%, rgba(184, 137, 59, 0.22), transparent 55%),
-    radial-gradient(ellipse at 100% 100%, rgba(90, 22, 34, 0.55), transparent 60%),
+    radial-gradient(ellipse at 20% 0%, rgba(220, 192, 138, 0.2), transparent 55%),
+    radial-gradient(ellipse at 100% 100%, rgba(16, 110, 82, 0.5), transparent 60%),
     url("/patterns/damask.svg");
   background-size: auto, auto, 120px 120px;
 }
-.bg-maroon-royal {
-  background-color: var(--maroon);
+.bg-emerald-royal {
+  background-color: var(--emerald);
   background-image:
     radial-gradient(ellipse at 50% 0%, rgba(220, 192, 138, 0.18), transparent 60%),
     url("/patterns/damask.svg");

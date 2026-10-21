@@ -51,7 +51,7 @@ export function RazorpayPay({ orderId, totalPaise, testMode }: { orderId: string
       name: "Bharat Secret",
       description: `Order ${s.orderNumber}`,
       prefill: s.prefill,
-      theme: { color: "#38251D" },
+      theme: { color: "#0D5A44" },
       modal: {
         ondismiss: () => setBusy(false),
         confirm_close: true,

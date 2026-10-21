@@ -3,12 +3,12 @@
 <linearGradient id="brass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6E4A1A"/><stop offset="0.35" stop-color="#C9973F"/><stop offset="0.55" stop-color="#F0D49A"/><stop offset="0.8" stop-color="#B07D2E"/><stop offset="1" stop-color="#5E3D14"/></linearGradient>
 <linearGradient id="rim" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8A5E22"/><stop offset="0.5" stop-color="#F6DFA8"/><stop offset="1" stop-color="#8A5E22"/></linearGradient>
 <radialGradient id="glow" cx="0.5" cy="0.42" r="0.6"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.75"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
-<radialGradient id="velvet" cx="0.3" cy="0.2" r="0.9"><stop offset="0" stop-color="#4A2A1E"/><stop offset="0.6" stop-color="#22160F"/><stop offset="1" stop-color="#140C08"/></radialGradient>
+<radialGradient id="velvet" cx="0.3" cy="0.2" r="0.9"><stop offset="0" stop-color="#0F4A3A"/><stop offset="0.6" stop-color="#082C22"/><stop offset="1" stop-color="#041A14"/></radialGradient>
 </defs>
 <rect width="800" height="800" fill="#F3EADC"/>
 <g fill="none" stroke="#B8893B" stroke-opacity="0.12"><circle cx="400" cy="380" r="150"/><circle cx="400" cy="380" r="210"/><circle cx="400" cy="380" r="270"/><circle cx="400" cy="380" r="330"/></g>
 <rect width="800" height="800" fill="url(#glow)"/>
-<ellipse cx="400" cy="470" rx="262" ry="22" fill="#3A2412"/>
+<ellipse cx="400" cy="470" rx="262" ry="22" fill="#0A3328"/>
 <g transform="rotate(156 172 480)"><ellipse cx="172" cy="480" rx="37" ry="31" fill="#C49A6C" stroke="#7E5A36" stroke-width="3"/><path d="M172,449 C159,471 184,489 172,511" stroke="#7E5A36" stroke-width="3" fill="none"/><path d="M147,474 q9,12 19,0 M178,486 q9,12 19,0" stroke="#7E5A36" stroke-width="2.5" fill="none"/></g>
 <g transform="rotate(314 240 458)"><ellipse cx="240" cy="458" rx="41" ry="35" fill="#C49A6C" stroke="#7E5A36" stroke-width="3"/><path d="M240,424 C226,448 254,468 240,493" stroke="#7E5A36" stroke-width="3" fill="none"/><path d="M213,451 q10,14 21,0 M247,465 q10,14 21,0" stroke="#7E5A36" stroke-width="2.5" fill="none"/></g>
 <g transform="rotate(205 536 456)"><ellipse cx="536" cy="456" rx="35" ry="29" fill="#C49A6C" stroke="#7E5A36" stroke-width="3"/><path d="M536,427 C525,447 548,465 536,485" stroke="#7E5A36" stroke-width="3" fill="none"/><path d="M513,450 q9,12 18,0 M542,462 q9,12 18,0" stroke="#7E5A36" stroke-width="2.5" fill="none"/></g>
@@ -44,6 +44,6 @@
 <g transform="rotate(73 453 355)"><ellipse cx="453" cy="355" rx="39" ry="32" fill="#C49A6C" stroke="#7E5A36" stroke-width="3"/><path d="M453,322 C440,345 465,365 453,387" stroke="#7E5A36" stroke-width="3" fill="none"/><path d="M427,348 q10,13 19,0 M459,361 q10,13 19,0" stroke="#7E5A36" stroke-width="2.5" fill="none"/></g>
 <g transform="rotate(179 408 352)"><ellipse cx="408" cy="352" rx="39" ry="33" fill="#C49A6C" stroke="#7E5A36" stroke-width="3"/><path d="M408,319 C395,342 421,362 408,384" stroke="#7E5A36" stroke-width="3" fill="none"/><path d="M382,345 q10,13 20,0 M414,358 q10,13 20,0" stroke="#7E5A36" stroke-width="2.5" fill="none"/></g>
 <ellipse cx="400" cy="648" rx="256" ry="23" fill="#000" opacity="0.18"/><path d="M130,470 Q152,640 400,644 Q648,640 670,470Z" fill="url(#brass)"/><path d="M211,546 Q400,598 589,546" stroke="#5E3D14" stroke-width="2" fill="none" opacity="0.5"/><path d="M252,575 Q400,616 548,575" stroke="#F6DFA8" stroke-width="1.5" fill="none" opacity="0.6"/><ellipse cx="400" cy="470" rx="270" ry="26" fill="none" stroke="url(#rim)" stroke-width="6"/>
-<text x="400" y="730" text-anchor="middle" font-family="Georgia, serif" font-size="34" letter-spacing="6" fill="#3A2412">WALNUTS</text>
+<text x="400" y="730" text-anchor="middle" font-family="Georgia, serif" font-size="34" letter-spacing="6" fill="#0A3328">WALNUTS</text>
 <text x="400" y="764" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" letter-spacing="5" fill="#96701F">PLACEHOLDER IMAGE</text>
 </svg>

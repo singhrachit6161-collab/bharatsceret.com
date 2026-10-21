@@ -23,7 +23,7 @@ export function ProductCard({ product, priority = false }: { product: ProductLis
           className="transition-transform duration-700 group-hover:scale-105"
         />
         {pct !== null && pct > 0 && (
-          <span className="absolute top-3 left-3 z-10 bg-maroon px-2.5 py-1 text-[10px] font-bold tracking-[0.16em] text-gold-light uppercase">
+          <span className="absolute top-3 left-3 z-10 bg-emerald px-2.5 py-1 text-[10px] font-bold tracking-[0.16em] text-gold-light uppercase">
             Save {pct}%
           </span>
         )}
@@ -39,7 +39,7 @@ export function ProductCard({ product, priority = false }: { product: ProductLis
           {multi && ` · ${product.variant_count} sizes`}
         </p>
         <h3 className="line-clamp-2 min-h-[3.25rem] font-display text-xl leading-tight font-semibold text-walnut">
-          <Link href={`/product/${product.slug}`} className="hover:text-maroon">
+          <Link href={`/product/${product.slug}`} className="hover:text-emerald">
             {product.name}
           </Link>
         </h3>
@@ -49,7 +49,7 @@ export function ProductCard({ product, priority = false }: { product: ProductLis
             <Price price={price} compareAt={compareAt} />
           </div>
         )}
-        {available > 0 && available <= 5 && <p className="text-[11px] font-medium text-maroon">Only {available} left</p>}
+        {available > 0 && available <= 5 && <p className="text-[11px] font-medium text-emerald">Only {available} left</p>}
         <div className="mt-2 w-full">
           {multi ? (
             <Link href={`/product/${product.slug}`} className="btn-outline w-full rounded-none border-walnut/25 px-3 py-2.5 text-[11px] tracking-[0.18em] uppercase hover:border-saffron hover:bg-walnut hover:text-gold-light">
