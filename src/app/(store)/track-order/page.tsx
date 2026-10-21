@@ -21,7 +21,7 @@ export default async function TrackOrderPage({ searchParams }: { searchParams: P
         {user ? (
           <form method="get" className="mt-5 space-y-3">
             <label htmlFor="order" className="label">Order number</label>
-            <input id="order" name="order" defaultValue={order} placeholder="e.g. SV261021-1001" required className="input" />
+            <input id="order" name="order" defaultValue={order} placeholder="e.g. BS261021-1001" required className="input" />
             {notFoundMsg && <p className="text-sm text-danger" role="alert">We couldn&apos;t find that order on your account.</p>}
             <button type="submit" className="btn-primary w-full">Track</button>
           </form>

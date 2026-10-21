@@ -17,10 +17,10 @@ export function NewsletterForm() {
           type="email"
           required
           placeholder="Your email"
-          className="w-full min-w-0 rounded-l-md border border-white/20 bg-white/10 px-3 py-2 text-sm text-ivory placeholder:text-ivory/50 focus:border-saffron focus:outline-none"
+          className="w-full min-w-0 border border-gold-light/30 bg-white/5 px-4 py-3 text-sm text-ivory placeholder:text-ivory/40 focus:border-gold-light focus:outline-none"
         />
-        <button type="submit" disabled={pending} className="rounded-r-md bg-saffron px-4 text-sm font-semibold text-walnut hover:bg-saffron-600 disabled:opacity-60">
-          {pending ? "…" : "Subscribe"}
+        <button type="submit" disabled={pending} className="btn-accent rounded-none px-6 text-[11px] uppercase disabled:opacity-60">
+          {pending ? "…" : "Join"}
         </button>
       </div>
       <p aria-live="polite" className={`mt-2 text-xs ${state?.ok ? "text-saffron" : "text-red-300"}`}>

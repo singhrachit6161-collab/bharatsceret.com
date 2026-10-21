@@ -1,4 +1,5 @@
 import { CategoryTiles } from "@/components/store/CategoryTiles";
+import { HeritageBand } from "@/components/store/HeritageBand";
 import { HeroCarousel } from "@/components/store/HeroCarousel";
 import { PromoBanners } from "@/components/store/PromoBanners";
 import { ProductSection } from "@/components/store/ProductSection";
@@ -15,11 +16,16 @@ export default async function HomePage() {
 
   const blocks: Record<HomepageSection["key"], React.ReactNode> = {
     category_tiles: <CategoryTiles key="tiles" tiles={data.tiles} />,
-    bestsellers: <ProductSection key="best" title={title("bestsellers", "Bestsellers")} products={data.bestsellers} viewAllHref="/shop?sort=popular" />,
-    most_viewed: <ProductSection key="viewed" title={title("most_viewed", "Most viewed")} products={data.mostViewed} note="Based on product page visits in the last 30 days" />,
-    latest: <ProductSection key="latest" title={title("latest", "Latest arrivals")} products={data.latest} viewAllHref="/shop?sort=newest" />,
+    bestsellers: (
+      <div key="best">
+        <ProductSection eyebrow="Most coveted" title={title("bestsellers", "Bestsellers")} products={data.bestsellers} viewAllHref="/shop?sort=popular" />
+        <HeritageBand heritage={settings.heritage} />
+      </div>
+    ),
+    most_viewed: <ProductSection key="viewed" eyebrow="Admired this month" title={title("most_viewed", "Most viewed")} products={data.mostViewed} note="Based on product page visits in the last 30 days" tone="cream" />,
+    latest: <ProductSection key="latest" eyebrow="Fresh from the harvest" title={title("latest", "New arrivals")} products={data.latest} viewAllHref="/shop?sort=newest" />,
     promo_banners: <PromoBanners key="promos" banners={data.promos} />,
-    featured: <ProductSection key="featured" title={title("featured", "Featured")} products={data.featured} viewAllHref="/shop" />,
+    featured: <ProductSection key="featured" eyebrow="The connoisseur’s edit" title={title("featured", "Featured")} products={data.featured} viewAllHref="/shop" tone="cream" />,
   };
   const order: HomepageSection["key"][] = data.sections.length
     ? data.sections.map((s) => s.key)
@@ -28,21 +34,17 @@ export default async function HomePage() {
   const orgJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: settings.store_contact.brand_name || "SwaadVana",
+    name: settings.store_contact.brand_name || "Bharat Secret",
     url: publicEnv.siteUrl,
     ...(settings.store_contact.email ? { email: settings.store_contact.email } : {}),
   };
 
   return (
     <>
-      <h1 className="sr-only">SwaadVana — premium dry fruits, nuts and gift hampers</h1>
-      <div className="container-page pt-4">
-        <HeroCarousel slides={data.hero} />
-      </div>
+      <h1 className="sr-only">Bharat Secret — royal Indian dry fruits, nuts and luxury gift hampers</h1>
+      <HeroCarousel slides={data.hero} />
       {order.filter(visible).map((key) => blocks[key])}
-      <div className="mt-6">
-        <TrustStrip items={settings.trust_strip} />
-      </div>
+      <TrustStrip items={settings.trust_strip} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd).replace(/</g, "\\u003c") }} />
     </>
   );

@@ -284,7 +284,7 @@ begin
     v_expires := null;
   end if;
 
-  v_order_number := 'SV' || to_char(now() at time zone 'Asia/Kolkata', 'YYMMDD') || '-'
+  v_order_number := 'BS' || to_char(now() at time zone 'Asia/Kolkata', 'YYMMDD') || '-'
                     || nextval('public.order_number_seq')::text;
 
   begin

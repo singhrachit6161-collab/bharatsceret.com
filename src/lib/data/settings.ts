@@ -27,12 +27,21 @@ export interface StoreSettings {
   checkout: { reservation_minutes: number };
   social: { instagram: string; facebook: string; youtube: string; x: string };
   trust_strip: { icon: string; title: string; text: string }[];
+  heritage: {
+    enabled: boolean;
+    eyebrow: string;
+    title: string;
+    body: string;
+    cta_label: string;
+    cta_url: string;
+    pillars: { title: string; text: string }[];
+  };
 }
 
 export const DEFAULT_SETTINGS: StoreSettings = {
   announcement: { enabled: false, message: "" },
   store_contact: {
-    brand_name: "SwaadVana",
+    brand_name: "Bharat Secret",
     legal_name: "",
     email: "",
     phone: "",
@@ -52,6 +61,7 @@ export const DEFAULT_SETTINGS: StoreSettings = {
   checkout: { reservation_minutes: 30 },
   social: { instagram: "", facebook: "", youtube: "", x: "" },
   trust_strip: [],
+  heritage: { enabled: false, eyebrow: "", title: "", body: "", cta_label: "", cta_url: "/about", pillars: [] },
 };
 
 export const getSettings = cache(async (): Promise<StoreSettings> => {

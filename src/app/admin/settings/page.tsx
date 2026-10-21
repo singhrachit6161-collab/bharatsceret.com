@@ -61,6 +61,23 @@ export default async function AdminSettings() {
       <Section title="Social links" settingKey="social">
         {(["instagram", "facebook", "youtube", "x"] as const).map((k) => <Field key={k} label={k} name={k} defaultValue={s.social[k]} placeholder="https://" />)}
       </Section>
+      <Section title="Heritage section (homepage)" settingKey="heritage" description="Your brand story. Only state sourcing, export or quality facts you can substantiate.">
+        <Check label="Show on homepage" name="enabled" defaultChecked={s.heritage.enabled} />
+        <Field label="Eyebrow" name="eyebrow" defaultValue={s.heritage.eyebrow} />
+        <Field label="Title" name="title" defaultValue={s.heritage.title} className="sm:col-span-2" />
+        <div className="sm:col-span-2">
+          <label htmlFor="f-hbody" className="label">Story</label>
+          <textarea id="f-hbody" name="body" defaultValue={s.heritage.body} rows={4} className="input" />
+        </div>
+        <Field label="Button label" name="cta_label" defaultValue={s.heritage.cta_label} />
+        <Field label="Button link" name="cta_url" defaultValue={s.heritage.cta_url} />
+        {[0, 1, 2].map((i) => (
+          <div key={i} className="grid gap-2 rounded-md border border-line p-3">
+            <input name={`pillar_title_${i}`} defaultValue={s.heritage.pillars[i]?.title ?? ""} placeholder="Pillar title (empty = hidden)" className="input" aria-label={`Pillar ${i + 1} title`} />
+            <input name={`pillar_text_${i}`} defaultValue={s.heritage.pillars[i]?.text ?? ""} placeholder="Pillar text" className="input" aria-label={`Pillar ${i + 1} text`} />
+          </div>
+        ))}
+      </Section>
       <Section title="Trust strip" settingKey="trust_strip" description="Only make claims you can substantiate.">
         {[0, 1, 2, 3].map((i) => (
           <div key={i} className="grid gap-2 rounded-md border border-line p-3">

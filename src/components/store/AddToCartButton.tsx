@@ -51,7 +51,7 @@ export function AddToCartButton({
         type="button"
         onClick={onClick}
         disabled={isDisabled}
-        className={`${buyNow ? "btn-accent" : "btn-primary"} ${compact ? "w-full px-3 py-2 text-xs" : "w-full"}`}
+        className={`${buyNow ? "btn-accent" : "btn-primary"} rounded-none uppercase ${compact ? "w-full px-3 py-2.5 text-[11px] tracking-[0.18em]" : "w-full py-3.5 text-xs tracking-[0.2em]"}`}
       >
         {message?.ok ? <Check size={16} aria-hidden="true" /> : !buyNow && <ShoppingBag size={16} aria-hidden="true" />}
         {pending ? "Adding…" : message?.ok ? "Added" : text}

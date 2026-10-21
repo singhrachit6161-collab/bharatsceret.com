@@ -5,19 +5,17 @@ const ICONS: Record<string, LucideIcon> = { truck: Truck, package: Package, shie
 export function TrustStrip({ items }: { items: { icon: string; title: string; text: string }[] }) {
   if (!items.length) return null;
   return (
-    <section aria-label="Why shop with us" className="border-y border-line bg-white">
-      <ul className="container-page grid grid-cols-2 gap-6 py-6 lg:grid-cols-4">
+    <section aria-label="Our promise" className="bg-maroon-royal text-ivory">
+      <ul className="container-page grid grid-cols-2 gap-8 py-12 lg:grid-cols-4">
         {items.map((it) => {
           const Icon = ICONS[it.icon] ?? Package;
           return (
-            <li key={it.title} className="flex items-start gap-3">
-              <span className="rounded-full bg-almond-100 p-2.5 text-walnut">
-                <Icon size={22} aria-hidden="true" />
+            <li key={it.title} className="flex flex-col items-center gap-3 text-center">
+              <span className="flex h-14 w-14 items-center justify-center rounded-full border border-gold-light/50 text-gold-light">
+                <Icon size={22} strokeWidth={1.4} aria-hidden="true" />
               </span>
-              <span>
-                <span className="block text-sm font-semibold text-walnut">{it.title}</span>
-                <span className="block text-xs text-muted">{it.text}</span>
-              </span>
+              <span className="font-display text-lg font-semibold text-ivory">{it.title}</span>
+              <span className="max-w-[16rem] text-xs leading-relaxed text-ivory/65">{it.text}</span>
             </li>
           );
         })}

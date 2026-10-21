@@ -241,6 +241,24 @@ const SETTINGS_PARSERS: Record<string, (fd: FormData) => { value?: unknown; erro
     }
     return { value: out };
   },
+  heritage: (fd) => {
+    const url = formString(fd, "cta_url");
+    if (url && !url.startsWith("/")) return { error: "Link must be a site path starting with /" };
+    const pillars = [0, 1, 2]
+      .map((i) => ({ title: formString(fd, `pillar_title_${i}`).slice(0, 60), text: formString(fd, `pillar_text_${i}`).slice(0, 160) }))
+      .filter((p) => p.title);
+    return {
+      value: {
+        enabled: formBool(fd, "enabled"),
+        eyebrow: formString(fd, "eyebrow").slice(0, 60),
+        title: formString(fd, "title").slice(0, 120),
+        body: formString(fd, "body").slice(0, 800),
+        cta_label: formString(fd, "cta_label").slice(0, 40),
+        cta_url: url,
+        pillars,
+      },
+    };
+  },
   trust_strip: (fd) => {
     const items = [0, 1, 2, 3]
       .map((i) => ({ icon: formString(fd, `icon_${i}`), title: formString(fd, `title_${i}`).slice(0, 60), text: formString(fd, `text_${i}`).slice(0, 120) }))

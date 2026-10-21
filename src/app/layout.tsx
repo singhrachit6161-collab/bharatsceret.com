@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, Playfair_Display } from "next/font/google";
+import { Cormorant_Garamond, Manrope } from "next/font/google";
 import { publicEnv } from "@/lib/env";
 import "./globals.css";
 
-const body = DM_Sans({ variable: "--font-body", subsets: ["latin"], display: "swap" });
-const display = Playfair_Display({
+const body = Manrope({ variable: "--font-body", subsets: ["latin"], display: "swap" });
+const display = Cormorant_Garamond({
   variable: "--font-display-serif",
   subsets: ["latin"],
   weight: ["500", "600", "700"],
@@ -13,15 +13,15 @@ const display = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL(publicEnv.siteUrl),
-  title: { default: "SwaadVana — Premium Dry Fruits", template: "%s | SwaadVana" },
+  title: { default: "Bharat Secret — Premium Dry Fruits", template: "%s | Bharat Secret" },
   description:
-    "Shop almonds, cashews, walnuts, pistachios, raisins, dates, seeds and festive gift hampers. Carefully packed and delivered across India.",
-  openGraph: { type: "website", siteName: "SwaadVana", locale: "en_IN" },
+    "Bharat Secret — premium almonds, cashews, walnuts, pistachios, dates and luxury gift hampers, curated and delivered across India.",
+  openGraph: { type: "website", siteName: "Bharat Secret", locale: "en_IN" },
   robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#38251D",
+  themeColor: "#1F1612",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

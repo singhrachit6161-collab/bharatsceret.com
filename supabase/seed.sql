@@ -8,12 +8,13 @@
 
 -- Store settings --------------------------------------------------------------
 insert into public.store_settings (key, value) values
-  ('announcement', '{"enabled": true, "message": "Premium dry fruits, carefully packed and delivered across India", "link_label": "Shop now", "link_url": "/shop"}'),
-  ('store_contact', '{"brand_name": "SwaadVana", "legal_name": "", "email": "support@example.com", "phone": "", "whatsapp": "", "address": "", "hours": "Mon–Sat, 10:00–18:00 IST", "fssai_license": ""}'),
+  ('announcement', '{"enabled": true, "message": "The royal treasury of Indian dry fruits \u00b7 Delivered across India", "link_label": "Shop the collection", "link_url": "/shop"}'),
+  ('store_contact', '{"brand_name": "Bharat Secret", "legal_name": "", "email": "support@example.com", "phone": "", "whatsapp": "", "address": "", "hours": "Mon–Sat, 10:00–18:00 IST", "fssai_license": ""}'),
   ('shipping', '{"flat_fee_paise": 6900, "free_shipping_threshold_paise": 99900, "estimated_days_min": 3, "estimated_days_max": 7, "serviceable_pincode_prefixes": []}'),
   ('cod', '{"enabled": true, "fee_paise": 4900, "min_order_paise": 29900, "max_order_paise": 500000}'),
   ('checkout', '{"reservation_minutes": 30}'),
   ('social', '{"instagram": "", "facebook": "", "youtube": "", "x": ""}'),
+  ('heritage', '{"enabled": true, "eyebrow": "From Bharat to the world", "title": "India\u2019s finest harvest, presented the royal way", "body": "Bharat Secret brings together the dry fruits India has treasured for generations \u2014 selected, sorted and packed for homes and gifting tables in India and abroad. [TEMPLATE \u2014 replace with your own sourcing story, and only mention export standards or certifications you actually hold.]", "cta_label": "Our story", "cta_url": "/about", "pillars": [{"title": "Thoughtfully sourced", "text": "Selected from India\u2019s celebrated growing regions."}, {"title": "Carefully graded", "text": "Sorted by size and quality before packing."}, {"title": "Gift-ready presentation", "text": "Elegant packs and hampers for every occasion."}]}'),
   ('trust_strip', '[{"icon": "truck", "title": "Shipping across India", "text": "Free shipping on orders above ₹999"}, {"icon": "package", "title": "Carefully packed", "text": "Sealed packs to keep products fresh"}, {"icon": "shield", "title": "Secure payments", "text": "UPI, cards and netbanking via Razorpay"}, {"icon": "headset", "title": "Customer support", "text": "Mon–Sat, 10:00–18:00 IST"}]')
 on conflict (key) do nothing;
 
@@ -154,7 +155,7 @@ where not exists (select 1 from public.homepage_banners);
 
 -- Policy & content page TEMPLATES -------------------------------------------------
 insert into public.content_pages (slug, title, body) values
-  ('about', 'About us', E'SwaadVana is a working name for a family-run dry fruits business.\n\nTell your story here: where you source from, how you pack, and what you stand for.\n\n[TEMPLATE — replace with your real story before launch.]'),
+  ('about', 'About us', E'Bharat Secret brings India’s treasured dry fruits to homes and gifting tables.\n\nTell your story here: where you source from, how you pack, and what you stand for.\n\n[TEMPLATE — replace with your real story before launch.]'),
   ('shipping-policy', 'Shipping policy', E'We ship across serviceable PIN codes in India.\n\n## Dispatch\nOrders are usually dispatched within 1–2 business days.\n\n## Delivery time\nDelivery typically takes 3–7 business days depending on location.\n\n## Shipping charges\nA flat shipping fee applies below the free-shipping threshold shown at checkout.\n\n[TEMPLATE — confirm timelines and charges with your courier partner before launch.]'),
   ('returns-policy', 'Return, refund and cancellation policy', E'## Cancellations\nUnpaid orders and cash-on-delivery orders can be cancelled from your account before they are processed.\n\n## Returns\nBecause these are food products, returns are accepted only for damaged, incorrect or expired items reported within 48 hours of delivery with photos.\n\n## Refunds\nApproved refunds are issued to the original payment method. Banks may take 5–7 business days to credit the amount.\n\n[TEMPLATE — review with a legal advisor before launch.]'),
   ('privacy-policy', 'Privacy policy', E'We collect only the information needed to process orders and support you: name, contact details and delivery addresses.\n\nPayments are processed by Razorpay; we never store card numbers, CVV or UPI PIN.\n\nWe record anonymous product view counts without personal identifiers to show popular products.\n\n[TEMPLATE — review with a legal advisor, including obligations under the Digital Personal Data Protection Act, 2023.]'),

@@ -1,8 +1,10 @@
-# SwaadVana — premium dry fruits store
+# Bharat Secret — premium dry fruits store
 
 A full-stack Indian dry-fruits e-commerce site: storefront, cart, checkout with Razorpay and cash on delivery, customer accounts, inventory that is safe when many people buy at once, and an admin panel.
 
-> **SwaadVana** is a temporary working name. It appears in the logo text, `src/app/layout.tsx` metadata and the `store_contact` setting. Check that the name is available before you use it.
+> **Brand:** Bharat Secret. The name appears in the logo (`src/components/ui/Logo.tsx`), the site metadata (`src/app/layout.tsx`) and the `store_contact` setting. Order numbers start with `BS`.
+>
+> **Design:** royal Indian luxury. Espresso, maroon and antique gold, Cormorant Garamond headings, palace-arch (jharokha) frames, gold ornament dividers and a damask pattern (`public/patterns/`). The homepage "heritage" story is edited in Admin → Settings. Only mention export standards or certifications you actually hold.
 
 **Stack:** Next.js 16 (App Router, TypeScript strict) · Tailwind CSS 4 · Supabase (Postgres, Auth, Storage, RLS) · Razorpay Standard Checkout · Zod · Vitest.
 
@@ -84,7 +86,7 @@ npm run build
 **Database tests** (concurrency, idempotency, RLS) need a **throwaway** PostgreSQL 15+:
 
 ```bash
-TEST_DATABASE_URL="postgresql://postgres@localhost:5432/swaadvana_test" npm run test:db
+TEST_DATABASE_URL="postgresql://postgres@localhost:5432/bharat_secret_test" npm run test:db
 ```
 
 The test setup **drops and recreates** that database. As a safety check, it refuses any database name that does not contain `test`. Never point it at Supabase.

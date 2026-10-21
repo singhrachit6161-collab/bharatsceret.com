@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { signOut } from "@/app/actions/auth";
 import { AdminNav } from "@/components/admin/AdminNav";
+import { Logo } from "@/components/ui/Logo";
 import { ADMIN_ROLES, hasAnyRole, requireStaffPage } from "@/lib/auth";
 import { isRazorpayConfigured, isRazorpayLiveMode, isServiceRoleConfigured } from "@/lib/server-env";
 
@@ -17,8 +18,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     <div className="flex min-h-screen flex-col bg-almond-100/40 lg:flex-row">
       <aside className="bg-walnut text-ivory lg:sticky lg:top-0 lg:h-screen lg:w-60 lg:shrink-0 lg:overflow-y-auto">
         <div className="flex items-center justify-between px-4 py-4">
-          <Link href="/admin" className="font-display text-xl font-bold">
-            Swaad<span className="text-saffron">Vana</span> <span className="text-xs font-normal text-ivory/60">admin</span>
+          <Link href="/admin" className="flex items-center gap-2">
+            <Logo tone="light" compact />
           </Link>
         </div>
         <AdminNav isAdmin={isAdmin} />

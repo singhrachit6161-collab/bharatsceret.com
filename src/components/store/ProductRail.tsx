@@ -18,7 +18,7 @@ export function ProductRail({ children, label }: { children: React.ReactNode; la
         role="region"
         aria-label={label}
         tabIndex={0}
-        className="no-scrollbar -mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-1 pb-2"
+        className="no-scrollbar -mx-1 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-1 pb-2"
       >
         {children}
       </div>
@@ -26,7 +26,7 @@ export function ProductRail({ children, label }: { children: React.ReactNode; la
         type="button"
         onClick={() => scroll(-1)}
         aria-label={`Scroll ${label} left`}
-        className="absolute top-1/3 -left-3 hidden h-10 w-10 items-center justify-center rounded-full border border-line bg-white text-walnut shadow-md hover:bg-almond-100 md:flex"
+        className="absolute top-1/3 -left-3 hidden h-10 w-10 items-center justify-center rounded-full border border-saffron/50 bg-ivory text-walnut shadow-md hover:bg-walnut hover:text-gold-light md:flex"
       >
         <ChevronLeft size={20} />
       </button>
@@ -34,7 +34,7 @@ export function ProductRail({ children, label }: { children: React.ReactNode; la
         type="button"
         onClick={() => scroll(1)}
         aria-label={`Scroll ${label} right`}
-        className="absolute top-1/3 -right-3 hidden h-10 w-10 items-center justify-center rounded-full border border-line bg-white text-walnut shadow-md hover:bg-almond-100 md:flex"
+        className="absolute top-1/3 -right-3 hidden h-10 w-10 items-center justify-center rounded-full border border-saffron/50 bg-ivory text-walnut shadow-md hover:bg-walnut hover:text-gold-light md:flex"
       >
         <ChevronRight size={20} />
       </button>
@@ -43,5 +43,5 @@ export function ProductRail({ children, label }: { children: React.ReactNode; la
 }
 
 export function RailItem({ children }: { children: React.ReactNode }) {
-  return <div className="w-[46%] shrink-0 snap-start sm:w-[31%] lg:w-[23.5%] xl:w-[18.8%]">{children}</div>;
+  return <div className="w-[72%] shrink-0 snap-start sm:w-[44%] md:w-[31%] lg:w-[23.5%]">{children}</div>;
 }

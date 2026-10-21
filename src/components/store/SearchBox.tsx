@@ -77,7 +77,7 @@ export function SearchBox({ categories }: { categories: { slug: string; name: st
         id="site-search-category"
         value={category}
         onChange={(e) => setCategory(e.target.value)}
-        className="hidden rounded-l-md border border-r-0 border-walnut/25 bg-almond-100 px-3 text-xs text-walnut focus:outline-none md:block"
+        className="hidden"
       >
         <option value="">All categories</option>
         {categories.map((c) => (
@@ -98,16 +98,16 @@ export function SearchBox({ categories }: { categories: { slug: string; name: st
         aria-autocomplete="list"
         aria-activedescendant={active >= 0 ? `${listId}-${active}` : undefined}
         autoComplete="off"
-        placeholder="Search almonds, cashews, gift hampers…"
+        placeholder="Search the collection…"
         value={q}
         onChange={(e) => setQ(e.target.value)}
         onKeyDown={onKeyDown}
         onFocus={() => items.length && setOpen(true)}
         onBlur={() => setTimeout(() => setOpen(false), 150)}
-        className="w-full min-w-0 border border-walnut/25 bg-white px-3 py-2 text-sm focus:border-saffron focus:outline-none max-md:rounded-l-md"
+        className="w-full min-w-0 rounded-l-full border border-r-0 border-walnut/15 bg-white/70 px-4 py-2 text-sm placeholder:text-muted/70 focus:border-saffron focus:outline-none"
       />
-      <button type="submit" aria-label="Search" className="rounded-r-md bg-walnut px-4 text-ivory hover:bg-walnut-700">
-        <Search size={18} />
+      <button type="submit" aria-label="Search" className="rounded-r-full border border-l-0 border-walnut/15 bg-white/70 pr-4 pl-2 text-walnut hover:text-saffron-600">
+        <Search size={17} strokeWidth={1.8} />
       </button>
       {open && items.length > 0 && (
         <ul id={listId} role="listbox" className="absolute top-full right-0 left-0 z-50 mt-1 overflow-hidden rounded-md border border-line bg-white shadow-lg">
