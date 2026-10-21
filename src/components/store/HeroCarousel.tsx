@@ -30,9 +30,10 @@ export function HeroCarousel({ slides }: { slides: Banner[] }) {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="container-page relative min-h-[560px] lg:min-h-[620px]">
+      <div className="relative min-h-[600px] lg:min-h-[680px]">
         {slides.map((s, i) => {
           const active = i === index;
+          const photo = !s.image_url.endsWith(".svg");
           return (
             <div
               key={s.id}
@@ -40,49 +41,47 @@ export function HeroCarousel({ slides }: { slides: Banner[] }) {
               aria-roledescription="slide"
               aria-label={`${i + 1} of ${count}: ${s.title}`}
               aria-hidden={!active}
-              className={`absolute inset-0 grid items-center gap-8 px-4 pt-12 pb-24 lg:pb-12 transition-opacity duration-1000 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:px-8 ${active ? "opacity-100" : "pointer-events-none opacity-0"}`}
+              className={`absolute inset-0 transition-opacity duration-1000 ${active ? "opacity-100" : "pointer-events-none opacity-0"}`}
             >
-              <div className="relative z-10 max-w-xl text-center lg:text-left">
-                <p className="eyebrow text-gold-light">The Royal Collection</p>
-                <h2 className="mt-5 font-display text-5xl leading-[1.02] font-semibold sm:text-6xl lg:text-7xl">{s.title}</h2>
-                <Ornament className="mt-6 lg:justify-start" tone="light" />
-                {s.subtitle && <p className="mx-auto mt-6 max-w-md text-base leading-relaxed text-ivory/75 lg:mx-0">{s.subtitle}</p>}
-                <div className="mt-9 flex flex-wrap justify-center gap-3 lg:justify-start">
-                  {s.cta_label && (
-                    <Link href={s.link_url} tabIndex={active ? 0 : -1} className="btn-accent px-8 py-3.5 text-xs uppercase">
-                      {s.cta_label}
+              <picture>
+                {s.mobile_image_url && <source media="(max-width: 640px)" srcSet={s.mobile_image_url} />}
+                <Image
+                  src={s.image_url}
+                  alt={s.alt}
+                  fill
+                  priority={i === 0}
+                  sizes="100vw"
+                  unoptimized={!photo}
+                  className={`object-cover transition-transform duration-[8000ms] ease-out ${photo ? "object-[70%_center]" : "object-right"} ${active ? "scale-105" : "scale-100"}`}
+                />
+              </picture>
+              {/* Emerald veil keeps text legible over photography. */}
+              <div className="absolute inset-0 bg-gradient-to-t from-walnut/90 via-walnut/55 to-walnut/20 lg:bg-gradient-to-r lg:from-walnut/95 lg:via-walnut/70 lg:to-transparent" />
+              <div className="pointer-events-none absolute inset-3 border border-gold-light/35 sm:inset-5" />
+              <div className="container-page relative flex h-full items-end pb-28 lg:items-center lg:pb-0">
+                <div className="max-w-xl text-center lg:text-left">
+                  <p className="eyebrow text-gold-light">The Royal Collection</p>
+                  <h2 className="mt-5 font-display text-5xl leading-[1.02] font-semibold drop-shadow-lg sm:text-6xl lg:text-7xl">{s.title}</h2>
+                  <Ornament className="mt-6 lg:justify-start" tone="light" />
+                  {s.subtitle && <p className="mx-auto mt-6 max-w-md text-base leading-relaxed text-ivory/85 lg:mx-0">{s.subtitle}</p>}
+                  <div className="mt-9 flex flex-wrap justify-center gap-3 lg:justify-start">
+                    {s.cta_label && (
+                      <Link href={s.link_url} tabIndex={active ? 0 : -1} className="btn-accent px-8 py-3.5 text-xs uppercase">
+                        {s.cta_label}
+                      </Link>
+                    )}
+                    <Link href="/shop" tabIndex={active ? 0 : -1} className="btn border border-gold-light/60 bg-walnut/30 px-8 py-3.5 text-xs tracking-wide text-gold-light uppercase backdrop-blur-sm hover:bg-gold-light/10">
+                      Explore the collection
                     </Link>
-                  )}
-                  <Link href="/shop" tabIndex={active ? 0 : -1} className="btn border border-gold-light/50 px-8 py-3.5 text-xs tracking-wide text-gold-light uppercase hover:bg-gold-light/10">
-                    Explore the collection
-                  </Link>
-                </div>
-              </div>
-              <div className="relative mx-auto hidden w-full max-w-[480px] lg:block">
-                <div className="arch relative aspect-[4/5] overflow-hidden border border-gold-light/50 p-3 shadow-2xl shadow-black/50">
-                  <div className="arch relative h-full w-full overflow-hidden">
-                    <picture>
-                      {s.mobile_image_url && <source media="(max-width: 640px)" srcSet={s.mobile_image_url} />}
-                      <Image
-                        src={s.image_url}
-                        alt={s.alt}
-                        fill
-                        priority={i === 0}
-                        sizes="480px"
-                        unoptimized={s.image_url.endsWith(".svg")}
-                        className={`object-cover transition-transform duration-[7000ms] ${active ? "scale-105" : "scale-100"}`}
-                      />
-                    </picture>
                   </div>
                 </div>
-                <div className="arch pointer-events-none absolute -inset-4 border border-gold-light/20" />
               </div>
             </div>
           );
         })}
       </div>
       {count > 1 && (
-        <div className="container-page absolute inset-x-0 bottom-6 flex items-center justify-between">
+        <div className="container-page absolute inset-x-0 bottom-9 z-10 flex items-center justify-between">
           <div className="flex gap-2">
             {slides.map((s, i) => (
               <button

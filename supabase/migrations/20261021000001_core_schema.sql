@@ -1,4 +1,4 @@
--- Bharat Secret core schema
+-- Bharat Secrets core schema
 -- Money is stored as integer paise (bigint). Currency is stored explicitly (INR).
 -- All primary keys are UUIDs unless noted.
 
@@ -120,7 +120,7 @@ create table public.products (
   id uuid primary key default gen_random_uuid(),
   name text not null check (char_length(name) between 2 and 160),
   slug text not null unique check (slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'),
-  brand text not null default 'Bharat Secret',
+  brand text not null default 'Bharat Secrets',
   short_description text check (char_length(short_description) <= 300),
   description text,
   ingredients text,

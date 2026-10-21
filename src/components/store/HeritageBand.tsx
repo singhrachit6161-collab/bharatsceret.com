@@ -11,7 +11,7 @@ export function HeritageBand({ heritage }: { heritage: StoreSettings["heritage"]
         <div className="relative mx-auto w-full max-w-md">
           <div className="arch relative aspect-[4/5] overflow-hidden border border-gold-light/40 p-3">
             <div className="arch relative h-full overflow-hidden">
-              <Image src="/placeholders/heritage.svg" alt="" fill sizes="448px" unoptimized className="object-cover" />
+              <Image src={heritage.image_url || "/brand/heritage-peacock-box.webp"} alt="Bharat Secrets gift boxes" fill sizes="448px" unoptimized={(heritage.image_url ?? "").endsWith(".svg")} className="object-cover" />
             </div>
           </div>
           <div className="absolute -right-4 -bottom-6 hidden border border-gold-light/40 bg-emerald px-6 py-5 text-center shadow-2xl sm:block">

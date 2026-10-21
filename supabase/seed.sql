@@ -9,12 +9,12 @@
 -- Store settings --------------------------------------------------------------
 insert into public.store_settings (key, value) values
   ('announcement', '{"enabled": true, "message": "The royal treasury of Indian dry fruits \u00b7 Delivered across India", "link_label": "Shop the collection", "link_url": "/shop"}'),
-  ('store_contact', '{"brand_name": "Bharat Secret", "legal_name": "", "email": "support@example.com", "phone": "", "whatsapp": "", "address": "", "hours": "Mon–Sat, 10:00–18:00 IST", "fssai_license": ""}'),
+  ('store_contact', '{"brand_name": "Bharat Secrets", "legal_name": "", "email": "support@example.com", "phone": "", "whatsapp": "", "address": "", "hours": "Mon–Sat, 10:00–18:00 IST", "fssai_license": ""}'),
   ('shipping', '{"flat_fee_paise": 6900, "free_shipping_threshold_paise": 99900, "estimated_days_min": 3, "estimated_days_max": 7, "serviceable_pincode_prefixes": []}'),
   ('cod', '{"enabled": true, "fee_paise": 4900, "min_order_paise": 29900, "max_order_paise": 500000}'),
   ('checkout', '{"reservation_minutes": 30}'),
   ('social', '{"instagram": "", "facebook": "", "youtube": "", "x": ""}'),
-  ('heritage', '{"enabled": true, "eyebrow": "From Bharat to the world", "title": "India\u2019s finest harvest, presented the royal way", "body": "Bharat Secret brings together the dry fruits India has treasured for generations \u2014 selected, sorted and packed for homes and gifting tables in India and abroad. [TEMPLATE \u2014 replace with your own sourcing story, and only mention export standards or certifications you actually hold.]", "cta_label": "Our story", "cta_url": "/about", "pillars": [{"title": "Thoughtfully sourced", "text": "Selected from India\u2019s celebrated growing regions."}, {"title": "Carefully graded", "text": "Sorted by size and quality before packing."}, {"title": "Gift-ready presentation", "text": "Elegant packs and hampers for every occasion."}]}'),
+  ('heritage', '{"enabled": true, "eyebrow": "From Bharat to the world", "title": "India\u2019s finest harvest, presented the royal way", "body": "Bharat Secrets brings together the dry fruits India has treasured for generations \u2014 selected, sorted and packed for homes and gifting tables in India and abroad. [TEMPLATE \u2014 replace with your own sourcing story, and only mention export standards or certifications you actually hold.]", "cta_label": "Our story", "cta_url": "/about", "image_url": "/brand/heritage-peacock-box.webp", "pillars": [{"title": "Thoughtfully sourced", "text": "Selected from India\u2019s celebrated growing regions."}, {"title": "Carefully graded", "text": "Sorted by size and quality before packing."}, {"title": "Gift-ready presentation", "text": "Elegant packs and hampers for every occasion."}]}'),
   ('trust_strip', '[{"icon": "truck", "title": "Shipping across India", "text": "Free shipping on orders above ₹999"}, {"icon": "package", "title": "Carefully packed", "text": "Sealed packs to keep products fresh"}, {"icon": "shield", "title": "Secure payments", "text": "UPI, cards and netbanking via Razorpay"}, {"icon": "headset", "title": "Customer support", "text": "Mon–Sat, 10:00–18:00 IST"}]')
 on conflict (key) do nothing;
 
@@ -24,7 +24,8 @@ insert into public.homepage_sections (key, title, sort_order, item_limit) values
   ('most_viewed', 'Most viewed', 30, 8),
   ('latest', 'Latest arrivals', 40, 8),
   ('promo_banners', 'Promotions', 50, 2),
-  ('featured', 'Featured', 60, 8)
+  ('featured', 'Featured', 60, 8),
+  ('brand_showcase', 'The Artisanal Portfolio', 25, 2)
 on conflict (key) do nothing;
 
 -- Categories --------------------------------------------------------------------
@@ -37,7 +38,7 @@ insert into public.categories (name, slug, description, image_url, sort_order, s
   ('Dates', 'dates', 'Soft and premium dates.', '/placeholders/dates.svg', 60, true),
   ('Seeds', 'seeds', 'Pumpkin, sunflower, chia and flax seeds.', '/placeholders/seeds.svg', 70, true),
   ('Trail Mix', 'trail-mix', 'Ready-to-eat mixes of nuts, seeds and berries.', '/placeholders/trail-mix.svg', 80, true),
-  ('Gift Hampers', 'gift-hampers', 'Festive and corporate gift boxes.', '/placeholders/gift-hampers.svg', 90, true),
+  ('Gift Hampers', 'gift-hampers', 'Festive and corporate gift boxes.', '/brand/heritage-peacock-box.webp', 90, true),
   ('Dried Apricots', 'dried-apricots', 'Sun-dried apricots.', '/placeholders/apricots.svg', 100, false),
   ('Dried Figs', 'dried-figs', 'Dried figs (anjeer).', '/placeholders/figs.svg', 110, false),
   ('Cranberries', 'cranberries', 'Dried cranberries.', '/placeholders/cranberries.svg', 120, false),
@@ -142,8 +143,8 @@ $$;
 -- Homepage banners (original placeholder artwork) --------------------------------
 insert into public.homepage_banners (placement, title, subtitle, cta_label, link_url, image_url, alt, theme, sort_order)
 select * from (values
-  ('hero'::public.banner_placement, 'Festive gifting, thoughtfully packed', 'Curated dry fruit hampers for family, friends and colleagues.', 'Explore hampers', '/category/gift-hampers', '/placeholders/hero-hampers.svg', 'Gift hampers with assorted dry fruits (placeholder artwork)', 'walnut', 10),
-  ('hero'::public.banner_placement, 'Everyday nuts for everyday goodness', 'Almonds, cashews, walnuts and pistachios in fresh, sealed packs.', 'Shop nuts', '/shop', '/placeholders/hero-nuts.svg', 'Assorted nuts in bowls (placeholder artwork)', 'saffron', 20),
+  ('hero'::public.banner_placement, 'Discover India’s handcrafted wonders', 'Artisanal luxury, curated for you — heirloom gift boxes, hand-painted jars and embroidered pouches.', 'Explore gift collections', '/category/gift-hampers', '/brand/hero-gift-collection.webp', 'Bharat Secrets gift boxes, jars and embroidered pouches arranged on a festive table', 'walnut', 10),
+  ('hero'::public.banner_placement, 'The Bharat Secrets portfolio', 'Dry fruits, saffron and spices presented in carved caskets and royal trunks.', 'Shop the collection', '/shop', '/brand/hero-portfolio.webp', 'Bharat Secrets jars, caskets and dry fruits displayed in a carved wooden haveli', 'saffron', 20),
   ('category_tile'::public.banner_placement, 'Apricots', null, null, '/category/dried-apricots', '/placeholders/apricots.svg', 'Dried apricots (placeholder artwork)', 'saffron', 10),
   ('category_tile'::public.banner_placement, 'Dried Figs', null, null, '/category/dried-figs', '/placeholders/figs.svg', 'Dried figs (placeholder artwork)', 'walnut', 20),
   ('category_tile'::public.banner_placement, 'Cranberries', null, null, '/category/cranberries', '/placeholders/cranberries.svg', 'Dried cranberries (placeholder artwork)', 'olive', 30),
@@ -155,7 +156,7 @@ where not exists (select 1 from public.homepage_banners);
 
 -- Policy & content page TEMPLATES -------------------------------------------------
 insert into public.content_pages (slug, title, body) values
-  ('about', 'About us', E'Bharat Secret brings India’s treasured dry fruits to homes and gifting tables.\n\nTell your story here: where you source from, how you pack, and what you stand for.\n\n[TEMPLATE — replace with your real story before launch.]'),
+  ('about', 'About us', E'Bharat Secrets brings India’s treasured dry fruits to homes and gifting tables.\n\nTell your story here: where you source from, how you pack, and what you stand for.\n\n[TEMPLATE — replace with your real story before launch.]'),
   ('shipping-policy', 'Shipping policy', E'We ship across serviceable PIN codes in India.\n\n## Dispatch\nOrders are usually dispatched within 1–2 business days.\n\n## Delivery time\nDelivery typically takes 3–7 business days depending on location.\n\n## Shipping charges\nA flat shipping fee applies below the free-shipping threshold shown at checkout.\n\n[TEMPLATE — confirm timelines and charges with your courier partner before launch.]'),
   ('returns-policy', 'Return, refund and cancellation policy', E'## Cancellations\nUnpaid orders and cash-on-delivery orders can be cancelled from your account before they are processed.\n\n## Returns\nBecause these are food products, returns are accepted only for damaged, incorrect or expired items reported within 48 hours of delivery with photos.\n\n## Refunds\nApproved refunds are issued to the original payment method. Banks may take 5–7 business days to credit the amount.\n\n[TEMPLATE — review with a legal advisor before launch.]'),
   ('privacy-policy', 'Privacy policy', E'We collect only the information needed to process orders and support you: name, contact details and delivery addresses.\n\nPayments are processed by Razorpay; we never store card numbers, CVV or UPI PIN.\n\nWe record anonymous product view counts without personal identifiers to show popular products.\n\n[TEMPLATE — review with a legal advisor, including obligations under the Digital Personal Data Protection Act, 2023.]'),

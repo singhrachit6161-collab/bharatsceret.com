@@ -19,7 +19,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       <aside className="bg-walnut text-ivory lg:sticky lg:top-0 lg:h-screen lg:w-60 lg:shrink-0 lg:overflow-y-auto">
         <div className="flex items-center justify-between px-4 py-4">
           <Link href="/admin" className="flex items-center gap-2">
-            <Logo tone="light" compact />
+            <Logo size={56} />
+            <span className="font-display text-lg font-semibold text-gold-light">Admin</span>
           </Link>
         </div>
         <AdminNav isAdmin={isAdmin} />

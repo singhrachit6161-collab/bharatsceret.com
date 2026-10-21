@@ -71,6 +71,7 @@ export default async function AdminSettings() {
         </div>
         <Field label="Button label" name="cta_label" defaultValue={s.heritage.cta_label} />
         <Field label="Button link" name="cta_url" defaultValue={s.heritage.cta_url} />
+        <Field label="Image URL" name="image_url" defaultValue={s.heritage.image_url ?? "/brand/heritage-peacock-box.webp"} className="sm:col-span-2" hint="Site path (e.g. /brand/heritage-peacock-box.webp) or an https URL from Storage." />
         {[0, 1, 2].map((i) => (
           <div key={i} className="grid gap-2 rounded-md border border-line p-3">
             <input name={`pillar_title_${i}`} defaultValue={s.heritage.pillars[i]?.title ?? ""} placeholder="Pillar title (empty = hidden)" className="input" aria-label={`Pillar ${i + 1} title`} />

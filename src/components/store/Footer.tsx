@@ -27,7 +27,7 @@ export async function Footer() {
   const [settings, categories] = await Promise.all([getSettings(), getCategories()]);
   const contact = settings.store_contact;
   const socials = Object.entries(settings.social).filter(([, url]) => typeof url === "string" && url.startsWith("https://"));
-  const brand = contact.brand_name || "Bharat Secret";
+  const brand = contact.brand_name || "Bharat Secrets";
 
   return (
     <footer className="bg-royal mt-auto text-ivory/85">
@@ -44,7 +44,7 @@ export async function Footer() {
       </div>
       <div className="container-page grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-5">
         <div className="lg:col-span-2">
-          <Logo tone="light" />
+          <Logo size={150} />
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-ivory/60">
             The royal treasury of Indian dry fruits — curated nuts, dates, berries and heirloom-style gift hampers.
           </p>

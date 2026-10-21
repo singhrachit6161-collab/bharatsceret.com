@@ -47,15 +47,16 @@ export async function Header() {
         </div>
       )}
 
-      <div className="container-page grid grid-cols-[auto_1fr_auto] items-center gap-3 py-3.5 lg:grid-cols-[1fr_auto_1fr] lg:py-5">
+      <div className="container-page grid grid-cols-[auto_1fr_auto] items-center gap-3 py-2 lg:grid-cols-[1fr_auto_1fr] lg:py-3">
         <div className="flex items-center gap-2">
           <MobileMenu links={mobileLinks} />
           <div className="hidden w-full max-w-sm lg:block">
             <SearchBox categories={categories.map((c) => ({ slug: c.slug, name: c.name }))} />
           </div>
         </div>
-        <Link href="/" className="justify-self-center" aria-label="Bharat Secret home">
-          <Logo />
+        <Link href="/" className="justify-self-center" aria-label="Bharat Secrets home">
+          <Logo size={64} priority className="lg:hidden" />
+          <Logo size={112} priority className="hidden lg:block" />
         </Link>
         <nav aria-label="Account" className="flex items-center justify-end gap-0.5 sm:gap-2">
           <Link href={user ? "/account" : "/login"} className="flex items-center gap-1.5 rounded-full p-2 text-walnut transition-colors hover:text-saffron-600">

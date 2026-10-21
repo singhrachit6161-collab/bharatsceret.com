@@ -1,3 +1,4 @@
+import { BrandShowcase } from "@/components/store/BrandShowcase";
 import { CategoryTiles } from "@/components/store/CategoryTiles";
 import { HeritageBand } from "@/components/store/HeritageBand";
 import { HeroCarousel } from "@/components/store/HeroCarousel";
@@ -25,23 +26,24 @@ export default async function HomePage() {
     most_viewed: <ProductSection key="viewed" eyebrow="Admired this month" title={title("most_viewed", "Most viewed")} products={data.mostViewed} note="Based on product page visits in the last 30 days" tone="cream" />,
     latest: <ProductSection key="latest" eyebrow="Fresh from the harvest" title={title("latest", "New arrivals")} products={data.latest} viewAllHref="/shop?sort=newest" />,
     promo_banners: <PromoBanners key="promos" banners={data.promos} />,
+    brand_showcase: <BrandShowcase key="showcase" title={title("brand_showcase", "The Artisanal Portfolio")} />,
     featured: <ProductSection key="featured" eyebrow="The connoisseur’s edit" title={title("featured", "Featured")} products={data.featured} viewAllHref="/shop" tone="cream" />,
   };
   const order: HomepageSection["key"][] = data.sections.length
     ? data.sections.map((s) => s.key)
-    : ["category_tiles", "bestsellers", "most_viewed", "latest", "promo_banners", "featured"];
+    : ["category_tiles", "bestsellers", "brand_showcase", "most_viewed", "latest", "promo_banners", "featured"];
 
   const orgJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: settings.store_contact.brand_name || "Bharat Secret",
+    name: settings.store_contact.brand_name || "Bharat Secrets",
     url: publicEnv.siteUrl,
     ...(settings.store_contact.email ? { email: settings.store_contact.email } : {}),
   };
 
   return (
     <>
-      <h1 className="sr-only">Bharat Secret — royal Indian dry fruits, nuts and luxury gift hampers</h1>
+      <h1 className="sr-only">Bharat Secrets — royal Indian dry fruits, nuts and luxury gift hampers</h1>
       <HeroCarousel slides={data.hero} />
       {order.filter(visible).map((key) => blocks[key])}
       <TrustStrip items={settings.trust_strip} />

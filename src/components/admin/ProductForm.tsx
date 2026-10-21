@@ -41,7 +41,7 @@ export function ProductForm({ product, categories, selected }: { product?: Produ
         <h2 className="font-semibold text-walnut sm:col-span-2">Basics</h2>
         <Field label="Name" name="name" defaultValue={product?.name} required maxLength={160} />
         <Field label="URL slug" name="slug" defaultValue={product?.slug} hint="Leave empty to generate from the name." maxLength={80} />
-        <Field label="Brand" name="brand" defaultValue={product?.brand ?? "Bharat Secret"} required />
+        <Field label="Brand" name="brand" defaultValue={product?.brand ?? "Bharat Secrets"} required />
         <div>
           <label htmlFor="f-status" className="label">Status</label>
           <select id="f-status" name="status" defaultValue={product?.status ?? "draft"} className="input">

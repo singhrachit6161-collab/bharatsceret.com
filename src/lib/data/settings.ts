@@ -34,6 +34,7 @@ export interface StoreSettings {
     body: string;
     cta_label: string;
     cta_url: string;
+    image_url?: string;
     pillars: { title: string; text: string }[];
   };
 }
@@ -41,7 +42,7 @@ export interface StoreSettings {
 export const DEFAULT_SETTINGS: StoreSettings = {
   announcement: { enabled: false, message: "" },
   store_contact: {
-    brand_name: "Bharat Secret",
+    brand_name: "Bharat Secrets",
     legal_name: "",
     email: "",
     phone: "",

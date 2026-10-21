@@ -13,10 +13,11 @@ const display = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   metadataBase: new URL(publicEnv.siteUrl),
-  title: { default: "Bharat Secret — Premium Dry Fruits", template: "%s | Bharat Secret" },
+  title: { default: "Bharat Secrets — Premium Dry Fruits", template: "%s | Bharat Secrets" },
   description:
-    "Bharat Secret — premium almonds, cashews, walnuts, pistachios, dates and luxury gift hampers, curated and delivered across India.",
-  openGraph: { type: "website", siteName: "Bharat Secret", locale: "en_IN" },
+    "Bharat Secrets — premium almonds, cashews, walnuts, pistachios, dates and luxury gift hampers, curated and delivered across India.",
+  openGraph: { type: "website", siteName: "Bharat Secrets", locale: "en_IN" },
+  twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
 };
 

@@ -47,7 +47,7 @@ function body(kind: NotificationKind, p: NotificationPayload): string {
     p.note ?? "",
     `View your order: ${link}`,
     "",
-    "— Bharat Secret",
+    "— Bharat Secrets",
   ];
   return lines.filter((l, i) => l || i === lines.length - 2).join("\n");
 }

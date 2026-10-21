@@ -1,10 +1,17 @@
-# Bharat Secret — premium dry fruits store
+# Bharat Secrets — premium dry fruits store
 
 A full-stack Indian dry-fruits e-commerce site: storefront, cart, checkout with Razorpay and cash on delivery, customer accounts, inventory that is safe when many people buy at once, and an admin panel.
 
-> **Brand:** Bharat Secret. The name appears in the logo (`src/components/ui/Logo.tsx`), the site metadata (`src/app/layout.tsx`) and the `store_contact` setting. Order numbers start with `BS`.
+> **Brand:** Bharat Secrets. Order numbers start with `BS`.
 >
-> **Design:** royal Indian luxury. Royal emerald, antique gold and ivory, Cormorant Garamond headings, palace-arch (jharokha) frames, gold ornament dividers and a damask pattern (`public/patterns/`). The homepage "heritage" story is edited in Admin → Settings. Only mention export standards or certifications you actually hold.
+> **Brand assets** in `public/brand/`:
+> - `logo.png` (header, footer and admin) and `logo-full.png` (high-res), both cut out of the supplied artwork on a transparent background.
+> - `hero-gift-collection.webp` and `hero-portfolio.webp` (hero slides).
+> - `heritage-peacock-box.webp` (heritage section and the Gift Hampers category).
+> - `artisanal-portfolio.webp` and `poster.webp` (Artisanal Portfolio section).
+> - `src/app/icon.png`, `apple-icon.png` and `opengraph-image.jpg` are generated from the same artwork.
+>
+> **Design:** royal Indian luxury: emerald green, antique gold and ivory, Cormorant Garamond headings, palace-arch frames, gold ornaments and a damask pattern. The heritage story and its image are edited in Admin → Settings. Hero slides are edited in Admin → Homepage. Only mention export standards or certifications you actually hold.
 
 **Stack:** Next.js 16 (App Router, TypeScript strict) · Tailwind CSS 4 · Supabase (Postgres, Auth, Storage, RLS) · Razorpay Standard Checkout · Zod · Vitest.
 

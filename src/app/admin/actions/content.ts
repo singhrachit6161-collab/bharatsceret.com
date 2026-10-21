@@ -156,7 +156,7 @@ export async function deleteBanner(_prev: AdminFormState, fd: FormData): Promise
 export async function saveSection(_prev: AdminFormState, fd: FormData): Promise<AdminFormState> {
   try {
     const { db, user } = await adminContext(ADMIN_ROLES);
-    const key = z.enum(["category_tiles", "bestsellers", "most_viewed", "latest", "promo_banners", "featured"]).safeParse(formString(fd, "key"));
+    const key = z.enum(["category_tiles", "bestsellers", "most_viewed", "latest", "promo_banners", "featured", "brand_showcase"]).safeParse(formString(fd, "key"));
     const title = formString(fd, "title").slice(0, 80);
     const sort = Number(formString(fd, "sort_order"));
     const limit = Number(formString(fd, "item_limit"));
@@ -255,6 +255,10 @@ const SETTINGS_PARSERS: Record<string, (fd: FormData) => { value?: unknown; erro
         body: formString(fd, "body").slice(0, 800),
         cta_label: formString(fd, "cta_label").slice(0, 40),
         cta_url: url,
+        image_url: (() => {
+          const img = formString(fd, "image_url");
+          return /^(https:\/\/|\/)/.test(img) ? img : "/brand/heritage-peacock-box.webp";
+        })(),
         pillars,
       },
     };
