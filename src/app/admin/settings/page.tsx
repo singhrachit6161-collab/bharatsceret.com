@@ -3,6 +3,7 @@ import { ActionForm } from "@/components/admin/ActionForm";
 import { Check, Field } from "@/components/admin/fields";
 import { PageHeader } from "@/components/admin/ui";
 import { ADMIN_ROLES, requireStaffPage } from "@/lib/auth";
+import { getCategories } from "@/lib/data/catalog";
 import { getSettings } from "@/lib/data/settings";
 import { paiseToRupeesString } from "@/lib/money";
 
@@ -21,7 +22,8 @@ function Section({ title, description, settingKey, children }: { title: string; 
 
 export default async function AdminSettings() {
   await requireStaffPage(ADMIN_ROLES);
-  const s = await getSettings();
+  const [s, categories] = await Promise.all([getSettings(), getCategories()]);
+  const roots = categories.filter((c) => !c.parent_id);
   const r = (p: number | null) => (p === null ? "" : paiseToRupeesString(p));
   return (
     <div className="max-w-4xl space-y-6">
@@ -57,6 +59,19 @@ export default async function AdminSettings() {
       </Section>
       <Section title="Checkout" settingKey="checkout">
         <Field label="Stock reservation window (minutes)" name="reservation_minutes" type="number" min={5} max={120} defaultValue={String(s.checkout.reservation_minutes)} hint="How long unpaid online orders hold stock." />
+      </Section>
+      <Section title="Build Your Own Hamper" settingKey="hamper" description="Boxes are products whose variant has a hamper capacity (Products → variant). Items come from the collections ticked here, including their sub-collections.">
+        <Check label="Hamper builder is live" name="enabled" defaultChecked={s.hamper.enabled} />
+        <Field label="Minimum items per hamper" name="min_items" type="number" min={1} max={24} defaultValue={String(s.hamper.min_items)} />
+        <Field label="Gift message limit (characters)" name="message_max" type="number" min={0} max={200} defaultValue={String(s.hamper.message_max)} />
+        <fieldset className="sm:col-span-2">
+          <legend className="label">Eligible collections</legend>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+            {roots.map((c) => (
+              <Check key={c.id} label={c.name} name="eligible_category_slugs" value={c.slug} defaultChecked={s.hamper.eligible_category_slugs.includes(c.slug)} />
+            ))}
+          </div>
+        </fieldset>
       </Section>
       <Section title="Social links" settingKey="social">
         {(["instagram", "facebook", "youtube", "x"] as const).map((k) => <Field key={k} label={k} name={k} defaultValue={s.social[k]} placeholder="https://" />)}

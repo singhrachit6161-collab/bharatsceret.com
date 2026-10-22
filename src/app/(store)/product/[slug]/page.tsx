@@ -1,7 +1,7 @@
 import { BadgeCheck, PackageCheck, RotateCcw, Truck } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { PincodeChecker } from "@/components/store/PincodeChecker";
 import { ProductGallery } from "@/components/store/ProductGallery";
 import { ProductPurchasePanel } from "@/components/store/ProductPurchasePanel";
@@ -39,6 +39,7 @@ export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
   if (!product) notFound();
+  if (product.isHamperBox) redirect("/build-your-hamper");
 
   const [reviews, related, user, settings, allCategories] = await Promise.all([
     getApprovedReviews(product.id),

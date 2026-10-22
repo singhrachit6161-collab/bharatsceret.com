@@ -22,6 +22,9 @@ const MESSAGES: Record<string, string> = {
   NOT_REFUNDABLE: "This order has no captured online payment to refund.",
   REFUND_EXCEEDS_BALANCE: "Refund amount exceeds the refundable balance.",
   ALREADY_RESTOCKED: "Stock for this order has already been restored.",
+  INVALID_BUNDLE: "One of your hampers is no longer valid. Please review your bag.",
+  BUNDLE_OVER_CAPACITY: "One of your hampers has more items than its box holds.",
+  BOX_WITHOUT_HAMPER: "Hamper boxes can only be bought as part of a hamper.",
 };
 
 export function friendlyError(error: unknown, fallback = "Something went wrong. Please try again."): string {

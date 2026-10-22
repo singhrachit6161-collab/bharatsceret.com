@@ -21,6 +21,7 @@ interface VariantRow {
   is_active: boolean;
   sort_order: number;
   max_per_order: number;
+  hamper_capacity: number | null;
   inventory: { on_hand: number; reserved: number } | { on_hand: number; reserved: number }[] | null;
 }
 
@@ -38,6 +39,15 @@ function VariantFields({ productId, v }: { productId: string; v?: VariantRow }) 
         <Field label="Max per order" name="max_per_order" type="number" min={1} max={100} defaultValue={String(v?.max_per_order ?? 10)} />
         <Field label="Sort order" name="sort_order" type="number" min={0} defaultValue={String(v?.sort_order ?? 0)} />
         {!v && <Field label="Initial stock" name="initial_stock" type="number" min={0} defaultValue="0" />}
+        <Field
+          label="Hamper box capacity"
+          name="hamper_capacity"
+          type="number"
+          min={1}
+          max={24}
+          defaultValue={v?.hamper_capacity ? String(v.hamper_capacity) : ""}
+          hint="Only for Build Your Own Hamper boxes: items it holds. Leave empty for normal products."
+        />
       </div>
       <Check label="Active (purchasable)" name="is_active" defaultChecked={v?.is_active ?? true} />
     </>
@@ -52,7 +62,7 @@ export default async function EditProduct({ params, searchParams }: { params: Pr
   const [{ data: product }, { data: categories }] = await Promise.all([
     supabase
       .from("products")
-      .select("*, product_categories (category_id), product_images (id, url, alt, sort_order, storage_path), product_variants (id, sku, label, weight_grams, price_paise, compare_at_paise, is_active, sort_order, max_per_order, inventory (on_hand, reserved))")
+      .select("*, product_categories (category_id), product_images (id, url, alt, sort_order, storage_path), product_variants (id, sku, label, weight_grams, price_paise, compare_at_paise, is_active, sort_order, max_per_order, hamper_capacity, inventory (on_hand, reserved))")
       .eq("id", id)
       .maybeSingle(),
     supabase.from("categories").select("*").order("sort_order"),
@@ -81,7 +91,7 @@ export default async function EditProduct({ params, searchParams }: { params: Pr
           return (
             <details key={v.id} className="card p-4">
               <summary className="flex cursor-pointer flex-wrap items-center justify-between gap-2 text-sm">
-                <span><strong>{v.label}</strong> · <span className="font-mono text-xs">{v.sku}</span> · ₹{paiseToRupeesString(Number(v.price_paise))}{!v.is_active && <span className="ml-2 text-danger">inactive</span>}</span>
+                <span><strong>{v.label}</strong> · <span className="font-mono text-xs">{v.sku}</span> · ₹{paiseToRupeesString(Number(v.price_paise))}{!v.is_active && <span className="ml-2 text-danger">inactive</span>}{v.hamper_capacity && <span className="ml-2 text-saffron-600">hamper box · {v.hamper_capacity} items</span>}</span>
                 <span className="text-xs text-muted">On hand {inv?.on_hand ?? 0} · reserved {inv?.reserved ?? 0}</span>
               </summary>
               <div className="mt-4 space-y-4">

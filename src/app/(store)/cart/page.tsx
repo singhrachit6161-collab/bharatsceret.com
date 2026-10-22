@@ -6,7 +6,8 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Price } from "@/components/ui/Price";
 import { ProductImage } from "@/components/ui/ProductImage";
-import { getCartView, toPricedLines } from "@/lib/data/cart";
+import { HamperCartCard } from "@/components/store/HamperCartCard";
+import { getCartView } from "@/lib/data/cart";
 import { codRules, getSettings, shippingRules } from "@/lib/data/settings";
 import { formatINR } from "@/lib/money";
 import { computeTotals } from "@/lib/pricing";
@@ -20,8 +21,9 @@ const ISSUE_TEXT = {
 } as const;
 
 export default async function CartPage() {
-  const [lines, settings] = await Promise.all([getCartView(), getSettings()]);
-  if (!lines.length) {
+  const [view, settings] = await Promise.all([getCartView(), getSettings()]);
+  const lines = view.lines;
+  if (view.isEmpty) {
     return (
       <div className="container-page py-10">
         <h1 className="section-title mb-6">Your cart</h1>
@@ -30,13 +32,13 @@ export default async function CartPage() {
     );
   }
   const totals = computeTotals({
-    lines: toPricedLines(lines.filter((l) => !l.issue)),
+    lines: view.priced,
     discountPaise: 0,
     shipping: shippingRules(settings),
     cod: codRules(settings),
     paymentMethod: "razorpay",
   });
-  const hasIssues = lines.some((l) => l.issue);
+  const hasIssues = view.hasIssues;
   const threshold = settings.shipping.free_shipping_threshold_paise;
   const remaining = threshold !== null ? threshold - totals.subtotalPaise : null;
 
@@ -45,6 +47,11 @@ export default async function CartPage() {
       <Breadcrumbs items={[{ name: "Cart" }]} />
       <h1 className="section-title mb-6">Your cart</h1>
       <div className="grid gap-8 lg:grid-cols-[1fr_360px]">
+        <div className="space-y-6">
+        {view.bundles.map((b) => (
+          <HamperCartCard key={b.id} bundle={b} />
+        ))}
+        {lines.length > 0 && (
         <ul className="card divide-y divide-line">
           {lines.map((l) => (
             <li key={l.variantId} className="flex gap-4 p-4">
@@ -70,6 +77,11 @@ export default async function CartPage() {
             </li>
           ))}
         </ul>
+        )}
+        <Link href="/build-your-hamper" className="block border border-dashed border-saffron/60 p-4 text-center text-sm font-semibold tracking-[0.14em] text-saffron-600 uppercase hover:bg-almond-100">
+          + Build another hamper
+        </Link>
+        </div>
 
         <aside className="card h-fit space-y-3 p-5" aria-labelledby="summary">
           <h2 id="summary" className="text-lg font-semibold text-walnut">

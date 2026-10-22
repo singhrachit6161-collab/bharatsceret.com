@@ -81,7 +81,32 @@ Gifting         Festivals · Weddings · Corporate · Build Your Own · Luxury
 - **Coupons:** a coupon scoped to a parent collection applies to products in its sub-collections.
 - **Regions:** regions are collections too. Tag a product with both its type and its region (e.g. *Walnuts* and *Kashmir*). It then appears in both places, and the product page shows a region badge.
 - **Adding a region:** add it in Admin → Collections with parent *Regions*. It appears in the menu and the homepage "Explore by region" section automatically.
-- **Build Your Own:** the Flavour Lab and Gifting entries are collections only, with no products seeded. An interactive mix or hamper builder is not built yet.
+- **Build Your Own:** *Gifting → Build Your Own* opens the hamper builder (see below). *Flavour Lab → Build Your Own* is still a plain collection; an interactive trail-mix builder is not built yet.
+
+## Build Your Own Hamper
+
+`/build-your-hamper` lets a customer build a gift hamper in three steps:
+1. Choose a box.
+2. Fill it.
+3. Add a recipient name and a gift message, with a live card preview.
+
+**Boxes.** A box is an ordinary product variant with **Hamper box capacity** set (Admin → Products → variant, 1–24 items).
+- Boxes have their own price and stock.
+- They are hidden from listings and cannot be bought on their own. Their product page redirects to the builder.
+- The seed creates three sample boxes (4, 6 and 9 items). Replace their photos and prices with your own.
+
+**Settings** (Admin → Settings → Build Your Own Hamper):
+- Turn the builder on or off.
+- Set the minimum number of items.
+- Set the maximum gift-message length.
+- Choose which top-level collections can go in a hamper. Their sub-collections are included automatically.
+
+**Checks.** The cart cookie stores only IDs, quantities and text. Prices and stock always come from the database.
+- At checkout, `place_order` re-checks every hamper: box capacity, eligible items, no box inside a box, stock (summed across hampers and standalone items), and message length.
+- Each hamper is saved to `order_bundles` with a snapshot of its contents and prices.
+- Limits: up to 3 hampers per order, and messages of up to 200 characters.
+
+**Packing.** The order page, for both the customer and admin, shows each hamper with its contents, recipient and message. Staff pack the box and **write or print the message card by hand**; nothing prints it automatically. Prices are never shown on the card.
 
 ## Database & migrations
 
@@ -95,6 +120,7 @@ Gifting         Festivals · Weddings · Corporate · Build Your Own · Luxury
 | 6 | `20261021000006_admin_reporting.sql` | Staff-only dashboard and customer reporting functions |
 | 7 | `20261021000007_brand_showcase.sql` | "Artisanal Portfolio" homepage section key |
 | 8 | `20261021000008_category_tree.sql` | Nested catalogue: listings roll up to parent collections, `regions` homepage section, cycle guard |
+| 9 | `20261021000009_hamper_builder.sql` | Hamper boxes (`hamper_capacity`), `order_bundles` snapshots, `place_order` with hamper validation, listing hides boxes |
 
 **How to apply them:**
 - **Supabase CLI:** `supabase link --project-ref <ref>`, then `supabase db push`.
@@ -188,7 +214,7 @@ The in-memory rate limiter protects a single instance only. For multi-instance o
 
 **Security:** RLS on every table, role checks on every admin action, and no secrets in client code.
 
-**Tests:** 30 unit tests and 28 database tests. The database tests include concurrent last-unit purchases, duplicate confirmations, coupon limits under concurrency, refunds and RLS.
+**Tests:** 78 unit and database tests. The database tests include concurrent last-unit purchases, duplicate confirmations, coupon limits under concurrency, refunds, RLS, and hamper validation (capacity, boxes without contents, and the last box in stock under concurrency).
 
 ### Requires your credentials or action before launch
 

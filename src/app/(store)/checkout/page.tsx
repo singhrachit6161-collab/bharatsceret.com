@@ -16,9 +16,10 @@ export const metadata: Metadata = { title: "Checkout", robots: { index: false } 
 
 export default async function CheckoutPage() {
   const user = await requireUser("/checkout");
-  const lines = await getCartView();
-  if (!lines.length) redirect("/cart");
-  if (lines.some((l) => l.issue)) redirect("/cart");
+  const view = await getCartView();
+  if (view.isEmpty || view.hasIssues) redirect("/cart");
+  const lines = view.lines;
+  const count = lines.length + view.bundles.length;
 
   const supabase = await createClient();
   const { data: addresses } = await supabase
@@ -27,7 +28,7 @@ export default async function CheckoutPage() {
     .eq("user_id", user.id)
     .order("is_default", { ascending: false })
     .order("created_at", { ascending: false });
-  const quote = await quoteCheckout({ userId: user.id, lines, couponCode: null, paymentMethod: "razorpay" });
+  const quote = await quoteCheckout({ userId: user.id, priced: view.priced, couponCode: null, paymentMethod: "razorpay" });
 
   return (
     <div className="container-page pb-16">
@@ -35,10 +36,20 @@ export default async function CheckoutPage() {
       <h1 className="section-title mb-6">Checkout</h1>
       <details className="card mb-6 p-4 text-sm">
         <summary className="cursor-pointer font-semibold text-walnut">
-          {lines.length} {lines.length === 1 ? "item" : "items"} in your order ·{" "}
+          {count} {count === 1 ? "item" : "items"} in your order ·{" "}
           <Link href="/cart" className="font-normal underline">Edit cart</Link>
         </summary>
         <ul className="mt-3 divide-y divide-line">
+          {view.bundles.map((b) => (
+            <li key={b.id} className="flex justify-between gap-3 py-2">
+              <span>
+                <strong>Custom hamper</strong> · {b.box.name} ({b.units} items)
+                {b.recipient && <span className="text-muted"> · for {b.recipient}</span>}
+                <span className="block text-xs text-muted">{b.items.map((i) => `${i.quantity}× ${i.name}`).join(", ")}</span>
+              </span>
+              <span className="shrink-0">{formatINR(b.subtotalPaise)}</span>
+            </li>
+          ))}
           {lines.map((l) => (
             <li key={l.variantId} className="flex justify-between py-2">
               <span>{l.name} · {l.label} × {l.quantity}</span>

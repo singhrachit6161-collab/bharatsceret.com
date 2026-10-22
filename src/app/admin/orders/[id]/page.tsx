@@ -39,6 +39,7 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
     refunds: { id: string; amount_paise: number; status: string; reason: string; provider_refund_id: string | null; failure_reason: string | null; created_at: string }[];
   };
   order.order_status_history.sort((a, b) => a.created_at.localeCompare(b.created_at));
+  order.order_bundles?.sort((a, b) => a.position - b.position);
 
   const pendingRefunds = order.refunds.filter((r) => r.status === "pending").reduce((s, r) => s + Number(r.amount_paise), 0);
   const refundable = Number(order.total_paise) - Number(order.refunded_paise) - pendingRefunds;

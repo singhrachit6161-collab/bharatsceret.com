@@ -8,6 +8,7 @@ export const ORDER_DETAIL_SELECT = `
   contact_phone, customer_note, reservation_expires_at, cancel_reason, paid_at, delivered_at, created_at,
   order_items (id, product_id, variant_id, product_name, variant_label, sku, image_url, unit_price_paise, quantity, line_total_paise),
   order_status_history (id, from_status, to_status, note, created_at),
+  order_bundles (id, position, box_name, box_label, capacity, recipient_name, gift_message, contents),
   shipments (id, carrier, tracking_number, tracking_url, status, shipped_at, delivered_at,
     shipment_events (id, status, description, location, occurred_at))`;
 
@@ -19,5 +20,6 @@ export async function getOrderByNumber(orderNumber: string): Promise<OrderDetail
   const o = data as unknown as OrderDetail;
   o.order_status_history.sort((a, b) => a.created_at.localeCompare(b.created_at));
   for (const s of o.shipments) s.shipment_events?.sort((a, b) => a.occurred_at.localeCompare(b.occurred_at));
+  o.order_bundles?.sort((a, b) => a.position - b.position);
   return o;
 }

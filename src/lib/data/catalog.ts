@@ -213,7 +213,7 @@ export const getProductBySlug = cache(async (slug: string): Promise<ProductDetai
        shelf_life, country_of_origin, manufacturer_info, fssai_license, seo_title, seo_description, og_image_url,
        rating_avg, review_count, status,
        product_images (id, url, alt, sort_order, storage_path),
-       product_variants (id, sku, label, weight_grams, price_paise, compare_at_paise, is_active, sort_order, max_per_order,
+       product_variants (id, sku, label, weight_grams, price_paise, compare_at_paise, is_active, sort_order, max_per_order, hamper_capacity,
          inventory (on_hand, reserved)),
        product_categories (categories (id, name, slug))`,
     )
@@ -222,16 +222,23 @@ export const getProductBySlug = cache(async (slug: string): Promise<ProductDetai
     .maybeSingle();
   if (!data) return null;
 
-  const variants = ((data.product_variants ?? []) as RawVariant[])
-    .filter((v) => v.is_active)
-    .map(({ inventory, ...v }) => ({ ...v, available: availableFrom(inventory) }))
+  const rawVariants = (data.product_variants ?? []) as (RawVariant & { hamper_capacity: number | null })[];
+  // Hamper boxes are sold only through the hamper builder.
+  const isHamperBox = rawVariants.length > 0 && rawVariants.every((v) => v.hamper_capacity !== null);
+  const variants = rawVariants
+    .filter((v) => v.is_active && v.hamper_capacity === null)
+    .map(({ inventory, ...v }) => {
+      const { hamper_capacity, ...rest } = v;
+      void hamper_capacity;
+      return { ...rest, available: availableFrom(inventory) };
+    })
     .sort((a, b) => a.sort_order - b.sort_order || a.price_paise - b.price_paise);
   const images = ((data.product_images ?? []) as ProductDetail["images"]).sort((a, b) => a.sort_order - b.sort_order);
   const categories = ((data.product_categories ?? []) as unknown as { categories: ProductDetail["categories"][number] | null }[])
     .map((pc) => pc.categories)
     .filter((c): c is ProductDetail["categories"][number] => Boolean(c));
 
-  return { ...(data as unknown as ProductDetail), variants, images, categories };
+  return { ...(data as unknown as ProductDetail), variants, images, categories, isHamperBox };
 });
 
 export async function getRelatedProducts(product: ProductDetail, limit = 8): Promise<ProductListing[]> {

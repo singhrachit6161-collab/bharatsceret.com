@@ -263,6 +263,15 @@ const SETTINGS_PARSERS: Record<string, (fd: FormData) => { value?: unknown; erro
       },
     };
   },
+  hamper: (fd) => {
+    const min = Number(formString(fd, "min_items"));
+    const max = Number(formString(fd, "message_max"));
+    const slugs = fd.getAll("eligible_category_slugs").filter((v): v is string => typeof v === "string" && /^[a-z0-9-]{1,80}$/.test(v));
+    if (!Number.isInteger(min) || min < 1 || min > 24) return { error: "Minimum items must be 1–24." };
+    if (!Number.isInteger(max) || max < 0 || max > 200) return { error: "Message length must be 0–200 characters." };
+    if (!slugs.length) return { error: "Choose at least one eligible collection." };
+    return { value: { enabled: formBool(fd, "enabled"), min_items: min, message_max: max, eligible_category_slugs: slugs } };
+  },
   trust_strip: (fd) => {
     const items = [0, 1, 2, 3]
       .map((i) => ({ icon: formString(fd, `icon_${i}`), title: formString(fd, `title_${i}`).slice(0, 60), text: formString(fd, `text_${i}`).slice(0, 120) }))

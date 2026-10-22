@@ -35,10 +35,10 @@ export function TextArea({
   );
 }
 
-export function Check({ label, name, defaultChecked }: { label: string; name: string; defaultChecked?: boolean }) {
+export function Check({ label, name, defaultChecked, value }: { label: string; name: string; defaultChecked?: boolean; value?: string }) {
   return (
     <label className="flex items-center gap-2 text-sm">
-      <input type="checkbox" name={name} defaultChecked={defaultChecked} className="h-4 w-4 accent-walnut" /> {label}
+      <input type="checkbox" name={name} value={value} defaultChecked={defaultChecked} className="h-4 w-4 accent-walnut" /> {label}
     </label>
   );
 }

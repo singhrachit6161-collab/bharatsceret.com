@@ -81,6 +81,8 @@ export interface ProductDetail {
   images: ProductImage[];
   variants: Variant[];
   categories: Pick<Category, "id" | "name" | "slug">[];
+  /** True for Build Your Own Hamper box products (not sold standalone). */
+  isHamperBox?: boolean;
 }
 
 export interface Banner {
@@ -188,4 +190,16 @@ export interface OrderDetail extends OrderSummary {
   order_items: OrderItem[];
   order_status_history: { id: number; from_status: OrderStatus | null; to_status: OrderStatus; note: string | null; created_at: string }[];
   shipments: Shipment[];
+  order_bundles?: OrderBundle[];
+}
+
+export interface OrderBundle {
+  id: string;
+  position: number;
+  box_name: string;
+  box_label: string;
+  capacity: number;
+  recipient_name: string | null;
+  gift_message: string | null;
+  contents: { variant_id: string; product_name: string; variant_label: string; sku: string; quantity: number; unit_price_paise: number }[];
 }

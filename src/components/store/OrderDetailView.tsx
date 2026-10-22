@@ -1,4 +1,4 @@
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Gift } from "lucide-react";
 import { ProductImage } from "@/components/ui/ProductImage";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { formatINR } from "@/lib/money";
@@ -53,6 +53,33 @@ export function OrderDetailView({ order }: { order: OrderDetail }) {
           )}
         </section>
       ))}
+
+      {!!order.order_bundles?.length && (
+        <section aria-label="Custom hampers" className="space-y-3">
+          {order.order_bundles.map((b) => (
+            <div key={b.id} className="gold-frame bg-ivory-pattern p-5 text-sm">
+              <div className="relative z-10">
+                <p className="eyebrow flex items-center gap-1.5"><Gift size={13} aria-hidden="true" /> Custom hamper {order.order_bundles!.length > 1 ? `#${b.position}` : ""}</p>
+                <p className="mt-1 font-display text-xl font-semibold text-walnut">{b.box_name} <span className="text-sm font-sans font-normal text-muted">({b.box_label})</span></p>
+                <ul className="mt-2 space-y-0.5">
+                  {b.contents.map((c) => (
+                    <li key={c.variant_id}>
+                      {c.quantity} × {c.product_name} <span className="text-muted">({c.variant_label} · {c.sku})</span>
+                    </li>
+                  ))}
+                </ul>
+                {(b.recipient_name || b.gift_message) && (
+                  <div className="mt-3 border-l-2 border-saffron pl-3">
+                    {b.recipient_name && <p className="text-xs font-semibold tracking-[0.18em] text-saffron-600 uppercase">For {b.recipient_name}</p>}
+                    {b.gift_message && <p className="font-display text-base whitespace-pre-line text-walnut italic">“{b.gift_message}”</p>}
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+          <p className="text-xs text-muted">Hamper boxes and their contents are also listed in the items below.</p>
+        </section>
+      )}
 
       <section className="card divide-y divide-line">
         {order.order_items.map((it) => (

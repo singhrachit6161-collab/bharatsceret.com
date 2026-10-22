@@ -117,6 +117,12 @@ const variantSchema = z.object({
   max_per_order: z.coerce.number().int().min(1).max(100),
   sort_order: z.coerce.number().int().min(0).max(999),
   initial_stock: z.string().trim().optional(),
+  hamper_capacity: z
+    .string()
+    .trim()
+    .optional()
+    .transform((v) => (v ? Number(v) : null))
+    .refine((v) => v === null || (Number.isInteger(v) && v >= 1 && v <= 24), "Hamper capacity must be 1–24 items (or empty)"),
 });
 
 export async function saveVariant(_prev: AdminFormState, fd: FormData): Promise<AdminFormState> {
@@ -141,6 +147,7 @@ export async function saveVariant(_prev: AdminFormState, fd: FormData): Promise<
       max_per_order: v.max_per_order,
       sort_order: v.sort_order,
       is_active: formBool(fd, "is_active"),
+      hamper_capacity: v.hamper_capacity,
     };
     const res = id
       ? await db.from("product_variants").update(row).eq("id", id).eq("product_id", v.product_id).select("id").single()

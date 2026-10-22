@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { HamperCta } from "@/components/store/HamperCta";
 import { parseFilters, ProductListingPage } from "@/components/store/ProductListingPage";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Ornament } from "@/components/ui/Ornament";
@@ -27,6 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CategoryPage({ params, searchParams }: Props) {
   const [{ slug }, sp] = await Promise.all([params, searchParams]);
+  if (slug === "build-your-own-hamper") redirect("/build-your-hamper");
   const [category, categories] = await Promise.all([getCategoryBySlug(slug), getCategories()]);
   if (!category) notFound();
   const ancestors = ancestorsOf(category.id, categories);
@@ -93,6 +95,8 @@ export default async function CategoryPage({ params, searchParams }: Props) {
           </ul>
         </nav>
       )}
+
+      {(category.slug === "gifting" || ancestors.some((a) => a.slug === "gifting")) && <HamperCta />}
 
       <div className="container-page pt-10">
         <ProductListingPage

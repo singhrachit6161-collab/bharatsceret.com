@@ -27,6 +27,7 @@ export interface StoreSettings {
   checkout: { reservation_minutes: number };
   social: { instagram: string; facebook: string; youtube: string; x: string };
   trust_strip: { icon: string; title: string; text: string }[];
+  hamper: { enabled: boolean; min_items: number; eligible_category_slugs: string[]; message_max: number };
   heritage: {
     enabled: boolean;
     eyebrow: string;
@@ -62,6 +63,12 @@ export const DEFAULT_SETTINGS: StoreSettings = {
   checkout: { reservation_minutes: 30 },
   social: { instagram: "", facebook: "", youtube: "", x: "" },
   trust_strip: [],
+  hamper: {
+    enabled: false,
+    min_items: 2,
+    eligible_category_slugs: ["dry-fruits", "flavour-lab", "spices", "snacks", "pantry", "tea-beverages"],
+    message_max: 200,
+  },
   heritage: { enabled: false, eyebrow: "", title: "", body: "", cta_label: "", cta_url: "/about", pillars: [] },
 };
 

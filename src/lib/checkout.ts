@@ -1,8 +1,6 @@
 import "server-only";
 import { codRules, getSettings, shippingRules } from "@/lib/data/settings";
-import type { CartViewLine } from "@/lib/data/cart";
-import { toPricedLines } from "@/lib/data/cart";
-import { computeTotals, evaluateCoupon, type CouponRule, type Totals } from "@/lib/pricing";
+import { computeTotals, evaluateCoupon, type CouponRule, type PricedLine, type Totals } from "@/lib/pricing";
 import { isServiceRoleConfigured } from "@/lib/server-env";
 import { createServiceClient } from "@/lib/supabase/server";
 
@@ -57,12 +55,13 @@ async function loadCoupon(code: string, userId: string): Promise<{ rule: CouponR
 
 export async function quoteCheckout(input: {
   userId: string;
-  lines: CartViewLine[];
+  /** Per-variant totals across the whole cart (standalone + hampers). */
+  priced: PricedLine[];
   couponCode: string | null;
   paymentMethod: "razorpay" | "cod";
 }): Promise<Quote> {
   const settings = await getSettings();
-  const priced = toPricedLines(input.lines);
+  const priced = input.priced;
   let coupon: Quote["coupon"] = null;
   let couponError: string | null = null;
 

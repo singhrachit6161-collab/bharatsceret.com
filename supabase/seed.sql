@@ -15,6 +15,7 @@ insert into public.store_settings (key, value) values
   ('checkout', '{"reservation_minutes": 30}'),
   ('social', '{"instagram": "", "facebook": "", "youtube": "", "x": ""}'),
   ('heritage', '{"enabled": true, "eyebrow": "From Bharat to the world", "title": "India\u2019s finest harvest, presented the royal way", "body": "Bharat Secrets brings together the dry fruits India has treasured for generations \u2014 selected, sorted and packed for homes and gifting tables in India and abroad. [TEMPLATE \u2014 replace with your own sourcing story, and only mention export standards or certifications you actually hold.]", "cta_label": "Our story", "cta_url": "/about", "image_url": "/brand/heritage-peacock-box.webp", "pillars": [{"title": "Thoughtfully sourced", "text": "Selected from India\u2019s celebrated growing regions."}, {"title": "Carefully graded", "text": "Sorted by size and quality before packing."}, {"title": "Gift-ready presentation", "text": "Elegant packs and hampers for every occasion."}]}'),
+  ('hamper', '{"enabled": true, "min_items": 2, "eligible_category_slugs": ["dry-fruits", "flavour-lab", "spices", "snacks", "pantry", "tea-beverages"], "message_max": 200}'),
   ('trust_strip', '[{"icon": "truck", "title": "Shipping across India", "text": "Free shipping on orders above ₹999"}, {"icon": "package", "title": "Carefully packed", "text": "Sealed packs to keep products fresh"}, {"icon": "shield", "title": "Secure payments", "text": "UPI, cards and netbanking via Razorpay"}, {"icon": "headset", "title": "Customer support", "text": "Mon–Sat, 10:00–18:00 IST"}]')
 on conflict (key) do nothing;
 
@@ -95,7 +96,7 @@ begin
       ('festive-gifts', 'Festivals', 'gifting', 'Diwali, Rakhi, Eid and Christmas gift boxes.', '/brand/products/floral-tin-box.webp', 10, true),
       ('wedding-gifts', 'Weddings', 'gifting', 'Favours, trousseau trays and shagun hampers.', '/brand/products/floral-pouches.webp', 20, true),
       ('corporate-gifts', 'Corporate', 'gifting', 'Branded and bulk gifting for teams and clients.', '/brand/products/red-gift-box.webp', 30, true),
-      ('build-your-own-hamper', 'Build Your Own', 'gifting', 'Design your own hamper (coming soon).', '/brand/products/woven-box.webp', 40, true),
+      ('build-your-own-hamper', 'Build Your Own', 'gifting', 'Choose a box, fill it with your favourites and add a personal message.', '/brand/products/woven-box.webp', 40, true),
       ('luxury-gifts', 'Luxury', 'gifting', 'Carved caskets and heirloom trunks.', '/brand/products/carved-casket.webp', 50, true)
     ) as t(slug, name, parent, description, image_url, sort_order, show_in_nav)
   loop
@@ -253,6 +254,43 @@ begin
 end;
 $$;
 
+-- Build Your Own Hamper boxes ------------------------------------------------------
+-- Each box is a product with one variant whose hamper_capacity is the number of
+-- items it holds. Boxes are hidden from normal listings and sold only as hampers.
+do $$
+declare
+  rec record;
+  v_product uuid;
+  v_variant uuid;
+begin
+  for rec in
+    select * from (values
+      ('hamper-box-classic', 'Classic Floral Box', 'A hand-painted floral keepsake box with a satin tray.', '/brand/products/floral-tin-box.webp', 'BOX-CLASSIC-4', 'Holds 4 items', 4, 49900::bigint, 60),
+      ('hamper-box-royal', 'Royal Woven Trunk', 'A hand-woven trunk with a brass clasp.', '/brand/products/woven-box.webp', 'BOX-ROYAL-6', 'Holds 6 items', 6, 89900::bigint, 40),
+      ('hamper-box-maharaja', 'Maharaja Carved Casket', 'A carved wooden casket lined in silk — our grandest presentation.', '/brand/products/carved-casket.webp', 'BOX-MAHARAJA-9', 'Holds 9 items', 9, 149900::bigint, 20)
+    ) as t(slug, name, short, img, sku, label, capacity, price, stock)
+  loop
+    insert into public.products (name, slug, short_description, description, status, published_at)
+    values (rec.name, rec.slug, rec.short, rec.short || ' SAMPLE BOX — replace with your real packaging details.', 'active', now())
+    on conflict (slug) do nothing
+    returning id into v_product;
+    if v_product is null then
+      continue;
+    end if;
+    insert into public.product_categories (product_id, category_id)
+    select v_product, c.id from public.categories c where c.slug = 'build-your-own-hamper';
+    insert into public.product_images (product_id, url, alt, sort_order) values (v_product, rec.img, rec.name, 0);
+    insert into public.product_variants (product_id, sku, label, price_paise, hamper_capacity, max_per_order)
+    values (v_product, rec.sku, rec.label, rec.price, rec.capacity, 5)
+    returning id into v_variant;
+    update public.inventory set on_hand = rec.stock where variant_id = v_variant;
+    insert into public.inventory_movements (variant_id, reason, delta_on_hand, note)
+    values (v_variant, 'initial', rec.stock, 'Seed stock');
+    v_product := null;
+  end loop;
+end;
+$$;
+
 -- Homepage banners ------------------------------------------------------------------
 insert into public.homepage_banners (placement, title, subtitle, cta_label, link_url, image_url, alt, theme, sort_order)
 select * from (values
@@ -263,7 +301,7 @@ select * from (values
   ('category_tile'::public.banner_placement, 'Flavour Lab', null, null, '/category/flavour-lab', '/placeholders/makhana.svg', 'Flavour Lab (placeholder artwork)', 'olive', 30),
   ('category_tile'::public.banner_placement, 'Gifting', null, null, '/category/gifting', '/brand/products/carved-casket.webp', 'Carved gift casket', 'cream', 40),
   ('promo'::public.banner_placement, 'Tea from the hills', 'Kashmiri kahwa, masala chai and pahadi infusions.', 'Shop tea', '/category/tea-beverages', '/placeholders/tea.svg', 'Tea leaves (placeholder artwork)', 'saffron', 10),
-  ('promo'::public.banner_placement, 'The royal pantry', 'Wild honey, achaar and chutneys.', 'Shop pantry', '/category/pantry', '/placeholders/honey.svg', 'Honey jar (placeholder artwork)', 'olive', 20)
+  ('promo'::public.banner_placement, 'Build your own hamper', 'Choose a box, fill it with favourites, add your message.', 'Start creating', '/build-your-hamper', '/brand/products/carved-casket.webp', 'Carved wooden hamper casket', 'olive', 20)
 ) as t(placement, title, subtitle, cta_label, link_url, image_url, alt, theme, sort_order)
 where not exists (select 1 from public.homepage_banners);
 

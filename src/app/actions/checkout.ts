@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { getSessionUser } from "@/lib/auth";
 import { quoteCheckout, type Quote } from "@/lib/checkout";
+import { EMPTY_CART } from "@/lib/cart";
 import { getCartView, writeCart } from "@/lib/data/cart";
 import { getSettings } from "@/lib/data/settings";
 import { errorCode, friendlyError } from "@/lib/errors";
@@ -24,9 +25,9 @@ export async function previewCheckout(input: {
   if (!user) return { ok: false, error: "Please sign in." };
   const method = input.paymentMethod === "cod" ? "cod" : "razorpay";
   const code = input.couponCode ? z.string().trim().max(30).parse(input.couponCode).toUpperCase() : null;
-  const lines = await getCartView();
-  if (!lines.length) return { ok: false, error: "Your cart is empty." };
-  return { ok: true, quote: await quoteCheckout({ userId: user.id, lines, couponCode: code, paymentMethod: method }) };
+  const view = await getCartView();
+  if (view.isEmpty) return { ok: false, error: "Your cart is empty." };
+  return { ok: true, quote: await quoteCheckout({ userId: user.id, priced: view.priced, couponCode: code, paymentMethod: method }) };
 }
 
 export type PlaceOrderState =
@@ -58,15 +59,15 @@ export async function placeOrder(_prev: PlaceOrderState, formData: FormData): Pr
     .maybeSingle();
   if (!address) return { ok: false, error: "Please select a valid delivery address." };
 
-  const lines = await getCartView();
-  if (!lines.length) return { ok: false, error: "Your cart is empty." };
-  if (lines.some((l) => l.issue)) {
+  const view = await getCartView();
+  if (view.isEmpty) return { ok: false, error: "Your cart is empty." };
+  if (view.hasIssues) {
     return { ok: false, error: "Some items in your cart are unavailable or exceed available stock. Please review your cart." };
   }
 
   const quote = await quoteCheckout({
     userId: user.id,
-    lines,
+    priced: view.priced,
     couponCode: input.coupon_code,
     paymentMethod: input.payment_method,
   });
@@ -80,7 +81,8 @@ export async function placeOrder(_prev: PlaceOrderState, formData: FormData): Pr
     p_user_id: user.id,
     p_idempotency_key: input.idempotency_key,
     p_payment_method: input.payment_method,
-    p_items: lines.map((l) => ({ variant_id: l.variantId, quantity: l.quantity, unit_price_paise: l.unitPricePaise })),
+    // Totals per variant across standalone lines and hampers; hampers described separately.
+    p_items: view.priced.map((l) => ({ variant_id: l.variantId, quantity: l.quantity, unit_price_paise: l.unitPricePaise })),
     p_subtotal_paise: quote.totals.subtotalPaise,
     p_discount_paise: quote.totals.discountPaise,
     p_shipping_paise: quote.totals.shippingPaise,
@@ -92,6 +94,7 @@ export async function placeOrder(_prev: PlaceOrderState, formData: FormData): Pr
     p_contact_phone: address.phone,
     p_customer_note: input.note,
     p_reservation_minutes: settings.checkout.reservation_minutes,
+    p_bundles: view.bundlePayload,
   });
   if (error || !data?.[0]) {
     if (!errorCode(error)) console.error("[checkout] place_order failed", error?.code);
@@ -100,7 +103,7 @@ export async function placeOrder(_prev: PlaceOrderState, formData: FormData): Pr
   const order = data[0] as { order_id: string; order_number: string; created: boolean };
 
   if (input.payment_method === "cod") {
-    await writeCart([]);
+    await writeCart(EMPTY_CART);
     if (order.created) {
       await notify("order_confirmed", { to: user.email, orderNumber: order.order_number, totalPaise: quote.totals.totalPaise });
     }
@@ -229,7 +232,7 @@ export async function verifyPayment(input: unknown): Promise<{ ok: true; status:
       p_method: gateway.method,
     });
     if (error) return { ok: false, error: friendlyError(error, "We could not confirm your payment yet.") };
-    await writeCart([]);
+    await writeCart(EMPTY_CART);
     if (outcome === "confirmed" || outcome === "late_confirmed") {
       await notify("payment_confirmed", { to: order.contact_email, orderNumber: order.order_number, totalPaise: Number(order.total_paise) });
     }
@@ -242,7 +245,7 @@ export async function verifyPayment(input: unknown): Promise<{ ok: true; status:
       .update({ status: "authorized", provider_payment_id: razorpay_payment_id })
       .eq("provider_order_id", razorpay_order_id)
       .in("status", ["created", "failed"]);
-    await writeCart([]);
+    await writeCart(EMPTY_CART);
     return { ok: true, status: "processing" };
   }
   return { ok: false, error: "Payment was not completed. You can try again." };
