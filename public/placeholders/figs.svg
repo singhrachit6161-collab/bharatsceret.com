@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Dried Figs placeholder illustration">
+<defs>
+<linearGradient id="brass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6E4A1A"/><stop offset="0.35" stop-color="#C9973F"/><stop offset="0.55" stop-color="#F0D49A"/><stop offset="0.8" stop-color="#B07D2E"/><stop offset="1" stop-color="#5E3D14"/></linearGradient>
+<linearGradient id="rim" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8A5E22"/><stop offset="0.5" stop-color="#F6DFA8"/><stop offset="1" stop-color="#8A5E22"/></linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.42" r="0.6"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.75"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
+<radialGradient id="velvet" cx="0.3" cy="0.2" r="0.9"><stop offset="0" stop-color="#0F4A3A"/><stop offset="0.6" stop-color="#082C22"/><stop offset="1" stop-color="#041A14"/></radialGradient>
+</defs>
+<rect width="800" height="800" fill="#F2E4D2"/>
+<g fill="none" stroke="#B8893B" stroke-opacity="0.12"><circle cx="400" cy="380" r="150"/><circle cx="400" cy="380" r="210"/><circle cx="400" cy="380" r="270"/><circle cx="400" cy="380" r="330"/></g>
+<rect width="800" height="800" fill="url(#glow)"/>
+<ellipse cx="400" cy="470" rx="262" ry="22" fill="#0A3328"/>
+<g transform="rotate(107 628 480)"><circle cx="628" cy="480" r="38" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="628" cy="480" r="17" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(51 185 477)"><circle cx="185" cy="477" r="38" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="185" cy="477" r="17" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(80 617 475)"><circle cx="617" cy="475" r="32" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="617" cy="475" r="14" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(193 595 474)"><circle cx="595" cy="474" r="30" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="595" cy="474" r="13" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(225 585 468)"><circle cx="585" cy="468" r="38" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="585" cy="468" r="17" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(234 205 464)"><circle cx="205" cy="464" r="36" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="205" cy="464" r="16" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(232 591 462)"><circle cx="591" cy="462" r="39" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="591" cy="462" r="17" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(189 599 455)"><circle cx="599" cy="455" r="34" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="599" cy="455" r="15" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(303 251 453)"><circle cx="251" cy="453" r="35" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="251" cy="453" r="16" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(69 303 452)"><circle cx="303" cy="452" r="37" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="303" cy="452" r="17" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(205 210 449)"><circle cx="210" cy="449" r="33" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="210" cy="449" r="15" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(321 531 448)"><circle cx="531" cy="448" r="38" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="531" cy="448" r="17" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(279 326 445)"><circle cx="326" cy="445" r="35" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="326" cy="445" r="16" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(193 234 442)"><circle cx="234" cy="442" r="38" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="234" cy="442" r="17" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(254 412 437)"><circle cx="412" cy="437" r="32" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="412" cy="437" r="14" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(85 270 436)"><circle cx="270" cy="436" r="36" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="270" cy="436" r="16" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(312 541 432)"><circle cx="541" cy="432" r="29" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="541" cy="432" r="13" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(309 314 428)"><circle cx="314" cy="428" r="32" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="314" cy="428" r="15" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(95 278 426)"><circle cx="278" cy="426" r="32" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="278" cy="426" r="14" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(45 233 426)"><circle cx="233" cy="426" r="33" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="233" cy="426" r="15" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(192 491 420)"><circle cx="491" cy="420" r="30" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="491" cy="420" r="13" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(291 312 413)"><circle cx="312" cy="413" r="35" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="312" cy="413" r="16" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(236 556 412)"><circle cx="556" cy="412" r="32" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="556" cy="412" r="14" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(3 558 409)"><circle cx="558" cy="409" r="35" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="558" cy="409" r="16" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(92 472 404)"><circle cx="472" cy="404" r="38" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="472" cy="404" r="17" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(100 373 404)"><circle cx="373" cy="404" r="39" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="373" cy="404" r="18" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(179 309 401)"><circle cx="309" cy="401" r="38" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="309" cy="401" r="17" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(157 428 396)"><circle cx="428" cy="396" r="38" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="428" cy="396" r="17" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(224 524 393)"><circle cx="524" cy="393" r="33" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="524" cy="393" r="15" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(116 463 388)"><circle cx="463" cy="388" r="29" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="463" cy="388" r="13" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(35 491 381)"><circle cx="491" cy="381" r="33" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="491" cy="381" r="15" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(259 339 378)"><circle cx="339" cy="378" r="32" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="339" cy="378" r="14" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(334 337 377)"><circle cx="337" cy="377" r="38" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="337" cy="377" r="17" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<g transform="rotate(29 304 375)"><circle cx="304" cy="375" r="30" fill="#B48A5E" stroke="#6E4C2C" stroke-width="3"/><circle cx="304" cy="375" r="14" fill="#D9B98C" stroke="#6E4C2C" stroke-width="2"/></g>
+<ellipse cx="400" cy="648" rx="256" ry="23" fill="#000" opacity="0.18"/><path d="M130,470 Q152,640 400,644 Q648,640 670,470Z" fill="url(#brass)"/><path d="M211,546 Q400,598 589,546" stroke="#5E3D14" stroke-width="2" fill="none" opacity="0.5"/><path d="M252,575 Q400,616 548,575" stroke="#F6DFA8" stroke-width="1.5" fill="none" opacity="0.6"/><ellipse cx="400" cy="470" rx="270" ry="26" fill="none" stroke="url(#rim)" stroke-width="6"/>
+<text x="400" y="730" text-anchor="middle" font-family="Georgia, serif" font-size="34" letter-spacing="6" fill="#0A3328">DRIED FIGS</text>
+<text x="400" y="764" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" letter-spacing="5" fill="#96701F">PLACEHOLDER IMAGE</text>
+</svg>

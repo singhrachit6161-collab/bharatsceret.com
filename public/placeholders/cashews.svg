@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Cashews placeholder illustration">
+<defs>
+<linearGradient id="brass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6E4A1A"/><stop offset="0.35" stop-color="#C9973F"/><stop offset="0.55" stop-color="#F0D49A"/><stop offset="0.8" stop-color="#B07D2E"/><stop offset="1" stop-color="#5E3D14"/></linearGradient>
+<linearGradient id="rim" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8A5E22"/><stop offset="0.5" stop-color="#F6DFA8"/><stop offset="1" stop-color="#8A5E22"/></linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.42" r="0.6"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.75"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
+<radialGradient id="velvet" cx="0.3" cy="0.2" r="0.9"><stop offset="0" stop-color="#0F4A3A"/><stop offset="0.6" stop-color="#082C22"/><stop offset="1" stop-color="#041A14"/></radialGradient>
+</defs>
+<rect width="800" height="800" fill="#F7F0E4"/>
+<g fill="none" stroke="#B8893B" stroke-opacity="0.12"><circle cx="400" cy="380" r="150"/><circle cx="400" cy="380" r="210"/><circle cx="400" cy="380" r="270"/><circle cx="400" cy="380" r="330"/></g>
+<rect width="800" height="800" fill="url(#glow)"/>
+<ellipse cx="400" cy="470" rx="262" ry="22" fill="#0A3328"/>
+<path transform="rotate(25 621 475)" d="M587,461 A38,38 0 1 0 656,461 L637,461 A19,19 0 1 1 606,461Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(357 595 470)" d="M559,455 A41,41 0 1 0 632,455 L612,455 A20,20 0 1 1 579,455Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(221 247 468)" d="M208,452 A43,43 0 1 0 286,452 L265,452 A21,21 0 1 1 230,452Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(355 617 466)" d="M588,454 A32,32 0 1 0 646,454 L630,454 A16,16 0 1 1 604,454Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(52 193 466)" d="M163,454 A33,33 0 1 0 223,454 L207,454 A16,16 0 1 1 180,454Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(194 423 455)" d="M390,442 A36,36 0 1 0 456,442 L438,442 A18,18 0 1 1 408,442Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(53 581 454)" d="M546,440 A38,38 0 1 0 615,440 L596,440 A19,19 0 1 1 565,440Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(247 332 454)" d="M298,440 A38,38 0 1 0 367,440 L348,440 A19,19 0 1 1 317,440Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(147 567 453)" d="M534,440 A36,36 0 1 0 600,440 L582,440 A18,18 0 1 1 552,440Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(286 461 452)" d="M431,440 A33,33 0 1 0 490,440 L474,440 A16,16 0 1 1 447,440Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(320 199 451)" d="M169,439 A33,33 0 1 0 230,439 L213,439 A17,17 0 1 1 186,439Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(255 459 448)" d="M421,432 A42,42 0 1 0 497,432 L476,432 A21,21 0 1 1 442,432Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(77 587 447)" d="M557,435 A32,32 0 1 0 616,435 L600,435 A16,16 0 1 1 573,435Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(292 513 447)" d="M480,434 A36,36 0 1 0 545,434 L527,434 A18,18 0 1 1 498,434Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(172 473 444)" d="M439,431 A37,37 0 1 0 507,431 L488,431 A19,19 0 1 1 457,431Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(320 345 440)" d="M310,426 A38,38 0 1 0 380,426 L361,426 A19,19 0 1 1 329,426Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(280 296 438)" d="M267,426 A32,32 0 1 0 325,426 L309,426 A16,16 0 1 1 283,426Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(67 269 433)" d="M238,421 A35,35 0 1 0 301,421 L283,421 A17,17 0 1 1 255,421Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(6 412 433)" d="M381,421 A34,34 0 1 0 443,421 L426,421 A17,17 0 1 1 398,421Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(237 242 430)" d="M213,419 A32,32 0 1 0 271,419 L255,419 A16,16 0 1 1 229,419Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(21 275 426)" d="M245,414 A33,33 0 1 0 304,414 L288,414 A16,16 0 1 1 261,414Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(291 332 413)" d="M299,400 A37,37 0 1 0 366,400 L347,400 A18,18 0 1 1 317,400Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(198 436 396)" d="M403,383 A36,36 0 1 0 468,383 L450,383 A18,18 0 1 1 421,383Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(131 260 392)" d="M231,380 A32,32 0 1 0 290,380 L274,380 A16,16 0 1 1 247,380Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(78 510 391)" d="M475,377 A38,38 0 1 0 544,377 L525,377 A19,19 0 1 1 494,377Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(17 372 389)" d="M336,374 A40,40 0 1 0 408,374 L388,374 A20,20 0 1 1 356,374Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(218 350 387)" d="M313,372 A41,41 0 1 0 388,372 L367,372 A21,21 0 1 1 333,372Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(6 389 373)" d="M360,361 A32,32 0 1 0 418,361 L402,361 A16,16 0 1 1 376,361Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(169 487 367)" d="M449,352 A42,42 0 1 0 525,352 L504,352 A21,21 0 1 1 470,352Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(50 412 361)" d="M382,349 A33,33 0 1 0 442,349 L425,349 A16,16 0 1 1 398,349Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(128 459 354)" d="M424,340 A38,38 0 1 0 494,340 L475,340 A19,19 0 1 1 443,340Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(219 386 346)" d="M356,334 A33,33 0 1 0 416,334 L399,334 A17,17 0 1 1 372,334Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(8 392 346)" d="M356,331 A40,40 0 1 0 429,331 L409,331 A20,20 0 1 1 376,331Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<path transform="rotate(92 423 342)" d="M386,327 A40,40 0 1 0 459,327 L439,327 A20,20 0 1 1 406,327Z" fill="#EBD3A8" stroke="#B8955C" stroke-width="3"/>
+<ellipse cx="400" cy="648" rx="256" ry="23" fill="#000" opacity="0.18"/><path d="M130,470 Q152,640 400,644 Q648,640 670,470Z" fill="url(#brass)"/><path d="M211,546 Q400,598 589,546" stroke="#5E3D14" stroke-width="2" fill="none" opacity="0.5"/><path d="M252,575 Q400,616 548,575" stroke="#F6DFA8" stroke-width="1.5" fill="none" opacity="0.6"/><ellipse cx="400" cy="470" rx="270" ry="26" fill="none" stroke="url(#rim)" stroke-width="6"/>
+<text x="400" y="730" text-anchor="middle" font-family="Georgia, serif" font-size="34" letter-spacing="6" fill="#0A3328">CASHEWS</text>
+<text x="400" y="764" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" letter-spacing="5" fill="#96701F">PLACEHOLDER IMAGE</text>
+</svg>

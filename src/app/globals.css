@@ -1,26 +1,212 @@
 @import "tailwindcss";
 
+/* Bharat Secrets design tokens */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Royal emerald, antique gold and ivory */
+  --walnut: #08281f;
+  --walnut-700: #0c3428;
+  --walnut-600: #134537;
+  --ivory: #faf6ef;
+  --saffron: #b8893b;
+  --saffron-600: #96701f;
+  --gold-light: #dcc08a;
+  --emerald: #0d5a44;
+  --emerald-700: #0a4636;
+  --almond: #ece4d2;
+  --almond-100: #f3eee2;
+  --olive: #1f6b50;
+  --ink: #11221c;
+  --muted: #5e6a62;
+  --line: #e3dac6;
+  --danger: #9b2230;
+  --success: #3d6338;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-walnut: var(--walnut);
+  --color-walnut-700: var(--walnut-700);
+  --color-walnut-600: var(--walnut-600);
+  --color-ivory: var(--ivory);
+  --color-saffron: var(--saffron);
+  --color-saffron-600: var(--saffron-600);
+  --color-gold-light: var(--gold-light);
+  --color-emerald: var(--emerald);
+  --color-emerald-700: var(--emerald-700);
+  --color-almond: var(--almond);
+  --color-almond-100: var(--almond-100);
+  --color-olive: var(--olive);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display-serif);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+.font-display {
+  font-family: var(--font-display-serif), Georgia, serif;
+  letter-spacing: 0.005em;
+}
+
+h3 {
+  font-family: var(--font-display-serif), Georgia, serif;
+}
+
+:focus-visible {
+  outline: 2px solid var(--saffron);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .btn,
+  .btn-primary,
+  .btn-accent,
+  .btn-outline,
+  .btn-ghost,
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-5 py-2.5 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply bg-walnut text-ivory tracking-wide hover:bg-walnut-600;
+  }
+  .btn-accent {
+    @apply bg-gradient-to-r from-saffron-600 via-saffron to-gold-light text-walnut tracking-wide shadow-sm hover:brightness-105;
+  }
+  .btn-outline {
+    @apply border border-walnut/30 bg-white text-walnut hover:border-walnut hover:bg-almond-100;
+  }
+  .btn-ghost {
+    @apply text-walnut hover:bg-almond-100;
+  }
+  .btn-danger {
+    @apply bg-danger text-white hover:bg-danger/90;
+  }
+  .input {
+    @apply w-full rounded-md border border-line bg-white px-3 py-2 text-sm text-ink placeholder:text-muted/70 focus:border-saffron focus:ring-2 focus:ring-saffron/30 focus:outline-none disabled:bg-almond-100;
+  }
+  .label {
+    @apply mb-1 block text-sm font-medium text-ink;
+  }
+  .card {
+    @apply rounded-lg border border-line bg-white;
+  }
+  .section-title {
+    @apply font-display text-3xl font-semibold text-walnut sm:text-4xl;
+  }
+  .eyebrow {
+    @apply text-[11px] font-semibold tracking-[0.32em] text-saffron-600 uppercase;
+  }
+  .gold-text {
+    @apply bg-gradient-to-r from-saffron-600 via-gold-light to-saffron bg-clip-text text-transparent;
+  }
+  .hairline {
+    @apply h-px bg-gradient-to-r from-transparent via-saffron/60 to-transparent;
+  }
+  .prose-store h2 {
+    @apply mt-8 mb-3 text-xl font-semibold text-walnut;
+  }
+  .prose-store p {
+    @apply mb-4 leading-relaxed text-ink/90;
+  }
+  .prose-store ul {
+    @apply mb-4 list-disc pl-6;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+/* Royal ornamentation */
+.arch {
+  border-radius: 999px 999px 14px 14px;
+}
+.bg-royal {
+  background-color: var(--walnut);
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(220, 192, 138, 0.2), transparent 55%),
+    radial-gradient(ellipse at 100% 100%, rgba(16, 110, 82, 0.5), transparent 60%),
+    url("/patterns/damask.svg");
+  background-size: auto, auto, 120px 120px;
+}
+.bg-emerald-royal {
+  background-color: var(--emerald);
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(220, 192, 138, 0.18), transparent 60%),
+    url("/patterns/damask.svg");
+  background-size: auto, 120px 120px;
+}
+.bg-ivory-pattern {
+  background-color: var(--ivory);
+  background-image: url("/patterns/damask-light.svg");
+  background-size: 140px 140px;
+}
+.gold-frame {
+  position: relative;
+}
+.gold-frame::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(220, 192, 138, 0.45);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.text-gold-gradient {
+  background: linear-gradient(100deg, #b8893b 0%, #f6e7bd 45%, #dcc08a 60%, #b8893b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Print only the invoice document on invoice pages. */
+@media print {
+  body:has(#invoice-print) * {
+    visibility: hidden;
+  }
+  body:has(#invoice-print) #invoice-print,
+  body:has(#invoice-print) #invoice-print * {
+    visibility: visible;
+  }
+  body:has(#invoice-print) #invoice-print {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    max-width: none;
+    border: 0;
+  }
 }

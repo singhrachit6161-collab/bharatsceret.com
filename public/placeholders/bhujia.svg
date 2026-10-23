@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Bhujia placeholder illustration">
+<defs>
+<linearGradient id="brass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6E4A1A"/><stop offset="0.35" stop-color="#C9973F"/><stop offset="0.55" stop-color="#F0D49A"/><stop offset="0.8" stop-color="#B07D2E"/><stop offset="1" stop-color="#5E3D14"/></linearGradient>
+<linearGradient id="rim" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8A5E22"/><stop offset="0.5" stop-color="#F6DFA8"/><stop offset="1" stop-color="#8A5E22"/></linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.42" r="0.6"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.75"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
+<radialGradient id="velvet" cx="0.3" cy="0.2" r="0.9"><stop offset="0" stop-color="#0F4A3A"/><stop offset="0.6" stop-color="#082C22"/><stop offset="1" stop-color="#041A14"/></radialGradient>
+</defs>
+<rect width="800" height="800" fill="#FAF0DC"/>
+<g fill="none" stroke="#B8893B" stroke-opacity="0.12"><circle cx="400" cy="380" r="150"/><circle cx="400" cy="380" r="210"/><circle cx="400" cy="380" r="270"/><circle cx="400" cy="380" r="330"/></g>
+<rect width="800" height="800" fill="url(#glow)"/>
+<ellipse cx="400" cy="470" rx="262" ry="22" fill="#0A3328"/>
+<path transform="rotate(132 172 480)" d="M126,480 q21,-18 46,0 t46,0" stroke="#D99A2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path transform="rotate(98 628 480)" d="M583,480 q21,-17 45,0 t45,0" stroke="#D99A2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path transform="rotate(185 172 479)" d="M125,479 q22,-18 47,0 t47,0" stroke="#D99A2B" stroke-width="7" stroke-linecap="round" fill="none"/>
+<path transform="rotate(297 176 477)" d="M132,477 q20,-17 44,0 t44,0" stroke="#D99A2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path transform="rotate(46 625 476)" d="M576,476 q23,-19 49,0 t49,0" stroke="#D99A2B" stroke-width="7" stroke-linecap="round" fill="none"/>
+<path transform="rotate(270 188 475)" d="M141,475 q22,-18 47,0 t47,0" stroke="#D99A2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path transform="rotate(337 605 475)" d="M566,475 q18,-15 39,0 t39,0" stroke="#D99A2B" stroke-width="5" stroke-linecap="round" fill="none"/>
+<path transform="rotate(345 180 471)" d="M138,471 q20,-16 43,0 t43,0" stroke="#D99A2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path transform="rotate(357 570 469)" d="M530,469 q19,-16 40,0 t40,0" stroke="#D99A2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path transform="rotate(12 261 463)" d="M215,463 q21,-18 46,0 t46,0" stroke="#D99A2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path transform="rotate(216 420 457)" d="M373,457 q22,-18 47,0 t47,0" stroke="#D99A2B" stroke-width="7" stroke-linecap="round" fill="none"/>
+<path transform="rotate(308 358 456)" d="M313,456 q21,-17 45,0 t45,0" stroke="#D99A2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path transform="rotate(55 446 456)" d="M400,456 q21,-18 46,0 t46,0" stroke="#D99A2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path transform="rotate(352 596 453)" d="M553,453 q20,-17 44,0 t44,0" stroke="#D99A2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path transform="rotate(325 385 453)" d="M347,453 q17,-15 38,0 t38,0" stroke="#D99A2B" stroke-width="5" stroke-linecap="round" fill="none"/>
+<path transform="rotate(229 289 453)" d="M251,453 q17,-14 38,0 t38,0" stroke="#D99A2B" stroke-width="5" stroke-linecap="round" fill="none"/>
+<path transform="rotate(145 559 449)" d="M512,449 q22,-18 47,0 t47,0" stroke="#D99A2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path transform="rotate(216 361 445)" d="M316,445 q21,-17 45,0 t45,0" stroke="#D99A2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path transform="rotate(273 554 439)" d="M512,439 q19,-16 42,0 t42,0" stroke="#D99A2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path transform="rotate(61 210 439)" d="M162,439 q22,-19 48,0 t48,0" stroke="#D99A2B" stroke-width="7" stroke-linecap="round" fill="none"/>
+<path transform="rotate(109 485 437)" d="M440,437 q21,-17 45,0 t45,0" stroke="#D99A2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path transform="rotate(170 336 433)" d="M297,433 q18,-15 38,0 t38,0" stroke="#D99A2B" stroke-width="5" stroke-linecap="round" fill="none"/>
+<path transform="rotate(85 474 428)" d="M432,428 q19,-16 42,0 t42,0" stroke="#D99A2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path transform="rotate(60 565 427)" d="M515,427 q23,-19 50,0 t50,0" stroke="#D99A2B" stroke-width="7" stroke-linecap="round" fill="none"/>
+<path transform="rotate(37 255 425)" d="M212,425 q20,-17 43,0 t43,0" stroke="#D99A2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path transform="rotate(181 501 414)" d="M461,414 q18,-15 40,0 t40,0" stroke="#D99A2B" stroke-width="5" stroke-linecap="round" fill="none"/>
+<path transform="rotate(24 415 409)" d="M367,409 q22,-18 47,0 t47,0" stroke="#D99A2B" stroke-width="7" stroke-linecap="round" fill="none"/>
+<path transform="rotate(275 351 408)" d="M313,408 q18,-15 39,0 t39,0" stroke="#D99A2B" stroke-width="5" stroke-linecap="round" fill="none"/>
+<path transform="rotate(72 274 407)" d="M228,407 q21,-18 46,0 t46,0" stroke="#D99A2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path transform="rotate(110 480 395)" d="M430,395 q23,-19 50,0 t50,0" stroke="#D99A2B" stroke-width="7" stroke-linecap="round" fill="none"/>
+<path transform="rotate(239 367 386)" d="M325,386 q20,-16 43,0 t43,0" stroke="#D99A2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path transform="rotate(270 462 377)" d="M413,377 q22,-19 49,0 t49,0" stroke="#D99A2B" stroke-width="7" stroke-linecap="round" fill="none"/>
+<path transform="rotate(55 329 375)" d="M280,375 q23,-19 49,0 t49,0" stroke="#D99A2B" stroke-width="7" stroke-linecap="round" fill="none"/>
+<path transform="rotate(105 453 362)" d="M407,362 q21,-18 46,0 t46,0" stroke="#D99A2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+<ellipse cx="400" cy="648" rx="256" ry="23" fill="#000" opacity="0.18"/><path d="M130,470 Q152,640 400,644 Q648,640 670,470Z" fill="url(#brass)"/><path d="M211,546 Q400,598 589,546" stroke="#5E3D14" stroke-width="2" fill="none" opacity="0.5"/><path d="M252,575 Q400,616 548,575" stroke="#F6DFA8" stroke-width="1.5" fill="none" opacity="0.6"/><ellipse cx="400" cy="470" rx="270" ry="26" fill="none" stroke="url(#rim)" stroke-width="6"/>
+<text x="400" y="730" text-anchor="middle" font-family="Georgia, serif" font-size="34" letter-spacing="6" fill="#0A3328">BHUJIA</text>
+<text x="400" y="764" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" letter-spacing="5" fill="#96701F">PLACEHOLDER IMAGE</text>
+</svg>
