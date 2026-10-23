@@ -10,6 +10,7 @@ A full-stack Indian dry-fruits e-commerce site: storefront, cart, checkout with 
 > - `heritage-peacock-box.webp` (heritage section and the Gift Hampers category).
 > - `artisanal-portfolio.webp` and `poster.webp` (Artisanal Portfolio section).
 > - `src/app/icon.png`, `apple-icon.png` and `opengraph-image.jpg` are generated from the same artwork.
+> - `hamper/` holds the Build Your Own Hamper artwork: the hero, three step medallions and the gift-card frame. This is original vector art drawn by `scripts/hamper-art/gen.py` and rendered by `render.mjs`. The hero frames your own box photographs in gilded arches.
 >
 > **Design:** royal Indian luxury: emerald green, antique gold and ivory, Cormorant Garamond headings, palace-arch frames, gold ornaments and a damask pattern. The heritage story and its image are edited in Admin → Settings. Hero slides are edited in Admin → Homepage. Only mention export standards or certifications you actually hold.
 

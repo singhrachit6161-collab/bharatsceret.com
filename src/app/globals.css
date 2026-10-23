@@ -185,3 +185,10 @@ h3 {
   pointer-events: none;
   z-index: 1;
 }
+
+.text-gold-gradient {
+  background: linear-gradient(100deg, #b8893b 0%, #f6e7bd 45%, #dcc08a 60%, #b8893b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

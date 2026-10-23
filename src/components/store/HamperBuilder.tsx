@@ -1,6 +1,7 @@
 "use client";
 
-import { Check, Gift, Minus, Plus, Search, Sparkles } from "lucide-react";
+import { Check, Minus, Plus, Search } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useMemo, useState, useTransition } from "react";
 import { addHamperToCart } from "@/app/actions/cart";
@@ -30,6 +31,21 @@ export interface BuilderItem {
 }
 
 const STEPS = ["Choose your box", "Fill it with treasures", "Add a personal touch"] as const;
+const NUMERALS = ["I", "II", "III"] as const;
+
+function StepHeading({ index, id, title, note, aside }: { index: 0 | 1 | 2; id: string; title: string; note: string; aside?: React.ReactNode }) {
+  return (
+    <div className="flex flex-wrap items-center gap-4 border-b border-saffron/25 pb-5">
+      <Image src={`/brand/hamper/step-${index + 1}.webp`} alt="" width={72} height={72} className="h-16 w-16 shrink-0 drop-shadow-lg sm:h-[72px] sm:w-[72px]" />
+      <div className="min-w-0 flex-1">
+        <p className="eyebrow text-saffron-600">Step {NUMERALS[index]}</p>
+        <h2 id={id} className="font-display text-3xl leading-tight font-semibold text-walnut sm:text-4xl">{title}</h2>
+        <p className="mt-1 text-sm text-muted">{note}</p>
+      </div>
+      {aside}
+    </div>
+  );
+}
 
 export function HamperBuilder({
   boxes,
@@ -119,25 +135,26 @@ export function HamperBuilder({
   return (
     <div className="grid gap-10 pb-20 lg:grid-cols-[1fr_380px] lg:pb-0">
       <div className="min-w-0 space-y-12">
-        <ol className="flex flex-wrap gap-3" aria-label="Progress">
+        <ol className="grid grid-cols-3 gap-2 bg-royal p-2 shadow-xl shadow-walnut/20" aria-label="Progress">
           {STEPS.map((label, i) => (
             <li
               key={label}
               aria-current={i === step ? "step" : undefined}
-              className={`flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold tracking-[0.14em] uppercase ${
-                i < step ? "border-emerald bg-emerald text-gold-light" : i === step ? "border-saffron text-saffron-600" : "border-line text-muted"
+              className={`flex items-center justify-center gap-2 px-2 py-3 text-center text-[10px] font-semibold tracking-[0.16em] uppercase transition sm:text-[11px] ${
+                i === step ? "bg-gradient-to-r from-saffron to-gold-light text-walnut" : i < step ? "text-gold-light" : "text-ivory/45"
               }`}
             >
-              {i < step ? <Check size={13} aria-hidden="true" /> : <span>{i + 1}</span>} {label}
+              <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border font-display text-sm normal-case tracking-normal ${i === step ? "border-walnut/40" : "border-gold-light/40"}`}>
+                {i < step ? <Check size={12} aria-hidden="true" /> : NUMERALS[i]}
+              </span>
+              <span className="hidden sm:inline">{label}</span>
             </li>
           ))}
         </ol>
 
         {/* Step 1 */}
         <section aria-labelledby="step-box">
-          <h2 id="step-box" className="font-display text-3xl font-semibold text-walnut">
-            <span className="text-saffron">I.</span> Choose your box
-          </h2>
+          <StepHeading index={0} id="step-box" title="Choose your keepsake box" note="Each box is made to be kept long after the treasures inside are gone." />
           <div className="mt-6 grid gap-5 sm:grid-cols-3">
             {boxes.map((b) => {
               const active = b.variantId === boxId;
@@ -164,9 +181,12 @@ export function HamperBuilder({
                       </span>
                     )}
                   </span>
-                  <span className="mt-4 block font-display text-xl font-semibold text-walnut">{b.name}</span>
-                  <span className="block text-xs font-semibold tracking-[0.18em] text-saffron-600 uppercase">Holds {b.capacity} items</span>
-                  <span className="mt-1 block text-sm text-muted">{soldOut ? "Sold out" : formatINR(b.pricePaise)}</span>
+                  <span className="mt-4 block text-center">
+                    <span className="block text-[10px] font-semibold tracking-[0.28em] text-saffron-600 uppercase">Holds {b.capacity} treasures</span>
+                    <span className="mt-1 block font-display text-2xl font-semibold text-walnut">{b.name}</span>
+                    <span className="mx-auto mt-2 block h-px w-12 bg-gradient-to-r from-transparent via-saffron to-transparent" aria-hidden="true" />
+                    <span className="mt-2 block text-sm font-semibold text-walnut/80">{soldOut ? "Sold out" : formatINR(b.pricePaise)}</span>
+                  </span>
                 </button>
               );
             })}
@@ -175,14 +195,17 @@ export function HamperBuilder({
 
         {/* Step 2 */}
         <section aria-labelledby="step-fill" className={box ? "" : "pointer-events-none opacity-40"}>
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <h2 id="step-fill" className="font-display text-3xl font-semibold text-walnut">
-              <span className="text-saffron">II.</span> Fill it with treasures
-            </h2>
-            <p className="text-sm font-semibold text-walnut" aria-live="polite">
-              {units} / {capacity || "–"} items
-            </p>
-          </div>
+          <StepHeading
+            index={1}
+            id="step-fill"
+            title="Fill it with treasures"
+            note="Dry fruits, spices, teas and pantry favourites from across Bharat."
+            aside={
+              <p className="border border-saffron/40 bg-white/60 px-4 py-2 text-center font-display text-2xl font-semibold text-walnut" aria-live="polite">
+                {units}<span className="text-base text-muted"> / {capacity || "–"}</span>
+              </p>
+            }
+          />
           <div className="mt-5 flex flex-wrap items-center gap-3">
             <div className="no-scrollbar flex max-w-full min-w-0 gap-2 overflow-x-auto" role="tablist" aria-label="Collections">
               {collections.map((c) => (
@@ -249,9 +272,7 @@ export function HamperBuilder({
 
         {/* Step 3 */}
         <section aria-labelledby="step-note" className={box ? "" : "pointer-events-none opacity-40"}>
-          <h2 id="step-note" className="font-display text-3xl font-semibold text-walnut">
-            <span className="text-saffron">III.</span> Add a personal touch
-          </h2>
+          <StepHeading index={2} id="step-note" title="Add a personal touch" note="A few words from you, on a keepsake card inside the box." />
           <div className="mt-6 grid gap-6 md:grid-cols-2">
             <div className="space-y-4">
               <div>
@@ -265,31 +286,38 @@ export function HamperBuilder({
               </div>
               <p className="text-xs text-muted">Your message is included on a card inside the box. Prices are never shown on the card.</p>
             </div>
-            <div className="bg-royal gold-frame flex min-h-56 flex-col items-center justify-center p-8 text-center text-ivory">
-              <Gift size={22} className="relative z-10 text-gold-light" aria-hidden="true" />
-              <p className="relative z-10 mt-3 eyebrow text-gold-light">{recipient.trim() ? `For ${recipient.trim()}` : "A gift for you"}</p>
-              <p className="relative z-10 mt-4 font-display text-xl leading-relaxed whitespace-pre-line italic">
-                {message.trim() || "Your message will appear here."}
-              </p>
-              <p className="relative z-10 mt-5 text-[10px] tracking-[0.3em] text-ivory/50 uppercase">Bharat Secrets</p>
-            </div>
+            <figure className="relative aspect-[25/16] w-full -rotate-1 shadow-2xl shadow-walnut/25 transition hover:rotate-0" aria-label="Card preview">
+              <Image src="/brand/hamper/gift-card.webp" alt="" fill sizes="(min-width: 768px) 30vw, 90vw" className="object-cover" />
+              <div className="absolute inset-0 flex flex-col items-center justify-center px-[14%] pt-[6%] text-center text-walnut">
+                <p className="eyebrow text-saffron-600">{recipient.trim() ? `For ${recipient.trim()}` : "A gift for you"}</p>
+                <p className="mt-3 line-clamp-5 font-display text-lg leading-snug whitespace-pre-line italic sm:text-xl">
+                  {message.trim() || "Your message will appear here."}
+                </p>
+                <p className="mt-3 text-[9px] tracking-[0.34em] text-saffron-600/80 uppercase">Bharat Secrets</p>
+              </div>
+            </figure>
           </div>
         </section>
       </div>
 
       {/* Live preview */}
       <aside className="lg:sticky lg:top-56 lg:self-start" aria-labelledby="preview-title">
-        <div className="bg-royal p-6 text-ivory shadow-2xl shadow-walnut/30">
+        <div className="bg-royal gold-frame p-6 text-ivory shadow-2xl shadow-walnut/30">
           <p className="eyebrow text-gold-light">Your hamper</p>
           <h2 id="preview-title" className="mt-1 font-display text-2xl font-semibold">{box ? box.name : "Choose a box"}</h2>
           {box && (
             <>
-              <div className="mt-5 grid grid-cols-3 gap-2" aria-label={`${units} of ${capacity} slots filled`}>
+              <div className="mt-5 grid grid-cols-3 gap-2 border border-gold-light/40 bg-black/25 p-2.5 shadow-[inset_0_0_24px_rgba(0,0,0,0.5)]" aria-label={`${units} of ${capacity} slots filled`}>
                 {Array.from({ length: capacity }, (_, k) => {
                   const it = slots[k];
                   return (
-                    <div key={k} className={`relative aspect-square overflow-hidden border ${it ? "border-gold-light/60 bg-ivory" : "border-dashed border-gold-light/30"}`}>
-                      {it ? <ProductImage src={it.imageUrl} alt={it.name} sizes="100px" /> : <span className="absolute inset-0 flex items-center justify-center text-gold-light/30"><Sparkles size={16} aria-hidden="true" /></span>}
+                    <div
+                      key={k}
+                      className={`relative aspect-square overflow-hidden rounded-sm border ${
+                        it ? "border-gold-light/70 bg-ivory shadow-md shadow-black/40" : "border-gold-light/20 bg-[radial-gradient(circle_at_50%_35%,#14634b,#06231b)] shadow-[inset_0_3px_8px_rgba(0,0,0,0.55)]"
+                      }`}
+                    >
+                      {it ? <ProductImage src={it.imageUrl} alt={it.name} sizes="100px" /> : <span className="absolute inset-0 flex items-center justify-center font-display text-sm text-gold-light/30">{k + 1}</span>}
                     </div>
                   );
                 })}
