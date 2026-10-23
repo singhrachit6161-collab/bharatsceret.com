@@ -11,7 +11,11 @@ export const serverEnv = {
   emailProviderApiKey: process.env.EMAIL_PROVIDER_API_KEY ?? "",
   emailFrom: process.env.EMAIL_FROM ?? "",
   shippingProvider: process.env.SHIPPING_PROVIDER ?? "manual",
-  shippingProviderApiKey: process.env.SHIPPING_PROVIDER_API_KEY ?? "",
+  shiprocketEmail: process.env.SHIPROCKET_EMAIL ?? "",
+  shiprocketPassword: process.env.SHIPROCKET_PASSWORD ?? "",
+  shiprocketPickupLocation: process.env.SHIPROCKET_PICKUP_LOCATION ?? "",
+  shiprocketPickupPincode: process.env.SHIPROCKET_PICKUP_PINCODE ?? "",
+  shiprocketWebhookToken: process.env.SHIPROCKET_WEBHOOK_TOKEN ?? "",
 };
 
 export function isRazorpayConfigured(): boolean {

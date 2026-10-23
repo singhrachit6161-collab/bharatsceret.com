@@ -26,6 +26,10 @@ const productSchema = z.object({
   country_of_origin: opt(80),
   manufacturer_info: opt(1000),
   fssai_license: z.string().trim().max(20).regex(/^(\d{14})?$/, "FSSAI licence number must be 14 digits").transform((v) => v || null),
+  hsn_code: z.string().trim().regex(/^(\d{4,8})?$/, "HSN code must be 4 to 8 digits").transform((v) => v || null),
+  gst_rate: z
+    .union([z.literal(""), z.enum(["0", "0.25", "3", "5", "12", "18", "28", "40"])])
+    .transform((v) => (v === "" ? null : Number(v))),
   status: z.enum(["draft", "active", "archived"]),
   published_at: z.string().trim().max(30),
   featured_rank: z.coerce.number().int().min(0).max(9999),

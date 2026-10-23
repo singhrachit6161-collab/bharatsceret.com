@@ -17,11 +17,16 @@ export type NotificationKind =
   | "tracking_update"
   | "order_delivered"
   | "order_cancelled"
-  | "refund_update";
+  | "refund_update"
+  | "return_update"
+  | "back_in_stock";
 
 export interface NotificationPayload {
   to: string | null;
-  orderNumber: string;
+  /** Required for order notifications; omitted for product alerts. */
+  orderNumber?: string;
+  productName?: string;
+  productUrl?: string;
   totalPaise?: number;
   trackingUrl?: string | null;
   note?: string | null;
@@ -36,16 +41,18 @@ const SUBJECTS: Record<NotificationKind, (p: NotificationPayload) => string> = {
   order_delivered: (p) => `Order ${p.orderNumber} delivered`,
   order_cancelled: (p) => `Order ${p.orderNumber} cancelled`,
   refund_update: (p) => `Refund update for order ${p.orderNumber}`,
+  return_update: (p) => `Return request update for order ${p.orderNumber}`,
+  back_in_stock: (p) => `${p.productName} is back in stock`,
 };
 
 function body(kind: NotificationKind, p: NotificationPayload): string {
-  const link = `${publicEnv.siteUrl}/account/orders/${encodeURIComponent(p.orderNumber)}`;
+  const link = p.productUrl ?? `${publicEnv.siteUrl}/account/orders/${encodeURIComponent(p.orderNumber ?? "")}`;
   const lines = [
     SUBJECTS[kind](p) + ".",
     p.totalPaise !== undefined ? `Order total: ${formatINR(p.totalPaise)}` : "",
     p.trackingUrl ? `Track your shipment: ${p.trackingUrl}` : "",
     p.note ?? "",
-    `View your order: ${link}`,
+    p.productUrl ? `Shop now: ${link}` : `View your order: ${link}`,
     "",
     "— Bharat Secrets",
   ];
@@ -59,8 +66,9 @@ function mask(email: string) {
 
 export async function notify(kind: NotificationKind, payload: NotificationPayload): Promise<{ sent: boolean }> {
   if (!payload.to) return { sent: false };
+  const ref = payload.orderNumber ?? payload.productName ?? "";
   if (!serverEnv.emailProviderApiKey || !serverEnv.emailFrom) {
-    console.info(`[notify:disabled] NOT sent "${kind}" for ${payload.orderNumber} to ${mask(payload.to)} (email provider not configured)`);
+    console.info(`[notify:disabled] NOT sent "${kind}" for ${ref} to ${mask(payload.to)} (email provider not configured)`);
     return { sent: false };
   }
   try {
@@ -70,12 +78,12 @@ export async function notify(kind: NotificationKind, payload: NotificationPayloa
       body: JSON.stringify({ from: serverEnv.emailFrom, to: [payload.to], subject: SUBJECTS[kind](payload), text: body(kind, payload) }),
     });
     if (!res.ok) {
-      console.error(`[notify] provider rejected "${kind}" for ${payload.orderNumber}: HTTP ${res.status}`);
+      console.error(`[notify] provider rejected "${kind}" for ${ref}: HTTP ${res.status}`);
       return { sent: false };
     }
     return { sent: true };
   } catch {
-    console.error(`[notify] failed to send "${kind}" for ${payload.orderNumber}`);
+    console.error(`[notify] failed to send "${kind}" for ${ref}`);
     return { sent: false };
   }
 }

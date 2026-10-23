@@ -18,6 +18,8 @@ export interface ProductRow {
   country_of_origin: string | null;
   manufacturer_info: string | null;
   fssai_license: string | null;
+  hsn_code: string | null;
+  gst_rate: number | null;
   status: "draft" | "active" | "archived";
   published_at: string | null;
   is_featured: boolean;
@@ -69,6 +71,23 @@ export function ProductForm({ product, categories, selected }: { product?: Produ
         <Field label="Shelf life / best before" name="shelf_life" defaultValue={product?.shelf_life} hint="e.g. Best before 6 months from packing" />
         <Field label="Country of origin" name="country_of_origin" defaultValue={product?.country_of_origin} />
         <Field label="FSSAI licence no." name="fssai_license" defaultValue={product?.fssai_license} inputMode="numeric" maxLength={14} pattern="\d{14}" />
+      </section>
+
+      <section className="card grid gap-4 p-5 sm:grid-cols-2">
+        <div className="sm:col-span-2">
+          <h2 className="font-semibold text-walnut">Tax (GST)</h2>
+          <p className="text-xs text-muted">Used on GST tax invoices. Prices are treated as GST-inclusive. Confirm the HSN code and rate with your accountant.</p>
+        </div>
+        <Field label="HSN code" name="hsn_code" defaultValue={product?.hsn_code} inputMode="numeric" maxLength={8} pattern="\d{4,8}" hint="4 to 8 digits" />
+        <div>
+          <label htmlFor="gst_rate" className="label">GST rate</label>
+          <select id="gst_rate" name="gst_rate" defaultValue={product?.gst_rate === null || product?.gst_rate === undefined ? "" : String(Number(product.gst_rate))} className="input">
+            <option value="">Not set</option>
+            {["0", "0.25", "3", "5", "12", "18", "28", "40"].map((r) => (
+              <option key={r} value={r}>{r}%</option>
+            ))}
+          </select>
+        </div>
       </section>
 
       <section className="card grid gap-4 p-5 sm:grid-cols-2">

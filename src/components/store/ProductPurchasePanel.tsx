@@ -5,8 +5,9 @@ import { useState } from "react";
 import { Price } from "@/components/ui/Price";
 import type { Variant } from "@/lib/types";
 import { AddToCartButton } from "./AddToCartButton";
+import { StockAlertButton } from "./StockAlertButton";
 
-export function ProductPurchasePanel({ variants }: { variants: Variant[] }) {
+export function ProductPurchasePanel({ variants, productSlug }: { variants: Variant[]; productSlug: string }) {
   const firstAvailable = variants.find((v) => v.available > 0) ?? variants[0];
   const [selectedId, setSelectedId] = useState(firstAvailable?.id);
   const [qty, setQty] = useState(1);
@@ -88,6 +89,7 @@ export function ProductPurchasePanel({ variants }: { variants: Variant[] }) {
         <AddToCartButton variantId={selected.id} quantity={quantity} disabled={!inStock} />
         {inStock && <AddToCartButton variantId={selected.id} quantity={quantity} buyNow />}
       </div>
+      {!inStock && <StockAlertButton key={selected.id} variantId={selected.id} returnTo={`/product/${productSlug}`} />}
     </div>
   );
 }

@@ -9,6 +9,7 @@ export const ORDER_DETAIL_SELECT = `
   order_items (id, product_id, variant_id, product_name, variant_label, sku, image_url, unit_price_paise, quantity, line_total_paise),
   order_status_history (id, from_status, to_status, note, created_at),
   order_bundles (id, position, box_name, box_label, capacity, recipient_name, gift_message, contents),
+  return_requests (id, reason, details, items, status, resolution_note, created_at, decided_at),
   shipments (id, carrier, tracking_number, tracking_url, status, shipped_at, delivered_at,
     shipment_events (id, status, description, location, occurred_at))`;
 

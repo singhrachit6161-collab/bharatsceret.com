@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { adminContext, audit, denied, formBool, formString, refreshStorefront, type AdminFormState } from "@/lib/admin";
 import { ADMIN_ROLES } from "@/lib/auth";
+import { GST_STATE_CODES, GSTIN_PATTERN } from "@/lib/invoice";
 import { rupeesToPaise } from "@/lib/money";
 
 const uuid = z.uuid();
@@ -271,6 +272,35 @@ const SETTINGS_PARSERS: Record<string, (fd: FormData) => { value?: unknown; erro
     if (!Number.isInteger(max) || max < 0 || max > 200) return { error: "Message length must be 0–200 characters." };
     if (!slugs.length) return { error: "Choose at least one eligible collection." };
     return { value: { enabled: formBool(fd, "enabled"), min_items: min, message_max: max, eligible_category_slugs: slugs } };
+  },
+  business: (fd) => {
+    const registered = formBool(fd, "gst_registered");
+    const gstin = formString(fd, "gstin").toUpperCase().replace(/\s+/g, "");
+    const state = formString(fd, "state");
+    const prefix = formString(fd, "invoice_prefix").toUpperCase();
+    if (gstin && !GSTIN_PATTERN.test(gstin)) return { error: "GSTIN must be 15 characters, e.g. 27ABCDE1234F1Z5." };
+    if (registered && !gstin) return { error: "Enter your GSTIN, or untick GST registered." };
+    if (state && !(state in GST_STATE_CODES)) return { error: "Choose a valid state." };
+    if (registered && gstin && state && GST_STATE_CODES[state as keyof typeof GST_STATE_CODES] !== gstin.slice(0, 2)) {
+      return { error: "The state does not match the first two digits of the GSTIN." };
+    }
+    if (!/^[A-Z0-9]{1,6}$/.test(prefix)) return { error: "Invoice prefix: 1–6 letters or digits." };
+    return {
+      value: {
+        gst_registered: registered,
+        legal_name: formString(fd, "legal_name").slice(0, 160),
+        gstin,
+        address: formString(fd, "address").slice(0, 500),
+        state,
+        state_code: state ? GST_STATE_CODES[state as keyof typeof GST_STATE_CODES] : "",
+        invoice_prefix: prefix,
+      },
+    };
+  },
+  returns: (fd) => {
+    const days = Number(formString(fd, "window_days"));
+    if (!Number.isInteger(days) || days < 1 || days > 60) return { error: "Return window must be 1–60 days." };
+    return { value: { enabled: formBool(fd, "enabled"), window_days: days, policy_note: formString(fd, "policy_note").slice(0, 600) } };
   },
   trust_strip: (fd) => {
     const items = [0, 1, 2, 3]

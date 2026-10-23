@@ -192,3 +192,21 @@ h3 {
   background-clip: text;
   color: transparent;
 }
+
+/* Print only the invoice document on invoice pages. */
+@media print {
+  body:has(#invoice-print) * {
+    visibility: hidden;
+  }
+  body:has(#invoice-print) #invoice-print,
+  body:has(#invoice-print) #invoice-print * {
+    visibility: visible;
+  }
+  body:has(#invoice-print) #invoice-print {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    max-width: none;
+    border: 0;
+  }
+}

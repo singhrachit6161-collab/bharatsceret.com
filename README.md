@@ -24,7 +24,7 @@ A full-stack Indian dry-fruits e-commerce site: storefront, cart, checkout with 
 - [Testing](#testing)
 - [Deployment](#deployment)
 - [What is done / what you still need to do](#status)
-- Guides: [Admin setup](docs/ADMIN_SETUP.md) · [Payments](docs/PAYMENTS.md) · [Inventory](docs/INVENTORY.md) · [Shipping](docs/SHIPPING.md) · [Security](docs/SECURITY.md)
+- Guides: [Admin setup](docs/ADMIN_SETUP.md) · [Payments](docs/PAYMENTS.md) · [Inventory](docs/INVENTORY.md) · [Shipping](docs/SHIPPING.md) · [Invoices, returns & stock alerts](docs/INVOICES_RETURNS.md) · [Security](docs/SECURITY.md)
 
 ## Quick start
 
@@ -122,6 +122,7 @@ Gifting         Festivals · Weddings · Corporate · Build Your Own · Luxury
 | 7 | `20261021000007_brand_showcase.sql` | "Artisanal Portfolio" homepage section key |
 | 8 | `20261021000008_category_tree.sql` | Nested catalogue: listings roll up to parent collections, `regions` homepage section, cycle guard |
 | 9 | `20261021000009_hamper_builder.sql` | Hamper boxes (`hamper_capacity`), `order_bundles` snapshots, `place_order` with hamper validation, listing hides boxes |
+| 10 | `20261021000010_commerce_essentials.sql` | GST invoices (numbered per financial year, immutable), return requests, back-in-stock alerts, Shiprocket shipment fields and carrier-event function |
 
 **How to apply them:**
 - **Supabase CLI:** `supabase link --project-ref <ref>`, then `supabase db push`.
@@ -197,9 +198,19 @@ The in-memory rate limiter protects a single instance only. For multi-instance o
 
 **Inventory:** reserve → commit → release, cancellation restock, return restock, and logged adjustments.
 
+**After-sales:**
+- **GST invoices:** a tax invoice, or a bill of supply if you are not registered. Customers can print it or save it as PDF.
+- **Returns:** customers report problems from their order within the return window, and staff review each request.
+- **Back-in-stock alerts:** customers can ask to be emailed when a sold-out pack size returns.
+
+See [docs/INVOICES_RETURNS.md](docs/INVOICES_RETURNS.md).
+
+**Shipping:** manual tracking, or **Shiprocket**, which covers live PIN serviceability, AWB, pickup and label booking from the order page, and tracking webhooks that move orders forward automatically. See [docs/SHIPPING.md](docs/SHIPPING.md).
+
 **Admin:**
 - Dashboard
-- Orders: fulfilment, shipments, cancel, refund, COD collection, restock
+- Orders: fulfilment, shipments (manual or Shiprocket booking), invoices, cancel, refund, COD collection, restock
+- Returns
 - Products: variants, image upload/reorder
 - Categories
 - Inventory
@@ -215,7 +226,7 @@ The in-memory rate limiter protects a single instance only. For multi-instance o
 
 **Security:** RLS on every table, role checks on every admin action, and no secrets in client code.
 
-**Tests:** 78 unit and database tests. The database tests include concurrent last-unit purchases, duplicate confirmations, coupon limits under concurrency, refunds, RLS, and hamper validation (capacity, boxes without contents, and the last box in stock under concurrency).
+**Tests:** 110 unit and database tests, including invoice numbering and tax maths, return rules, stock alerts and carrier-event idempotency. The database tests include concurrent last-unit purchases, duplicate confirmations, coupon limits under concurrency, refunds, RLS, and hamper validation (capacity, boxes without contents, and the last box in stock under concurrency).
 
 ### Requires your credentials or action before launch
 
@@ -225,7 +236,8 @@ The in-memory rate limiter protects a single instance only. For multi-instance o
   - Enable **automatic capture**.
   - Online payments were verified locally only with simulated, signed webhooks. A real test-mode checkout still needs your keys.
 - **Email provider:** optional. Without it, notifications are **logged as not sent**, never claimed as sent. Auth emails (confirmation and password reset) are sent by Supabase Auth, so configure SMTP in Supabase for production.
-- **Shipping:** only the manual provider exists. Staff enter the carrier and tracking details. Shiprocket or another carrier API is **not** integrated yet (see [docs/SHIPPING.md](docs/SHIPPING.md)).
+- **Shipping:** Shiprocket is integrated but untested against a real account. Add your API user and pickup location, set the webhook, and run a test booking (especially a COD order) before going live. See [docs/SHIPPING.md](docs/SHIPPING.md). Without it, the manual provider works as before.
+- **GST:** enter your GSTIN and business details, set each product's HSN code and GST rate, and have your accountant confirm them (see [docs/INVOICES_RETURNS.md](docs/INVOICES_RETURNS.md)).
 - **Content and compliance:** this is the blocking item for launch.
   - Replace the sample products, prices and placeholder images.
   - Fill in the labelling fields: ingredients, manufacturer, FSSAI licence and country of origin. The admin panel will not publish a product without them.

@@ -1,3 +1,4 @@
+import type { ReturnRequest } from "@/lib/returns";
 export interface Category {
   id: string;
   parent_id: string | null;
@@ -191,6 +192,7 @@ export interface OrderDetail extends OrderSummary {
   order_status_history: { id: number; from_status: OrderStatus | null; to_status: OrderStatus; note: string | null; created_at: string }[];
   shipments: Shipment[];
   order_bundles?: OrderBundle[];
+  return_requests?: ReturnRequest[];
 }
 
 export interface OrderBundle {

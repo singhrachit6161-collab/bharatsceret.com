@@ -1,15 +1,19 @@
 import { randomUUID } from "node:crypto";
 import { notFound } from "next/navigation";
-import { adminCancelOrder, initiateRefund, markCodCollected, restockReturn, saveShipment, updateOrderStatus } from "@/app/admin/actions/orders";
+import Link from "next/link";
+import { adminCancelOrder, bookShiprocket, initiateRefund, markCodCollected, restockReturn, saveShipment, updateOrderStatus, updateReturn } from "@/app/admin/actions/orders";
 import { ActionForm } from "@/components/admin/ActionForm";
 import { AdminCrumbs, PageHeader, Table, Td, Th } from "@/components/admin/ui";
 import { OrderDetailView } from "@/components/store/OrderDetailView";
+import { ReturnRequestsList } from "@/components/store/ReturnRequestsList";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { ADMIN_ROLES, hasAnyRole, requireStaffPage } from "@/lib/auth";
+import { invoiceReady } from "@/lib/data/invoices";
 import { ORDER_DETAIL_SELECT } from "@/lib/data/orders";
 import { formatINR, paiseToRupeesString } from "@/lib/money";
 import { ORDER_STATUS_LABELS } from "@/lib/order-status";
 import { SHIPMENT_STATUS_LABELS } from "@/lib/shipping";
+import { isShiprocketConfigured } from "@/lib/shipping/shiprocket";
 import { createClient } from "@/lib/supabase/server";
 import type { OrderDetail, OrderStatus } from "@/lib/types";
 
@@ -47,12 +51,31 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
   const cancellable = ["pending_payment", "confirmed", "processing", "packed", "on_hold"].includes(order.status);
   const nextStatuses = NEXT_STATUS[order.status] ?? [];
   const shipment = order.shipments[0];
+  const [{ data: shipMeta }, { data: weights }] = await Promise.all([
+    supabase.from("shipments").select("id, provider, label_url").eq("order_id", order.id),
+    supabase.from("order_items").select("quantity, product_variants (weight_grams)").eq("order_id", order.id),
+  ]);
+  const labels = (shipMeta ?? []) as { id: string; provider: string; label_url: string | null }[];
+  const grams = ((weights ?? []) as unknown as { quantity: number; product_variants: { weight_grams: number | null } | null }[]).reduce(
+    (n, i) => n + (i.product_variants?.weight_grams ?? 250) * i.quantity,
+    0,
+  );
+  const suggestedKg = Math.max(0.5, Math.ceil((grams * 1.15) / 100) / 10); // +15% for packaging
+  const canBook =
+    isShiprocketConfigured() &&
+    ["confirmed", "processing", "packed"].includes(order.status) &&
+    !order.shipments.some((s) => s.tracking_number && labels.find((l) => l.id === s.id)?.provider === "shiprocket");
+  const returns = order.return_requests ?? [];
 
   return (
     <div className="space-y-6">
       <div>
         <AdminCrumbs items={[{ name: "Orders", href: "/admin/orders" }, { name: order.order_number }]} />
-        <PageHeader title={`Order ${order.order_number}`} description={`${order.contact_email ?? "no email"} · ${order.contact_phone}`} />
+        <PageHeader
+          title={`Order ${order.order_number}`}
+          description={`${order.contact_email ?? "no email"} · ${order.contact_phone}`}
+          actions={invoiceReady(order) ? <Link href={`/admin/orders/${order.id}/invoice`} className="btn-outline py-2">Invoice</Link> : undefined}
+        />
       </div>
       {order.status === "on_hold" && (
         <p className="rounded-md bg-saffron/15 p-3 text-sm text-saffron-600">
@@ -67,6 +90,35 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
       <div className="grid gap-6 xl:grid-cols-[1fr_380px]">
         <div className="space-y-6">
           <OrderDetailView order={order} />
+          {labels.some((l) => l.label_url) && (
+            <p className="card p-3 text-sm">
+              Shipping label:{" "}
+              {labels.filter((l) => l.label_url).map((l) => (
+                <a key={l.id} href={l.label_url!} target="_blank" rel="noopener noreferrer" className="font-semibold text-walnut underline">Download label (PDF)</a>
+              ))}
+            </p>
+          )}
+          <ReturnRequestsList
+            requests={returns}
+            items={order.order_items}
+            actions={(r) =>
+              ["requested", "approved", "received"].includes(r.status) ? (
+                <ActionForm action={updateReturn} submitLabel="Update return" className="flex flex-wrap items-end gap-2">
+                  <input type="hidden" name="return_id" value={r.id} />
+                  <input type="hidden" name="order_id" value={order.id} />
+                  <select name="status" className="input w-auto" aria-label="New return status">
+                    {(r.status === "requested" ? ["approved", "rejected"] : r.status === "approved" ? ["received", "refunded", "closed"] : ["refunded", "closed"]).map((st) => (
+                      <option key={st} value={st}>{st[0].toUpperCase() + st.slice(1)}</option>
+                    ))}
+                  </select>
+                  <input name="note" placeholder="Message to customer (required to reject/close)" maxLength={1000} className="input min-w-64 flex-1" />
+                </ActionForm>
+              ) : null
+            }
+          />
+          {returns.some((r) => ["approved", "received"].includes(r.status)) && (
+            <p className="text-xs text-muted">Refund the customer with the Refund panel (online payments) or by bank transfer for COD orders, then mark the return as refunded. Use Return restock only for items fit to resell.</p>
+          )}
 
           <section>
             <h2 className="mb-2 font-semibold text-walnut">Payments</h2>
@@ -144,6 +196,24 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
                 <input type="hidden" name="order_id" value={order.id} />
                 <input type="hidden" name="status" value="confirmed" />
                 <input name="note" placeholder="Note" className="input" />
+              </ActionForm>
+            </div>
+          )}
+
+          {canBook && (
+            <div className="card border-emerald/30 p-4">
+              <h2 className="mb-1 font-semibold text-walnut">Ship with Shiprocket</h2>
+              <p className="mb-3 text-xs text-muted">Creates the Shiprocket order, assigns a courier by your Shiprocket priority, schedules pickup and fetches the label.</p>
+              <ActionForm action={bookShiprocket} submitLabel="Book shipment" pendingLabel="Contacting Shiprocket…">
+                <input type="hidden" name="order_id" value={order.id} />
+                <label className="label" htmlFor="sr-weight">Package weight (kg)</label>
+                <input id="sr-weight" name="weight_kg" defaultValue={suggestedKg} inputMode="decimal" required className="input" />
+                <div className="grid grid-cols-3 gap-2">
+                  <input name="length" defaultValue={20} aria-label="Length (cm)" title="Length (cm)" inputMode="numeric" required className="input" />
+                  <input name="breadth" defaultValue={15} aria-label="Breadth (cm)" title="Breadth (cm)" inputMode="numeric" required className="input" />
+                  <input name="height" defaultValue={10} aria-label="Height (cm)" title="Height (cm)" inputMode="numeric" required className="input" />
+                </div>
+                <p className="text-xs text-muted">Dimensions in cm (L × B × H). Weight suggested from pack sizes + 15% packaging.</p>
               </ActionForm>
             </div>
           )}

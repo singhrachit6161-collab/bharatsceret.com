@@ -1,12 +1,14 @@
 import { timingSafeEqual } from "node:crypto";
 import { NextResponse, type NextRequest } from "next/server";
 import { isServiceRoleConfigured, serverEnv } from "@/lib/server-env";
+import { sendStockAlerts } from "@/lib/stock-alerts";
 import { createServiceClient } from "@/lib/supabase/server";
 
 /**
  * Scheduled maintenance (call every 5 minutes with `Authorization: Bearer $CRON_SECRET`):
  *  - expires unpaid online orders and releases their stock reservations
  *  - refreshes product popularity scores
+ *  - emails back-in-stock alerts
  */
 function authorized(request: NextRequest): boolean {
   const secret = serverEnv.cronSecret;
@@ -26,7 +28,8 @@ async function run(request: NextRequest) {
   if (expired.error || popularity.error) {
     return NextResponse.json({ error: "maintenance failed" }, { status: 500 });
   }
-  return NextResponse.json({ expiredOrders: expired.data, popularityUpdated: popularity.data });
+  const stockAlerts = await sendStockAlerts().catch(() => ({ sent: 0, pending: 0, skipped: "failed" }));
+  return NextResponse.json({ expiredOrders: expired.data, popularityUpdated: popularity.data, stockAlerts });
 }
 
 export const GET = run;

@@ -1,6 +1,7 @@
 import "server-only";
 import { cache } from "react";
 import { isSupabaseConfigured } from "@/lib/env";
+import type { BusinessSettings } from "@/lib/invoice";
 import type { CodRules, ShippingRules } from "@/lib/pricing";
 import { createClient } from "@/lib/supabase/server";
 
@@ -28,6 +29,8 @@ export interface StoreSettings {
   social: { instagram: string; facebook: string; youtube: string; x: string };
   trust_strip: { icon: string; title: string; text: string }[];
   hamper: { enabled: boolean; min_items: number; eligible_category_slugs: string[]; message_max: number };
+  business: BusinessSettings;
+  returns: { enabled: boolean; window_days: number; policy_note: string };
   heritage: {
     enabled: boolean;
     eyebrow: string;
@@ -69,6 +72,8 @@ export const DEFAULT_SETTINGS: StoreSettings = {
     eligible_category_slugs: ["dry-fruits", "flavour-lab", "spices", "snacks", "pantry", "tea-beverages"],
     message_max: 200,
   },
+  business: { gst_registered: false, legal_name: "", gstin: "", address: "", state: "", state_code: "", invoice_prefix: "BS" },
+  returns: { enabled: false, window_days: 7, policy_note: "" },
   heritage: { enabled: false, eyebrow: "", title: "", body: "", cta_label: "", cta_url: "/about", pillars: [] },
 };
 

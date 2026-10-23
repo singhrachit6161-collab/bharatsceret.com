@@ -8,7 +8,9 @@ import { friendlyError } from "@/lib/errors";
 import { rupeesToPaise } from "@/lib/money";
 import { notify } from "@/lib/notifications";
 import { getRazorpay } from "@/lib/razorpay";
+import { ensureInvoice } from "@/lib/data/invoices";
 import { isRazorpayConfigured, isServiceRoleConfigured } from "@/lib/server-env";
+import { assignAwb, createShiprocketOrder, generateLabel, isShiprocketConfigured, schedulePickup, ShiprocketError, trackingUrl } from "@/lib/shipping/shiprocket";
 import { createServiceClient } from "@/lib/supabase/server";
 
 const uuid = z.uuid();
@@ -116,6 +118,9 @@ export async function saveShipment(_prev: AdminFormState, fd: FormData): Promise
         const { error } = await db.rpc("update_order_status", { p_order_id: s.order_id, p_to: st, p_note: `Shipment ${s.status}` });
         if (error) break;
       }
+    }
+    if (["shipped", "in_transit", "out_for_delivery", "delivered"].includes(s.status)) {
+      await ensureInvoice(s.order_id, user.id).catch(() => null);
     }
     const c = await orderContact(db, s.order_id);
     if (c) {
@@ -229,6 +234,151 @@ export async function initiateRefund(_prev: AdminFormState, fd: FormData): Promi
       return { ok: false, message: `Razorpay rejected the refund: ${msg}` };
     }
   } catch (e) {
+    return denied(e);
+  }
+}
+
+const RETURN_UPDATE_NOTES: Record<string, string> = {
+  approved: "Your return request has been approved. We will contact you about the next steps.",
+  rejected: "We could not approve your return request.",
+  received: "We have received the returned item(s).",
+  refunded: "Your return has been refunded.",
+  closed: "Your return request has been closed.",
+};
+
+export async function updateReturn(_prev: AdminFormState, fd: FormData): Promise<AdminFormState> {
+  try {
+    const { db } = await adminContext();
+    const returnId = formString(fd, "return_id");
+    const orderId = formString(fd, "order_id");
+    const status = z.enum(["approved", "rejected", "received", "refunded", "closed"]).safeParse(formString(fd, "status"));
+    const note = formString(fd, "note");
+    if (!uuid.safeParse(returnId).success || !uuid.safeParse(orderId).success || !status.success) return { ok: false, message: "Invalid request." };
+    const { error } = await db.rpc("update_return_request", { p_return_id: returnId, p_status: status.data, p_note: note || null });
+    if (error) return { ok: false, message: friendlyError(error) };
+    const c = await orderContact(db, orderId);
+    if (c) {
+      await notify("return_update", {
+        to: c.contact_email,
+        orderNumber: c.order_number,
+        note: [RETURN_UPDATE_NOTES[status.data], note].filter(Boolean).join(" "),
+      });
+    }
+    revalidatePath(`/admin/orders/${orderId}`);
+    revalidatePath("/admin/returns");
+    return { ok: true, message: "Return updated." };
+  } catch (e) {
+    return denied(e);
+  }
+}
+
+const bookingSchema = z.object({
+  order_id: z.uuid(),
+  weight_kg: z.coerce.number().min(0.1).max(30),
+  length: z.coerce.number().int().min(1).max(150),
+  breadth: z.coerce.number().int().min(1).max(150),
+  height: z.coerce.number().int().min(1).max(150),
+});
+
+type BookingOrder = {
+  id: string;
+  order_number: string;
+  created_at: string;
+  status: string;
+  payment_method: "razorpay" | "cod";
+  shipping_address: Parameters<typeof createShiprocketOrder>[0]["address"];
+  contact_email: string | null;
+  discount_paise: number;
+  shipping_paise: number;
+  cod_fee_paise: number;
+  order_items: { product_name: string; variant_label: string; sku: string; quantity: number; unit_price_paise: number }[];
+  shipments: { id: string; provider: string; provider_shipment_id: string | null; tracking_number: string | null }[];
+};
+
+/**
+ * Book the order with Shiprocket: create the Shiprocket order, assign an AWB
+ * (courier chosen by your Shiprocket courier priority), schedule pickup and
+ * fetch the label. Safe to retry: an existing Shiprocket shipment is reused.
+ */
+export async function bookShiprocket(_prev: AdminFormState, fd: FormData): Promise<AdminFormState> {
+  try {
+    const { db, user } = await adminContext();
+    if (!isShiprocketConfigured()) return { ok: false, message: "Shiprocket is not configured." };
+    const parsed = bookingSchema.safeParse(Object.fromEntries(fd));
+    if (!parsed.success) return { ok: false, message: "Check the package weight and dimensions." };
+    const b = parsed.data;
+
+    const { data } = await db
+      .from("orders")
+      .select("id, order_number, created_at, status, payment_method, shipping_address, contact_email, discount_paise, shipping_paise, cod_fee_paise, order_items (product_name, variant_label, sku, quantity, unit_price_paise), shipments (id, provider, provider_shipment_id, tracking_number)")
+      .eq("id", b.order_id)
+      .maybeSingle();
+    const order = data as unknown as BookingOrder | null;
+    if (!order) return { ok: false, message: "Order not found." };
+    if (!["confirmed", "processing", "packed"].includes(order.status)) return { ok: false, message: "Only confirmed, processing or packed orders can be booked." };
+    const existing = order.shipments.find((sh) => sh.provider === "shiprocket");
+    if (existing?.tracking_number) return { ok: false, message: "This order already has a Shiprocket AWB." };
+
+    let shipmentRowId = existing?.id ?? null;
+    let srShipmentId = existing?.provider_shipment_id ?? null;
+    if (!srShipmentId) {
+      const created = await createShiprocketOrder({
+        orderNumber: order.order_number,
+        orderDate: new Date(order.created_at),
+        paymentMethod: order.payment_method,
+        address: order.shipping_address,
+        email: order.contact_email,
+        items: order.order_items.map((i) => ({ name: `${i.product_name} (${i.variant_label})`, sku: i.sku, units: i.quantity, unitPricePaise: Number(i.unit_price_paise) })),
+        shippingPaise: Number(order.shipping_paise),
+        codFeePaise: Number(order.cod_fee_paise),
+        discountPaise: Number(order.discount_paise),
+        length: b.length,
+        breadth: b.breadth,
+        height: b.height,
+        weightKg: b.weight_kg,
+      });
+      srShipmentId = created.shipmentId;
+      // Record the link immediately so a later failure can be retried without a duplicate Shiprocket order.
+      const ins = await db
+        .from("shipments")
+        .insert({ order_id: order.id, carrier: "Shiprocket", provider: "shiprocket", provider_order_id: created.orderId, provider_shipment_id: created.shipmentId, status: "pending" })
+        .select("id")
+        .single();
+      if (ins.error) return { ok: false, message: "Shiprocket order created, but saving it failed. Do not book again; contact support." };
+      shipmentRowId = ins.data.id;
+    }
+
+    const awb = await assignAwb(srShipmentId);
+    let label: string | null = null;
+    const warnings: string[] = [];
+    try {
+      await schedulePickup(srShipmentId);
+    } catch (e) {
+      warnings.push(`pickup not scheduled (${(e as Error).message})`);
+    }
+    try {
+      label = await generateLabel(srShipmentId);
+    } catch (e) {
+      warnings.push(`label not ready (${(e as Error).message})`);
+    }
+
+    const upd = await db
+      .from("shipments")
+      .update({ carrier: awb.courierName.slice(0, 80), courier_id: awb.courierId || null, tracking_number: awb.awb, tracking_url: trackingUrl(awb.awb), label_url: label, status: "packed" })
+      .eq("id", shipmentRowId!);
+    if (upd.error) return { ok: false, message: `AWB ${awb.awb} assigned, but saving it failed. Enter it manually.` };
+    await db.from("shipment_events").insert({ shipment_id: shipmentRowId, status: "packed", description: `Booked with Shiprocket · ${awb.courierName} · AWB ${awb.awb}`, source: "manual", actor_id: user.id });
+    await audit(db, user.id, "shipment.shiprocket_book", "order", order.id, { awb: awb.awb, courier: awb.courierName });
+
+    for (const st of fulfilmentPath(order.status, "packed")) {
+      const { error } = await db.rpc("update_order_status", { p_order_id: order.id, p_to: st, p_note: "Booked with Shiprocket" });
+      if (error) break;
+    }
+    await ensureInvoice(order.id, user.id).catch(() => null);
+    revalidatePath(`/admin/orders/${order.id}`);
+    return { ok: true, message: `Booked with ${awb.courierName}. AWB ${awb.awb}.${warnings.length ? ` Note: ${warnings.join("; ")}.` : ""}` };
+  } catch (e) {
+    if (e instanceof ShiprocketError) return { ok: false, message: `Shiprocket: ${e.message}` };
     return denied(e);
   }
 }

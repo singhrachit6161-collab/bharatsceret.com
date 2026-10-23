@@ -129,7 +129,7 @@ export default async function ProductPage({ params }: Props) {
             {product.short_description && <p className="mt-3 text-ink/85">{product.short_description}</p>}
           </div>
 
-          <ProductPurchasePanel variants={product.variants} />
+          <ProductPurchasePanel variants={product.variants} productSlug={product.slug} />
           <WishlistButton productId={product.id} initialSaved={saved} />
           <PincodeChecker />
 

@@ -6,6 +6,7 @@ import { ADMIN_ROLES, requireStaffPage } from "@/lib/auth";
 import { getCategories } from "@/lib/data/catalog";
 import { getSettings } from "@/lib/data/settings";
 import { paiseToRupeesString } from "@/lib/money";
+import { INDIAN_STATES } from "@/lib/validation";
 
 function Section({ title, description, settingKey, children }: { title: string; description?: string; settingKey: string; children: React.ReactNode }) {
   return (
@@ -72,6 +73,31 @@ export default async function AdminSettings() {
             ))}
           </div>
         </fieldset>
+      </Section>
+      <Section title="Business & GST" settingKey="business" description="Printed on invoices. If you are not GST-registered, leave it unticked and customers get a Bill of Supply without tax. Set each product's HSN code and GST rate before turning this on.">
+        <Check label="GST registered (issue tax invoices)" name="gst_registered" defaultChecked={s.business.gst_registered} />
+        <Field label="Registered business name" name="legal_name" defaultValue={s.business.legal_name} />
+        <Field label="GSTIN" name="gstin" defaultValue={s.business.gstin} maxLength={15} placeholder="27ABCDE1234F1Z5" />
+        <div>
+          <label htmlFor="f-bstate" className="label">State of registration</label>
+          <select id="f-bstate" name="state" defaultValue={s.business.state} className="input">
+            <option value="">Choose…</option>
+            {INDIAN_STATES.map((st) => <option key={st} value={st}>{st}</option>)}
+          </select>
+        </div>
+        <Field label="Invoice number prefix" name="invoice_prefix" defaultValue={s.business.invoice_prefix} maxLength={6} hint="e.g. BS → BS/2627/00001" />
+        <div className="sm:col-span-2">
+          <label htmlFor="f-baddr" className="label">Registered address</label>
+          <textarea id="f-baddr" name="address" defaultValue={s.business.address} rows={3} className="input" />
+        </div>
+      </Section>
+      <Section title="Returns" settingKey="returns" description="Customers can report a problem from their order page within this many days of delivery. You review every request.">
+        <Check label="Accept return requests online" name="enabled" defaultChecked={s.returns.enabled} />
+        <Field label="Return window (days after delivery)" name="window_days" type="number" min={1} max={60} defaultValue={String(s.returns.window_days)} />
+        <div className="sm:col-span-2">
+          <label htmlFor="f-rnote" className="label">Policy note shown to customers</label>
+          <textarea id="f-rnote" name="policy_note" defaultValue={s.returns.policy_note} rows={3} maxLength={600} className="input" />
+        </div>
       </Section>
       <Section title="Social links" settingKey="social">
         {(["instagram", "facebook", "youtube", "x"] as const).map((k) => <Field key={k} label={k} name={k} defaultValue={s.social[k]} placeholder="https://" />)}

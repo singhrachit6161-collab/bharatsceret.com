@@ -2,7 +2,7 @@
 
 import {
   BarChart3, Boxes, ClipboardList, FileText, Image as ImageIcon, LifeBuoy, Mail, MessageSquare, Package,
-  ScrollText, Settings, Tag, Tags, Users,
+  ScrollText, Settings, Tag, Tags, Undo2, Users,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation";
 const ITEMS = [
   { href: "/admin", label: "Dashboard", icon: BarChart3, admin: false },
   { href: "/admin/orders", label: "Orders", icon: ClipboardList, admin: false },
+  { href: "/admin/returns", label: "Returns", icon: Undo2, admin: false },
   { href: "/admin/products", label: "Products", icon: Package, admin: true },
   { href: "/admin/categories", label: "Collections", icon: Tags, admin: true },
   { href: "/admin/inventory", label: "Inventory", icon: Boxes, admin: false },

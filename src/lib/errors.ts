@@ -25,6 +25,16 @@ const MESSAGES: Record<string, string> = {
   INVALID_BUNDLE: "One of your hampers is no longer valid. Please review your bag.",
   BUNDLE_OVER_CAPACITY: "One of your hampers has more items than its box holds.",
   BOX_WITHOUT_HAMPER: "Hamper boxes can only be bought as part of a hamper.",
+  RETURNS_DISABLED: "Returns are not being accepted online right now. Please contact us.",
+  RETURN_NOT_ALLOWED: "A return can be requested only after your order is delivered.",
+  RETURN_WINDOW_CLOSED: "The return window for this order has closed. Please contact us if you need help.",
+  INVALID_RETURN: "Please choose a reason and describe the problem (at least 10 characters).",
+  INVALID_RETURN_ITEMS: "Please choose which items, and how many, you want to return.",
+  RETURN_ALREADY_OPEN: "There is already an open return request for this order.",
+  RETURN_NOT_FOUND: "Return request not found.",
+  EMAIL_REQUIRED: "Your account needs an email address for alerts.",
+  TOO_MANY_ALERTS: "You have too many stock alerts. Remove some first.",
+  INVOICE_NOT_READY: "The invoice is issued once the order is packed for dispatch.",
 };
 
 export function friendlyError(error: unknown, fallback = "Something went wrong. Please try again."): string {
