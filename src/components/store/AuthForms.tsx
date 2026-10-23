@@ -25,6 +25,14 @@ function Message({ state }: { state: AuthState }) {
   return (
     <p role={state.ok ? "status" : "alert"} className={`rounded-md p-3 text-sm ${state.ok ? "bg-almond-100 text-walnut" : "bg-danger/10 text-danger"}`}>
       {state.message}
+      {state.link && (
+        <>
+          {" "}
+          <Link href={state.link.href} className="font-semibold underline underline-offset-2">
+            {state.link.label}
+          </Link>
+        </>
+      )}
     </p>
   );
 }

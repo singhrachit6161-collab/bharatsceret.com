@@ -7,7 +7,7 @@ import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { createClient } from "@/lib/supabase/server";
 import { fieldErrors, signInSchema, signUpSchema } from "@/lib/validation";
 
-export type AuthState = { ok: boolean; message?: string; errors?: Record<string, string> } | null;
+export type AuthState = { ok: boolean; message?: string; errors?: Record<string, string>; link?: { href: string; label: string } } | null;
 
 /** Only allow same-site relative redirects. */
 function safeNext(next: FormDataEntryValue | null): string {
@@ -44,6 +44,14 @@ export async function signUp(_prev: AuthState, formData: FormData): Promise<Auth
       emailRedirectTo: `${publicEnv.siteUrl}/auth/callback?next=/account`,
     },
   });
+  if (error?.code === "user_already_exists") {
+    const next = safeNext(formData.get("next"));
+    return {
+      ok: false,
+      message: "An account with this email already exists. Please sign in instead.",
+      link: { href: `/login${next === "/account" ? "" : `?next=${encodeURIComponent(next)}`}`, label: "Sign in" },
+    };
+  }
   if (error) return { ok: false, message: error.message.includes("Password") ? error.message : "Could not create your account." };
   if (data.session) redirect(safeNext(formData.get("next")));
   return { ok: true, message: "Check your email to confirm your account, then sign in." };
